@@ -24,8 +24,8 @@ public class Player extends Entity {
     } //end Player
 
     public void setDefaultValues(){ 
-        x = 100; 
-        y = 100; 
+        x = 300; 
+        y = 600; 
         speed = 4; 
         direction = "forward"; 
     } //end setDefaultValues
