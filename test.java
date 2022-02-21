@@ -53,6 +53,7 @@ public class test {
 
         System.out.println( "User input was: " + holder );
         
+        userIn.close();
         return holder; 
     }
 }//end class
