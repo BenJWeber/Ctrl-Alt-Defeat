@@ -8,17 +8,19 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import GUI_attempt.src.entity.Player;
+import GUI_attempt.src.map.MapManager;
 
 
 public class GamePanel extends JPanel implements Runnable{
     final int originalTileSize = 16; //16x16 tile
-    final int scale = 6;    
+    final int scale = 5;    
     public final int tileSize = originalTileSize * scale; //48x48 tile
-    final int maxScreenCol = 16; 
-    final int maxScreenRow = 12; 
+    public final int maxScreenCol = 16; 
+    public final int maxScreenRow = 12; 
     final int screenWidth = tileSize * maxScreenCol; //768 Pixels
     final int screenHeight = tileSize * maxScreenRow; //576 Pixels
 
+    MapManager map = new MapManager( this ); 
     inputHandler keyH = new inputHandler(); 
     Thread gameThread; 
     Player player = new Player( this, keyH ); 
@@ -75,6 +77,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent( Graphics graphics ){ 
         super.paintComponent( graphics ); 
         Graphics2D graphics2 = ( Graphics2D )graphics; 
+
+        map.draw( graphics2 ); 
         player.draw( graphics2 ); 
     } //end paintComponent 
 }

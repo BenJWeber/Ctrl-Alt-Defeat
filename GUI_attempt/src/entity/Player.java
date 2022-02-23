@@ -24,7 +24,7 @@ public class Player extends Entity {
     } //end Player
 
     public void setDefaultValues(){ 
-        x = 300; 
+        x = 200; 
         y = 600; 
         speed = 4; 
         direction = "forward"; 
@@ -32,9 +32,9 @@ public class Player extends Entity {
 
     public void getPlayerImage(){ 
         try{ 
-            forward1 = ImageIO.read( getClass().getResourceAsStream( "Cowboy_1.png" ) ); 
-            forward2 = ImageIO.read( getClass().getResourceAsStream( "Cowboy_2.png" ) ); 
-            jump = ImageIO.read( getClass().getResourceAsStream( "Cowboy_Jump.png" ) ); 
+            forward1 = ImageIO.read( getClass().getResourceAsStream( "../../res/player/Cowboy_1.png" ) ); 
+            forward2 = ImageIO.read( getClass().getResourceAsStream( "../../res/player/Cowboy_2.png" ) ); 
+            jump = ImageIO.read( getClass().getResourceAsStream( "../../res/player/Cowboy_Jump.png" ) ); 
         } catch( IOException e ){ 
             e.printStackTrace(); 
         } //end catch
