@@ -43,8 +43,7 @@ public class Player extends Entity {
     public void update(){ 
         if( keyH.jumpPressed == true ){ 
             direction = "up"; 
-            y -= speed; 
-            x += 1; 
+            y -= speed;  
             jumpFlag = true; 
         } //end if
         else{ 
