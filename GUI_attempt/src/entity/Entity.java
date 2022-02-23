@@ -1,3 +1,8 @@
+/*
+* Entity.java
+* Contains public characteristics for entities. 
+*/
+
 package GUI_attempt.src.entity;
 
 import java.awt.image.BufferedImage; 

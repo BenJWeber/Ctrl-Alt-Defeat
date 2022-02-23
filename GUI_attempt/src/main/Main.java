@@ -1,3 +1,8 @@
+/*
+* Main.java
+* Initiates Gameplay
+*/
+
 package GUI_attempt.src.main;
 
 import javax.swing.JFrame; 

@@ -1,3 +1,8 @@
+/*
+* MapManager.java
+* Reads in map tiles and generates map based off of text file. 
+*/
+
 package GUI_attempt.src.map;
 
 import java.io.BufferedReader;

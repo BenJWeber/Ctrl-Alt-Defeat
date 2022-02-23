@@ -1,3 +1,8 @@
+/*
+* GamePanel.java
+* Creates GUI, controls FPS, containes main run loop, calls methods to update GUI. 
+*/
+
 package GUI_attempt.src.main;
 
 import java.awt.Color; 
@@ -21,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
     final int screenHeight = tileSize * maxScreenRow; //576 Pixels
 
     MapManager map = new MapManager( this ); 
-    inputHandler keyH = new inputHandler(); 
+    InputHandler keyH = new InputHandler(); 
     Thread gameThread; 
     Player player = new Player( this, keyH ); 
 

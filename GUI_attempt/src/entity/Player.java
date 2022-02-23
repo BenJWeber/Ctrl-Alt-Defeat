@@ -1,7 +1,12 @@
+/*
+* Player.java
+* Loads player image, handles player animation based on user input.
+*/
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
-import GUI_attempt.src.main.inputHandler;
+import GUI_attempt.src.main.InputHandler;
 
 import java.io.IOException;
 import java.awt.Graphics2D;
@@ -11,11 +16,11 @@ import javax.imageio.ImageIO;
 
 public class Player extends Entity {
     GamePanel gp; 
-    inputHandler keyH; 
+    InputHandler keyH; 
 
     public boolean jumpFlag = false; 
 
-    public Player( GamePanel gp, inputHandler keyH ){ 
+    public Player( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH; 
 

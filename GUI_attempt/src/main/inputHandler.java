@@ -1,9 +1,14 @@
+/*
+* InputHandler.java
+* Detects keyboard input and processes expected action. 
+*/
+
 package GUI_attempt.src.main; 
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener; 
 
-public class inputHandler implements KeyListener{
+public class InputHandler implements KeyListener{
     public boolean jumpPressed; 
 
     @Override

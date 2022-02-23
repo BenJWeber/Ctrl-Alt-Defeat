@@ -1,3 +1,7 @@
+/*
+* Map.java
+*/
+
 package GUI_attempt.src.map;
 
 import java.awt.image.BufferedImage; 
