@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -36,25 +37,29 @@ public class test {
         int errorCounter = 0; 
         System.out.print( "Enter the following text as fast as possible: "); 
 
-        //randomly prints words from the selected word bank
+        //fills string with randomly selected words from word bank
         Random rand = new Random();
+        String correctLine = "";
         for(int i = 0; i <= 10; i++)
-            System.out.print(correctWords[rand.nextInt(50)] + " ");
-        System.out.println();
+            correctLine += correctWords[rand.nextInt(50)] + " ";
+        
+        //prints word to type
+        System.out.println(correctLine);
 
         String user = userInput(); 
         String insult; 
         scan.close();
 
-        String correct = correctWords.toString();
-        char[] systemSet = correct.toLowerCase().toCharArray(); 
+        char[] systemSet = correctLine.toLowerCase().toCharArray(); 
         char[] userSet = user.toLowerCase().toCharArray(); 
-        length = correct.length(); 
+        length = correctLine.length(); 
 
+        //compares input with correct words
         for( int i = 0; i < length - 1 && i < userSet.length; i++ ) { 
             if( systemSet[i] != userSet[i] )
                 errorCounter++; 
         }//end for
+
         if( errorCounter > 0 )
             insult = "You Suck!"; 
         else 
