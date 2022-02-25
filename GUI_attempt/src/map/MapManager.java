@@ -31,11 +31,37 @@ public class MapManager {
     public void getMapImage(){ 
         try{ 
             map[0] = new Map(); 
-            map[0].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road.png" ) ); 
+            map[0].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road_1.png" ) ); 
             map[1] = new Map(); 
-            map[1].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sand.png" ) ); 
+            map[1].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road_2.png" ) ); 
             map[2] = new Map(); 
-            map[2].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky.png" ) ); 
+            map[2].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road_3.png" ) ); 
+            //map[3] = new Map(); 
+            //map[3].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky.png" ) ); 
+            //map[4] = new Map(); 
+            //map[4].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky.png" ) ); 
+            map[5] = new Map(); 
+            map[5].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sand_1.png" ) ); 
+            map[6] = new Map(); 
+            map[6].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sand_2.png" ) ); 
+            map[7] = new Map(); 
+            map[7].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sand_3.png" ) ); 
+            map[8] = new Map(); 
+            map[8].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sand_4.png" ) ); 
+            map[9] = new Map(); 
+            map[9].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_1.png" ) ); 
+            map[10] = new Map(); 
+            map[10].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_2.png" ) ); 
+            map[11] = new Map(); 
+            map[11].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_3.png" ) ); 
+            map[12] = new Map(); 
+            map[12].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_4.png" ) ); 
+            map[13] = new Map(); 
+            map[13].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_5.png" ) ); 
+            map[14] = new Map(); 
+            map[14].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_6.png" ) ); 
+            map[15] = new Map(); 
+            map[15].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_7.png" ) ); 
         } //end try
         catch( IOException e ){ 
             e.printStackTrace();

@@ -30,8 +30,8 @@ public class Player extends Entity {
 
     public void setDefaultValues(){ 
         x = 200; 
-        y = 600; 
-        speed = 4; 
+        y = 675; 
+        speed = 15; 
         direction = "forward"; 
     } //end setDefaultValues
 
@@ -52,7 +52,7 @@ public class Player extends Entity {
             jumpFlag = true; 
         } //end if
         else{ 
-            direction = "forward"; 
+            direction = "forward";
             if( jumpFlag == true ){ 
                 setDefaultValues(); 
                 jumpFlag = false; 
