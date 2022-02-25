@@ -1,6 +1,6 @@
 /*
 * Main.java
-* Initiates Gameplay
+* Initiates Gameplay 
 */
 
 package GUI_attempt.src.main;

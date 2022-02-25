@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread; 
     Player player = new Player( this, keyH ); 
 
-    public int FPS = 60; 
+    public int FPS = 30; 
 
     public GamePanel(){ 
         this.setPreferredSize( new Dimension( screenWidth, screenHeight ) );

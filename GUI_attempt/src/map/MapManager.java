@@ -22,7 +22,7 @@ public class MapManager {
     public MapManager( GamePanel gp ){ 
         this.gp = gp; 
 
-        map = new Map[20]; 
+        map = new Map[30]; 
         mapTileNum = new int[ gp.maxScreenCol ][ gp.maxScreenRow ]; 
         getMapImage(); 
         loadMap(); 
@@ -62,6 +62,16 @@ public class MapManager {
             map[14].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_6.png" ) ); 
             map[15] = new Map(); 
             map[15].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_7.png" ) ); 
+            map[16] = new Map(); 
+            map[16].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_8.png" ) ); 
+            map[17] = new Map(); 
+            map[17].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_9.png" ) ); 
+            map[18] = new Map(); 
+            map[18].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_10.png" ) ); 
+            map[19] = new Map(); 
+            map[19].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky_11.png" ) ); 
+            map[20] = new Map(); 
+            map[20].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sun_1.png" ) ); 
         } //end try
         catch( IOException e ){ 
             e.printStackTrace();
