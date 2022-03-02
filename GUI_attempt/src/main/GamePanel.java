@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import GUI_attempt.src.entity.Monster;
 import GUI_attempt.src.entity.Player;
+import GUI_attempt.src.entity.Words;
 import GUI_attempt.src.map.MapManager;
 
 
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread; 
     public Player player = new Player( this, keyH ); 
     public Monster monster = new Monster( this ); 
+    public Words words = new Words( this ); 
 
     public int FPS = 60; 
 
@@ -85,7 +87,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void update(){ 
         mapManager.update(); 
         player.update(); 
-        monster.update(); 
+        monster.update();
+        words.update();
     } //end update
 
     public void paintComponent( Graphics graphics ){ 
@@ -94,6 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         mapManager.draw( graphics2 ); 
         player.draw( graphics2 );
-        monster.draw( graphics2 );  
+        monster.draw( graphics2 ); 
+        words.draw( graphics2 ); 
     } //end paintComponent 
 }
