@@ -10,6 +10,8 @@ import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener{
     public boolean jumpPressed; 
+    public boolean increaseSpeed; 
+    public boolean decreaseSpeed; 
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -22,6 +24,13 @@ public class InputHandler implements KeyListener{
         if( code == KeyEvent.VK_J ){ 
             jumpPressed = true; 
         } //end if
+        if( code == KeyEvent.VK_D ){ 
+            increaseSpeed = true; 
+        } //end if
+        if( code == KeyEvent.VK_A ){ 
+            decreaseSpeed = true; 
+        } //end if
+
     } //end keyPressed
 
     @Override
@@ -30,6 +39,12 @@ public class InputHandler implements KeyListener{
 
         if( code == KeyEvent.VK_J ){ 
             jumpPressed = false; 
+        } //end if
+        if( code == KeyEvent.VK_D ){ 
+            increaseSpeed = false; 
+        } //end if
+        if( code == KeyEvent.VK_A ){ 
+            decreaseSpeed = false; 
         } //end if
     } //end keyReleased
     

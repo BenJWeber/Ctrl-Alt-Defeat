@@ -18,20 +18,31 @@ public class Player extends Entity {
     GamePanel gp; 
     InputHandler keyH; 
 
+    int defaultPlayerY = 675; 
+    int defaultPlayerX = 200; 
+
+    public int screenX; 
+    public int screenY;
+
     public boolean jumpFlag = false; 
 
     public Player( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
-        this.keyH = keyH; 
-
+        this.keyH = keyH;
+        screenX = 200; 
+        screenY = 675; 
         setDefaultValues();
         getPlayerImage(); 
     } //end Player
 
     public void setDefaultValues(){ 
-        x = 200; 
-        y = 675; 
-        speed = 15; 
+        worldX = 200; 
+        worldY = 675; 
+
+        playerX = defaultPlayerX; 
+        playerY = defaultPlayerY; 
+        
+        speed = 4; 
         direction = "forward"; 
     } //end setDefaultValues
 
@@ -48,28 +59,54 @@ public class Player extends Entity {
     public void update(){ 
         if( keyH.jumpPressed == true ){ 
             direction = "up"; 
-            y -= speed;  
+            playerY -= speed;  
+            worldX += speed;
             jumpFlag = true; 
         } //end if
+        else if( keyH.increaseSpeed == true ){ 
+            direction = "forward"; 
+            playerX += (speed + 2 ); 
+            worldX += speed;
+
+            if (spriteCounter > 5 ){ 
+                if( spriteNum == 1 )
+                    spriteNum = 2; 
+                else if( spriteNum == 2 )
+                    spriteNum = 1; 
+                spriteCounter = 0; 
+            } //end if
+        } //end else if
+        else if( keyH.decreaseSpeed == true ){ 
+            direction = "forward"; 
+            playerX -= ( speed - 2 ); 
+            worldX += speed;
+
+            if (spriteCounter > 15 ){ 
+                if( spriteNum == 1 )
+                    spriteNum = 2; 
+                else if( spriteNum == 2 )
+                    spriteNum = 1; 
+                spriteCounter = 0; 
+            } //end if
+        } //end else if
         else{ 
             direction = "forward";
             if( jumpFlag == true ){ 
-                setDefaultValues(); 
+                playerY = defaultPlayerY; 
                 jumpFlag = false; 
+            } //end if
+            worldX += speed;
+            
+            if (spriteCounter > 10 ){ 
+                if( spriteNum == 1 )
+                    spriteNum = 2; 
+                else if( spriteNum == 2 )
+                    spriteNum = 1; 
+                spriteCounter = 0; 
             } //end if
         } //end else
 
         spriteCounter++; 
-
-        //Control speed of walking animation: 
-        if (spriteCounter > 10 ){ 
-            if( spriteNum == 1 )
-                spriteNum = 2; 
-            else if( spriteNum == 2 )
-                spriteNum = 1; 
-            spriteCounter = 0; 
-        } //end if
-
     } //end update
 
     public void draw( Graphics2D graphics2 ){ 
@@ -87,6 +124,6 @@ public class Player extends Entity {
                 break; 
         } //end switch
 
-        graphics2.drawImage( image, x, y, gp.tileSize, gp.tileSize, null ); 
+        graphics2.drawImage( image, playerX, playerY, gp.tileSize, gp.tileSize, null ); 
     } //end draw
 } //end class

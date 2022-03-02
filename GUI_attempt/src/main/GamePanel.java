@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import GUI_attempt.src.entity.Monster;
 import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.map.MapManager;
 
@@ -25,12 +26,18 @@ public class GamePanel extends JPanel implements Runnable{
     final int screenWidth = tileSize * maxScreenCol; //768 Pixels
     final int screenHeight = tileSize * maxScreenRow; //576 Pixels
 
-    MapManager map = new MapManager( this ); 
+    public final int maxWorldCol = 128; 
+    public final int maxWorldRow = 12; 
+    public final int worldWidth = tileSize * maxWorldCol; 
+    public final int worldHeight = tileSize * maxWorldRow;  
+
+    public MapManager mapManager = new MapManager( this ); 
     InputHandler keyH = new InputHandler(); 
     Thread gameThread; 
-    Player player = new Player( this, keyH ); 
+    public Player player = new Player( this, keyH ); 
+    public Monster monster = new Monster( this ); 
 
-    public int FPS = 30; 
+    public int FPS = 60; 
 
     public GamePanel(){ 
         this.setPreferredSize( new Dimension( screenWidth, screenHeight ) );
@@ -76,14 +83,17 @@ public class GamePanel extends JPanel implements Runnable{
     } //End run
 
     public void update(){ 
+        mapManager.update(); 
         player.update(); 
+        monster.update(); 
     } //end update
 
     public void paintComponent( Graphics graphics ){ 
         super.paintComponent( graphics ); 
         Graphics2D graphics2 = ( Graphics2D )graphics; 
 
-        map.draw( graphics2 ); 
-        player.draw( graphics2 ); 
+        mapManager.draw( graphics2 ); 
+        player.draw( graphics2 );
+        monster.draw( graphics2 );  
     } //end paintComponent 
 }
