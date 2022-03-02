@@ -59,14 +59,22 @@ public class Player extends Entity {
     public void update(){ 
         if( keyH.jumpPressed == true ){ 
             direction = "up"; 
+
             playerY -= speed;  
             worldX += speed;
+            
             jumpFlag = true; 
         } //end if
         else if( keyH.increaseSpeed == true ){ 
             direction = "forward"; 
-            playerX += (speed + 2 ); 
+
+            playerX += (speed + 1 ); 
             worldX += speed;
+
+            if( jumpFlag == true ){ 
+                playerY = defaultPlayerY; 
+                jumpFlag = false; 
+            } //end if
 
             if (spriteCounter > 5 ){ 
                 if( spriteNum == 1 )
@@ -78,8 +86,14 @@ public class Player extends Entity {
         } //end else if
         else if( keyH.decreaseSpeed == true ){ 
             direction = "forward"; 
+
             playerX -= ( speed - 2 ); 
             worldX += speed;
+
+            if( jumpFlag == true ){ 
+                playerY = defaultPlayerY; 
+                jumpFlag = false; 
+            } //end if
 
             if (spriteCounter > 15 ){ 
                 if( spriteNum == 1 )
@@ -91,11 +105,13 @@ public class Player extends Entity {
         } //end else if
         else{ 
             direction = "forward";
+
+            worldX += speed;
+
             if( jumpFlag == true ){ 
                 playerY = defaultPlayerY; 
                 jumpFlag = false; 
             } //end if
-            worldX += speed;
             
             if (spriteCounter > 10 ){ 
                 if( spriteNum == 1 )

@@ -19,10 +19,8 @@ public class Monster extends Entity {
     } //end Player
 
     public void setDefaultValues(){ 
-        monsterX = 10; 
-        monsterY = 675; 
-        
-        //speed = 4;  
+        monsterX = 0; 
+        monsterY = 675;
     } //end setDefaultValues
 
     public void getMonsterImage(){ 
