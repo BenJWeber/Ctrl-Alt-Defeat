@@ -85,15 +85,15 @@ public class Words extends Entity {
 
                 //prints each letter corresponding to the ascii code. 
                 //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc
-                graphics2.drawImage(images[letter - 97], ( wordsX_2 = wordsX_1 + ( i * gp.tileSize + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
+                graphics2.drawImage(images[letter - 97], ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
                 i++;
             }//end for
 
             //prints space here
-            graphics2.drawImage(space, ( wordsX_2 = wordsX_1 + ( i * gp.tileSize + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
+            graphics2.drawImage(space, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
             i++;
             line = br.readLine();
-        }//end while
+        } //end while
 
         br.close();
         } catch ( IOException e) {
