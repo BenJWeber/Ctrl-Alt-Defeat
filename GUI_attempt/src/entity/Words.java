@@ -1,6 +1,7 @@
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
+import GUI_attempt.src.main.InputHandler;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,10 +13,13 @@ import javax.imageio.ImageIO;
 
 public class Words extends Entity {
     GamePanel gp;
+    InputHandler keyH; 
+    String color = "BLACK";
 
-    public Words( GamePanel gp ){ 
+    public Words( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
-         
+        this.keyH = keyH; 
+
         setDefaultValues(); 
         getWordsImage(); 
     } //end Player
@@ -114,7 +118,33 @@ public class Words extends Entity {
         } //end catch
     } //end getPlayerImage
 
-    public void update(){ 
+    public void update(){
+        try{ 
+            BufferedReader br = new BufferedReader ( new FileReader("mediumWords.txt") );
+            String line = br.readLine();
+
+            while( line != null ){ 
+                line = br.readLine();            
+            } //end while
+            br.close(); 
+
+            char[] charArray = line.toCharArray(); 
+            
+            int count = 0; 
+            while( count < charArray.length ){ 
+                System.out.println( charArray[count] + "\n" ); 
+                count++; 
+            }
+        } catch( IOException e ){ 
+            e.printStackTrace(); 
+        } //end catch
+
+        if( keyH.gPressed == true )
+            color = "GREEN"; 
+        else if( keyH.rPressed == true )
+            color = "RED"; 
+        else
+            color = "BLACK"; 
 
         wordsX_1 = wordsX_1 - 5; 
        
@@ -127,7 +157,7 @@ public class Words extends Entity {
         BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
         BufferedImage[] images_green = {letter_a_g, letter_b_g, letter_c_g, letter_d_g, letter_e_g, letter_f_g, letter_g_g, letter_h_g, letter_i_g, letter_j_g, letter_k_g, letter_l_g, letter_m_g, letter_n_g, letter_o_g, letter_p_g, letter_q_g, letter_r_g, letter_s_g, letter_t_g, letter_u_g, letter_v_g, letter_w_g, letter_x_g, letter_y_g, letter_z_g};
         BufferedImage[] images_red = {letter_a_r, letter_b_r, letter_c_r, letter_d_r, letter_e_r, letter_f_r, letter_g_r, letter_h_r, letter_i_r, letter_j_r, letter_k_r, letter_l_r, letter_m_r, letter_n_r, letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r};
-
+        BufferedImage imageLetter; 
         // Only Works with lowercase letters!
         try {
             //The txt file has one word per line
@@ -139,11 +169,22 @@ public class Words extends Entity {
             // create an array of ascii codes coresponding to each letter in the word
             byte[] bytes = line.getBytes("US-ASCII");
             for(byte letter : bytes) {
-
                 //prints each letter corresponding to the ascii code. 
                 //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc
-                graphics2.drawImage(images[letter - 97], ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-                i++;
+                 
+                switch( color ){ 
+                    case "GREEN": //User got letter correct
+                        imageLetter = images_green[ letter - 97 ]; 
+                        break; 
+                    case "RED":   //User got letter incorrect
+                        imageLetter = images_red[ letter - 97 ]; 
+                        break; 
+                    default:      //User has not attempted letter
+                        imageLetter = images[ letter - 97 ]; 
+                } //end switch
+
+                graphics2.drawImage(imageLetter, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
+                i++; 
             }//end for
 
             //prints space here
@@ -156,36 +197,5 @@ public class Words extends Entity {
         } catch ( IOException e) {
             e.printStackTrace();
         }//end catch
-
- 
-
-/*
-        graphics2.drawImage( letter_a, wordsX_1, wordsY, gp.tileSize, gp.tileSize, null ); 
-        graphics2.drawImage( letter_b, ( wordsX_2 = wordsX_1 + ( gp.tileSize + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize, gp.tileSize, null ); 
-        graphics2.drawImage( letter_c, ( wordsX_2 = wordsX_1 + ( 2 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_d, ( wordsX_2 = wordsX_1 + ( 3 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_e, ( wordsX_2 = wordsX_1 + ( 4 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_f, ( wordsX_2 = wordsX_1 + ( 5 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_g, ( wordsX_2 = wordsX_1 + ( 6 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_h, ( wordsX_2 = wordsX_1 + ( 7 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_i, ( wordsX_2 = wordsX_1 + ( 8 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_j, ( wordsX_2 = wordsX_1 + ( 9 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_k, ( wordsX_2 = wordsX_1 + ( 10 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_l, ( wordsX_2 = wordsX_1 + ( 11 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_m, ( wordsX_2 = wordsX_1 + ( 12 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_n, ( wordsX_2 = wordsX_1 + ( 13 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_o, ( wordsX_2 = wordsX_1 + ( 14 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_p, ( wordsX_2 = wordsX_1 + ( 15 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_q, ( wordsX_2 = wordsX_1 + ( 16 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_r, ( wordsX_2 = wordsX_1 + ( 17 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_s, ( wordsX_2 = wordsX_1 + ( 18 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_t, ( wordsX_2 = wordsX_1 + ( 19 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_u, ( wordsX_2 = wordsX_1 + ( 20 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_v, ( wordsX_2 = wordsX_1 + ( 21 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_w, ( wordsX_2 = wordsX_1 + ( 22 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_x, ( wordsX_2 = wordsX_1 + ( 23 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_y, ( wordsX_2 = wordsX_1 + ( 24 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-        graphics2.drawImage( letter_z, ( wordsX_2 = wordsX_1 + ( 25 * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-*/
     } //end draw
 } //end class

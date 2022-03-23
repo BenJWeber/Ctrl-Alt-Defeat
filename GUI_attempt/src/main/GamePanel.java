@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread; 
     public Player player = new Player( this, keyH ); 
     public Monster monster = new Monster( this ); 
-    public Words words = new Words( this ); 
+    public Words words = new Words( this, keyH ); 
 
     public int FPS = 60; 
 

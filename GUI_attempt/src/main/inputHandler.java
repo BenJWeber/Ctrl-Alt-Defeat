@@ -12,6 +12,7 @@ public class InputHandler implements KeyListener{
     public boolean jumpPressed; 
     public boolean increaseSpeed; 
     public boolean decreaseSpeed; 
+    public boolean gPressed, rPressed; 
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -30,6 +31,12 @@ public class InputHandler implements KeyListener{
         if( code == KeyEvent.VK_A ){ 
             decreaseSpeed = true; 
         } //end if
+        if( code == KeyEvent.VK_G ){ 
+            gPressed = true; 
+        } //end if
+        if( code == KeyEvent.VK_R ){ 
+            rPressed = true; 
+        } //end if
 
     } //end keyPressed
 
@@ -45,6 +52,12 @@ public class InputHandler implements KeyListener{
         } //end if
         if( code == KeyEvent.VK_A ){ 
             decreaseSpeed = false; 
+        } //end if
+        if( code == KeyEvent.VK_G ){ 
+            gPressed = false; 
+        } //end if
+        if( code == KeyEvent.VK_R ){ 
+            rPressed = false; 
         } //end if
     } //end keyReleased
     
