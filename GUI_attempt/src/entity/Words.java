@@ -119,26 +119,6 @@ public class Words extends Entity {
     } //end getPlayerImage
 
     public void update(){
-        try{ 
-            BufferedReader br = new BufferedReader ( new FileReader("mediumWords.txt") );
-            String line = br.readLine();
-
-            while( line != null ){ 
-                line = br.readLine();            
-            } //end while
-            br.close(); 
-
-            char[] charArray = line.toCharArray(); 
-            
-            int count = 0; 
-            while( count < charArray.length ){ 
-                System.out.println( charArray[count] + "\n" ); 
-                count++; 
-            }
-        } catch( IOException e ){ 
-            e.printStackTrace(); 
-        } //end catch
-
         if( keyH.gPressed == true )
             color = "GREEN"; 
         else if( keyH.rPressed == true )
