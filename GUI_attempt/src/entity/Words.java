@@ -6,6 +6,7 @@ import GUI_attempt.src.main.InputHandler;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
@@ -15,6 +16,7 @@ public class Words extends Entity {
     GamePanel gp;
     InputHandler keyH; 
     String color = "BLACK";
+    String[] correctWords = getWords();
 
     public Words( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
@@ -113,10 +115,13 @@ public class Words extends Entity {
             letter_z_r = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Z_R.png" ) );
 
             space = ImageIO.read( getClass().getResourceAsStream( "../../res/words/space.png" ) );
+
         } catch( IOException e ){ 
             e.printStackTrace(); 
         } //end catch
     } //end getPlayerImage
+
+
 
     public void update(){
         if( keyH.gPressed == true )
@@ -131,6 +136,45 @@ public class Words extends Entity {
         spriteCounter++; 
     } //end update
 
+
+
+    public static String[] getWords(){ 
+        try {
+        String files[] = {"easyWords.txt", "mediumWords.txt", "hardWords.txt"};
+        String list = "";
+                               
+        BufferedReader br = new BufferedReader( new FileReader( files[1] ) );
+        String line = br.readLine();
+
+        while( line != null ){ 
+            list += line + " "; 
+            line = br.readLine(); 
+        }//end while
+        br.close(); 
+    
+
+        String[] Words = list.split(" ");
+        Random rand = new Random();
+
+        String correct = "";
+        //set to 17 for now because thats when the map ends
+        for(int i = 0; i <= 17; i++)
+            correct += Words[rand.nextInt(50)] + " ";
+
+        
+        return correct.split(" ");
+
+        } catch ( IOException e) {
+        e.printStackTrace();
+    }//end catch
+
+    //if theres an IOException
+    String[] empty = {"error", "error", "error"};
+    return empty;
+    }//end getWords
+
+
+
     public void draw( Graphics2D graphics2 ){ 
 
         //adds all the letter images into an array in order
@@ -138,20 +182,18 @@ public class Words extends Entity {
         BufferedImage[] images_green = {letter_a_g, letter_b_g, letter_c_g, letter_d_g, letter_e_g, letter_f_g, letter_g_g, letter_h_g, letter_i_g, letter_j_g, letter_k_g, letter_l_g, letter_m_g, letter_n_g, letter_o_g, letter_p_g, letter_q_g, letter_r_g, letter_s_g, letter_t_g, letter_u_g, letter_v_g, letter_w_g, letter_x_g, letter_y_g, letter_z_g};
         BufferedImage[] images_red = {letter_a_r, letter_b_r, letter_c_r, letter_d_r, letter_e_r, letter_f_r, letter_g_r, letter_h_r, letter_i_r, letter_j_r, letter_k_r, letter_l_r, letter_m_r, letter_n_r, letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r};
         BufferedImage imageLetter; 
+
+        
         // Only Works with lowercase letters!
         try {
-            //The txt file has one word per line
-            BufferedReader br = new BufferedReader ( new FileReader("mediumWords.txt") );
-            String line = br.readLine() ;
             int i = 1; //keeps letters from overlapping
 
-        while(line != null) {
+       for(int x = 0; x < correctWords.length; x++) {
+            //System.out.println(correctLine.length + "  " + x + " " + i);
             // create an array of ascii codes coresponding to each letter in the word
-            byte[] bytes = line.getBytes("US-ASCII");
+            byte[] bytes = correctWords[x].getBytes("US-ASCII");
             for(byte letter : bytes) {
-                //prints each letter corresponding to the ascii code. 
-                //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc
-                 
+
                 switch( color ){ 
                     case "GREEN": //User got letter correct
                         imageLetter = images_green[ letter - 97 ]; 
@@ -163,6 +205,8 @@ public class Words extends Entity {
                         imageLetter = images[ letter - 97 ]; 
                 } //end switch
 
+                //prints each letter corresponding to the ascii code. 
+                //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc
                 graphics2.drawImage(imageLetter, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
                 i++; 
             }//end for
@@ -170,12 +214,11 @@ public class Words extends Entity {
             //prints space here
             graphics2.drawImage(space, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
             i++;
-            line = br.readLine();
-        } //end while
+        } //end for
 
-        br.close();
         } catch ( IOException e) {
             e.printStackTrace();
         }//end catch
     } //end draw
+
 } //end class
