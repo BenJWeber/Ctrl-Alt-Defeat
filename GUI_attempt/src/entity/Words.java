@@ -6,6 +6,7 @@ import GUI_attempt.src.main.InputHandler;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
@@ -154,15 +155,21 @@ public class Words extends Entity {
     
 
         String[] Words = list.split(" ");
+
+        //to make sure there is no duplicates
+        ArrayList<String> correct = new ArrayList<String>();   
         Random rand = new Random();
+        while (correct.size() < 17) {
+            String random = Words[rand.nextInt(50)];
+            if (!correct.contains(random)) {
+                correct.add(random);
+            }//end if
+        }//end while
 
-        String correct = "";
-        //set to 17 for now because thats when the map ends
-        for(int i = 0; i <= 17; i++)
-            correct += Words[rand.nextInt(50)] + " ";
+        String[] correctWords = new String[correct.size()];
+        correctWords = correct.toArray(correctWords);
 
-        
-        return correct.split(" ");
+        return correctWords;
 
         } catch ( IOException e) {
         e.printStackTrace();
