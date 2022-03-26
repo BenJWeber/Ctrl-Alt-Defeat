@@ -12,12 +12,15 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
 import javax.imageio.ImageIO;
+import javax.lang.model.util.ElementScanner14;
 
 public class Words extends Entity {
     GamePanel gp;
     InputHandler keyH; 
     String color = "BLACK";
     String[] correctWords = getWords();
+    String[] correctLetters; 
+    boolean colorFlag = false; 
 
     public Words( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
@@ -125,6 +128,12 @@ public class Words extends Entity {
 
 
     public void update(){
+        if( keyH.aPressed )
+        { 
+            System.out.println( "'A' Was Pressed" ); 
+            keyH.aPressed = false; 
+        }
+
         if( keyH.gPressed == true )
             color = "GREEN"; 
         else if( keyH.rPressed == true )
@@ -147,9 +156,9 @@ public class Words extends Entity {
         BufferedReader br = new BufferedReader( new FileReader( files[1] ) );
         String line = br.readLine();
 
-        while( line != null ){ 
-            list += line + " "; 
-            line = br.readLine(); 
+        while( line != null ){              
+            list += line + " ";                          
+            line = br.readLine();                        
         }//end while
         br.close(); 
     
@@ -171,7 +180,7 @@ public class Words extends Entity {
 
         return correctWords;
 
-        } catch ( IOException e) {
+        } catch ( IOException e) { 
         e.printStackTrace();
     }//end catch
 
@@ -195,15 +204,21 @@ public class Words extends Entity {
         try {
             int i = 1; //keeps letters from overlapping
 
-       for(int x = 0; x < correctWords.length; x++) {
+       for( int x = 0; x < correctWords.length; x++ ) {
             //System.out.println(correctLine.length + "  " + x + " " + i);
             // create an array of ascii codes coresponding to each letter in the word
             byte[] bytes = correctWords[x].getBytes("US-ASCII");
             for(byte letter : bytes) {
-
+               // System.out.println( x + ": " +  correctWords[x] ); 
                 switch( color ){ 
                     case "GREEN": //User got letter correct
-                        imageLetter = images_green[ letter - 97 ]; 
+                        if( colorFlag == false )
+                            imageLetter = images_green[ letter - 97 ]; 
+                        else
+                            imageLetter = images[ letter - 97 ]; 
+
+                        System.out.println( letter ); 
+                        colorFlag = true; 
                         break; 
                     case "RED":   //User got letter incorrect
                         imageLetter = images_red[ letter - 97 ]; 
@@ -216,6 +231,8 @@ public class Words extends Entity {
                 //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc
                 graphics2.drawImage(imageLetter, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
                 i++; 
+               
+                //System.out.println( "Word X Value: " + wordsX_2 ); 
             }//end for
 
             //prints space here
