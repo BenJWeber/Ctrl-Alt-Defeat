@@ -15,7 +15,9 @@ public class InputHandler implements KeyListener{
     public boolean aPressed, bPressed, cPressed, dPressed, ePressed, fPressed, gPressed, hPressed, 
                     iPressed, jPressed, kPressed, lPressed, mPressed, nPressed, oPressed, pPressed, 
                     qPressed, rPressed, sPressed, tPressed, uPressed, vPressed, wPressed, xPressed, 
-                    yPressed, zPressed; 
+                    yPressed, zPressed, spacePressed; 
+    int counter = 0; 
+
     @Override
     public void keyTyped(KeyEvent e) {
     } //end keyTyped
@@ -102,6 +104,14 @@ public class InputHandler implements KeyListener{
         if( code == KeyEvent.VK_Z ){ 
             zPressed = true; 
         } //end if
+        if( code == KeyEvent.VK_SPACE ){ 
+            if( counter == 0 ){ 
+                spacePressed = true; 
+                counter++; 
+            } //end if
+            else
+                spacePressed = false; 
+        } //end if
     } //end keyPressed
 
     @Override
@@ -185,6 +195,10 @@ public class InputHandler implements KeyListener{
         } //end if
         if( code == KeyEvent.VK_Z ){ 
             zPressed = false; 
+        } //end if
+        if( code == KeyEvent.VK_SPACE ){ 
+            spacePressed = false; 
+            counter = 0; 
         } //end if
     } //end keyReleased
 }//end class
