@@ -25,6 +25,7 @@ public class TestWords extends Entity {
     String[] correctLetters; 
     boolean colorFlag = false; 
     int wordCounter; 
+    int currentLength; 
 
     /*
     * Call methods. 
@@ -47,6 +48,7 @@ public class TestWords extends Entity {
         wordsX_3 = wordsX_2 + gp.tileSize; 
         wordsY = 250;
         wordCounter = 0; 
+        currentLength = 3; 
     } //end setDefaultValues
 
     /*
@@ -223,13 +225,20 @@ public class TestWords extends Entity {
     public void update(){
         int j = 0; 
     
-        for( int i = wordCounter; i < wordCounter + 3; i++ ){
+        for( int i = wordCounter; i < wordCounter + currentLength; i++ ){
             currentWords[ j ] = correctWords[ i ];
             j++;  
         } //end for
 
         if( keyH.spacePressed == true ){           
             wordCounter++; 
+
+            if( wordCounter == correctWords.length - 2 )
+                currentLength = 2; 
+            
+            if( wordCounter == correctWords.length - 1 )
+                currentLength = 1; 
+
             keyH.spacePressed = false; 
         } //end if
     } //end update
@@ -247,7 +256,7 @@ public class TestWords extends Entity {
         try {
             int i = 1; //keeps letters from overlapping
        
-            for( int x = 0; x < 3; x++ ){ 
+            for( int x = 0; x < currentLength; x++ ){ 
                 byte[] bytes = currentWords[x].getBytes("US-ASCII");
                 if( x == 0 || x == 2 )
                     color = "GREY"; 
