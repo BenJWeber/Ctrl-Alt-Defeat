@@ -12,10 +12,11 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import GUI_attempt.src.entity.Menu;
 import GUI_attempt.src.entity.Monster;
 import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.entity.TestWords;
-import GUI_attempt.src.entity.Words;
+//import GUI_attempt.src.entity.Words;
 import GUI_attempt.src.map.MapManager;
 
 
@@ -39,8 +40,17 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player( this, keyH ); 
     public Monster monster = new Monster( this ); 
     public TestWords words = new TestWords( this, keyH ); 
+    public Menu menu = new Menu();
 
     public int FPS = 60; 
+    
+    
+    public static enum STATE{
+        menu,
+        game
+    };
+
+    public static STATE State = STATE.menu;
 
     public GamePanel(){ 
         this.setPreferredSize( new Dimension( screenWidth, screenHeight ) );
@@ -52,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void startGameThread(){ 
         gameThread = new Thread( this );
-        gameThread.start();  
+        gameThread.start(); 
     } //End startGameThread
 
     @Override
@@ -63,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable{
         long currentTime; 
         long timer = 0; 
         int drawCount = 0; 
+        this.addMouseListener(new MouseInput());
         
         while( gameThread != null ){ 
             currentTime = System.nanoTime(); 
@@ -95,10 +106,18 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent( Graphics graphics ){ 
         super.paintComponent( graphics ); 
         Graphics2D graphics2 = ( Graphics2D )graphics; 
+        
+        
+        if(State == STATE.game) {
+         mapManager.draw( graphics2 ); 
+         player.draw( graphics2 );
+         monster.draw( graphics2 ); 
+         words.draw( graphics2 ); 
+        }
+        else if(State == STATE.menu) {
+            mapManager.draw( graphics2 );
+            menu.draw( graphics2 );
+        }
 
-        mapManager.draw( graphics2 ); 
-        player.draw( graphics2 );
-        monster.draw( graphics2 ); 
-        words.draw( graphics2 ); 
     } //end paintComponent 
 }
