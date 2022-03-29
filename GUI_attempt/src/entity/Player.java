@@ -7,6 +7,7 @@ package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
 import GUI_attempt.src.main.InputHandler;
+import GUI_attempt.src.entity.TestWords; 
 
 import java.io.IOException;
 import java.awt.Graphics2D;
@@ -65,10 +66,11 @@ public class Player extends Entity {
             
             jumpFlag = true; 
         } //end if
-        else if( keyH.increaseSpeed == true ){ 
+        else if( gp.increaseSpeed ){ 
+            gp.increaseSpeed = false; 
             direction = "forward"; 
 
-            playerX += (speed + 1 ); 
+            playerX += (speed + 4 ); 
             worldX += speed;
 
             if( jumpFlag == true ){ 
@@ -84,10 +86,11 @@ public class Player extends Entity {
                 spriteCounter = 0; 
             } //end if
         } //end else if
-        else if( keyH.decreaseSpeed == true ){ 
+        else if( gp.decreaseSpeed ){ 
+            gp.decreaseSpeed = false; 
             direction = "forward"; 
 
-            playerX -= ( speed - 2 ); 
+            playerX -= ( speed + 4 ); 
             worldX += speed;
 
             if( jumpFlag == true ){ 

@@ -330,11 +330,14 @@ public class TestWords extends Entity {
     } //end getUserInput
 
     public void checkUserInput(){ 
-        if( userInput.equals( compareWord ) == true )
-            colorVerified = "GREEN"; 
-        else
-            colorVerified = "RED";  
-
+        if( userInput.equals( compareWord ) == true ){ 
+            colorVerified = "GREEN";
+            gp.increaseSpeed = true;  
+        } //end if
+        else{
+            colorVerified = "RED";
+            gp.decreaseSpeed = true;   
+        } //end else
         userInput = ""; 
     } //end checkUserInput
 
