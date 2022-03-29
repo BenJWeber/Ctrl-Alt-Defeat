@@ -26,6 +26,7 @@ public class TestWords extends Entity {
     String[] currentWords = { "1", "2", "3" }; 
     int wordCounter = 0; 
     int currentLength;  
+    int numWords;
     String userInput = ""; 
 
     /*
@@ -48,8 +49,9 @@ public class TestWords extends Entity {
         wordsX_2 = wordsX_1_a + gp.tileSize; 
         wordsX_3 = wordsX_2 + gp.tileSize; 
         wordsY = 250;
-        wordCounter = 0; 
+        wordCounter = 1; 
         currentLength = 3;
+        numWords = 20;
     } //end setDefaultValues
 
     /*
@@ -192,12 +194,12 @@ public class TestWords extends Entity {
         //to make sure there is no duplicates
         ArrayList<String> correct = new ArrayList<String>();   
         Random rand = new Random();
-       // while (correct.size() < numWords) {
+        while (correct.size() < 20) {
             String random = words.get(rand.nextInt(50));
             if (!correct.contains(random)) {
                 correct.add(random);
             }//end if
-       // }//end while
+        }//end while
 
         String[] correctWords = new String[correct.size()];
         correctWords = correct.toArray(correctWords);
@@ -345,7 +347,7 @@ public class TestWords extends Entity {
         int j = 0; 
  
         getUserInput(); 
-        for( int i = wordCounter; i < wordCounter + currentLength; i++ ){
+        for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
             currentWords[ j ] = correctWords[ i ];
             j++;  
         } //end for
