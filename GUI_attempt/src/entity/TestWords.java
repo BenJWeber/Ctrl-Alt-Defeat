@@ -26,7 +26,7 @@ public class TestWords extends Entity {
     String[] currentWords = { "1", "2", "3" }; 
     int wordCounter = 0; 
     int currentLength;  
-    int numWords; 
+    int numWords;
     String userInput = ""; 
 
     /*
@@ -49,9 +49,9 @@ public class TestWords extends Entity {
         wordsX_2 = wordsX_1_a + gp.tileSize; 
         wordsX_3 = wordsX_2 + gp.tileSize; 
         wordsY = 250;
-        wordCounter = 0; 
+        wordCounter = 1; 
         currentLength = 3;
-        numWords = 20; 
+        numWords = 20;
     } //end setDefaultValues
 
     /*
