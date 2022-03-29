@@ -177,6 +177,7 @@ public class TestWords extends Entity {
     */
     public static String[] getWords(){ 
         try {
+
         String files[] = {"easyWords.txt", "mediumWords.txt", "hardWords.txt"};                     
         BufferedReader br = new BufferedReader( new FileReader( files[1] ) );
 
@@ -191,12 +192,12 @@ public class TestWords extends Entity {
         //to make sure there is no duplicates
         ArrayList<String> correct = new ArrayList<String>();   
         Random rand = new Random();
-        while (correct.size() < 17) {
+       // while (correct.size() < numWords) {
             String random = words.get(rand.nextInt(50));
             if (!correct.contains(random)) {
                 correct.add(random);
             }//end if
-        }//end while
+       // }//end while
 
         String[] correctWords = new String[correct.size()];
         correctWords = correct.toArray(correctWords);
