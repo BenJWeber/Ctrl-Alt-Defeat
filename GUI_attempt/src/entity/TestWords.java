@@ -20,12 +20,13 @@ public class TestWords extends Entity {
     GamePanel gp;
     InputHandler keyH; 
     String color = "BLACK";
+    String colorVerified = "RED";
+    String compareWord = "";  
     String[] correctWords;
     String[] currentWords = { "1", "2", "3" }; 
-    String[] correctLetters; 
-    boolean colorFlag = false; 
-    int wordCounter; 
-    int currentLength; 
+    int wordCounter = 0; 
+    int currentLength;  
+    String userInput = ""; 
 
     /*
     * Call methods. 
@@ -48,7 +49,7 @@ public class TestWords extends Entity {
         wordsX_3 = wordsX_2 + gp.tileSize; 
         wordsY = 250;
         wordCounter = 0; 
-        currentLength = 3; 
+        currentLength = 3;
     } //end setDefaultValues
 
     /*
@@ -213,9 +214,126 @@ public class TestWords extends Entity {
     /*
     * Checks if user typed correct character. 
     */ 
-    public void checkUserInput(){ 
+    public void getUserInput(){ 
+        if( keyH.aPressed ){ 
+            userInput = userInput + "a";
+            keyH.aPressed = false;  
+        } //end if
+        else if( keyH.bPressed ){ 
+            userInput = userInput + "b";
+            keyH.bPressed = false;
+        } //end else if
+        else if( keyH.cPressed ){ 
+            userInput = userInput + "c";
+            keyH.cPressed = false;
+        } //end else if
+        else if( keyH.dPressed ){ 
+            userInput = userInput + "d";
+            keyH.dPressed = false;
+        } //end else if
+        else if( keyH.ePressed ){ 
+            userInput = userInput + "e";
+            keyH.ePressed = false;
+        } //end else if
+        else if( keyH.fPressed ){ 
+            userInput = userInput + "f";
+            keyH.fPressed = false;
+        } //end else if
+        else if( keyH.gPressed ){ 
+            userInput = userInput + "g";
+            keyH.gPressed = false;
+        } //end else if
+        else if( keyH.hPressed ){ 
+            userInput = userInput + "h";
+            keyH.hPressed = false;
+        } //end else if
+        else if( keyH.iPressed ){ 
+            userInput = userInput + "i";
+            keyH.iPressed = false;
+        } //end else if
+        else if( keyH.jPressed ){ 
+            userInput = userInput + "j";
+            keyH.jPressed = false;
+        } //end else if
+        else if( keyH.kPressed ){ 
+            userInput = userInput + "k";
+            keyH.kPressed = false;
+        } //end else if
+        else if( keyH.lPressed ){ 
+            userInput = userInput + "l";
+            keyH.lPressed = false;
+        } //end else if
+        else if( keyH.mPressed ){ 
+            userInput = userInput + "m";
+            keyH.mPressed = false;
+        } //end else if
+        else if( keyH.nPressed ){ 
+            userInput = userInput + "n";
+            keyH.nPressed = false;
+        } //end else if
+        else if( keyH.oPressed ){ 
+            userInput = userInput + "o";
+            keyH.oPressed = false;
+        } //end else if
+        else if( keyH.pPressed ){ 
+            userInput = userInput + "p";
+            keyH.pPressed = false;
+        } //end else if
+        else if( keyH.qPressed ){ 
+            userInput = userInput + "q";
+            keyH.qPressed = false;
+        } //end else if
+        else if( keyH.rPressed ){ 
+            userInput = userInput + "r";
+            keyH.rPressed = false;
+        } //end else if
+        else if( keyH.sPressed ){ 
+            userInput = userInput + "s";
+            keyH.sPressed = false;
+        } //end else if
+        else if( keyH.tPressed ){ 
+            userInput = userInput + "t";
+            keyH.tPressed = false;
+        } //end else if
+        else if( keyH.uPressed ){ 
+            userInput = userInput + "u";
+            keyH.uPressed = false;
+        } //end else if
+        else if( keyH.vPressed ){ 
+            userInput = userInput + "v";
+            keyH.vPressed = false;
+        } //end else if
+        else if( keyH.wPressed ){ 
+            userInput = userInput + "w";
+            keyH.wPressed = false;
+        } //end else if
+        else if( keyH.xPressed ){ 
+            userInput = userInput + "x";
+            keyH.xPressed = false;
+        } //end else if
+        else if( keyH.yPressed ){ 
+            userInput = userInput + "y";
+            keyH.yPressed = false;
+        } //end else if
+        else if( keyH.zPressed ){ 
+            userInput = userInput + "z";
+            keyH.zPressed = false;
+        } //end else if
+        else if( keyH.backSpacePressed ){ 
+            userInput = userInput.substring( 0, userInput.length() - 1 );
+            keyH.backSpacePressed = false;  
+        } //end else if
+        System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
+    } //end getUserInput
 
-    }
+    public void checkUserInput(){ 
+        if( userInput.equals( compareWord ) == true )
+            colorVerified = "GREEN"; 
+        else
+            colorVerified = "RED";  
+
+        userInput = ""; 
+    } //end checkUserInput
 
     /*
     * Calls checkUserInput. 
@@ -224,7 +342,8 @@ public class TestWords extends Entity {
     */ 
     public void update(){
         int j = 0; 
-    
+ 
+        getUserInput(); 
         for( int i = wordCounter; i < wordCounter + currentLength; i++ ){
             currentWords[ j ] = correctWords[ i ];
             j++;  
@@ -233,10 +352,12 @@ public class TestWords extends Entity {
         if( keyH.spacePressed == true ){           
             wordCounter++; 
 
-            if( wordCounter == correctWords.length - 2 )
+            checkUserInput();  
+
+            if( wordCounter == correctWords.length - 2 ) //Allows last word to make it to center. 
                 currentLength = 2; 
             
-            if( wordCounter == correctWords.length - 1 )
+            if( wordCounter == correctWords.length - 1 ) //Allows last word to make it to the left of center. 
                 currentLength = 1; 
 
             keyH.spacePressed = false; 
@@ -257,31 +378,40 @@ public class TestWords extends Entity {
             int i = 1; //keeps letters from overlapping
        
             for( int x = 0; x < currentLength; x++ ){ 
+                //compareWord = currentWords[x]; 
                 byte[] bytes = currentWords[x].getBytes("US-ASCII");
+                int length = bytes.length; 
                 if( x == 0 || x == 2 )
                     color = "GREY"; 
-                else    
+                else{     
                     color = "BLACK"; 
+                } //end else
 
-                for(byte letter : bytes) {
-                    //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc            
-                    switch( color ){ 
-                        case "GREEN": //User got letter correct
-                            imageLetter = images_green[ letter - 97 ]; 
-                            break; 
-                        case "RED":  //user got letter wrong
-                            imageLetter = images_red[ letter - 97 ];
-                            break;
-                        case "GREY": 
-                            imageLetter = images_grey[ letter - 97 ]; 
-                            break; 
-                        default:      //User has not attempted letter
-                            imageLetter = images[letter - 97]; 
-                            break;
-                    } //end switch
+                for( int m = 0; m < length; m++ ) {
+                        //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc 
+                        if( x == 1){
+                            compareWord = currentWords[x];  
+                        } //end if 
+                        else if( x == 0 )
+                            color = colorVerified; 
+                        switch( color ){ 
+                            case "GREEN": //User got letter correct
+                                imageLetter = images_green[ bytes[m] - 97 ]; 
+                                break; 
+                            case "RED":  //user got letter wrong
+                                imageLetter = images_red[ bytes[m] - 97 ];
+                                break;
+                            case "GREY": 
+                                imageLetter = images_grey[ bytes[m] - 97 ]; 
+                                break; 
+                            default:      //User has not attempted letter
+                                imageLetter = images[bytes[m] - 97]; 
+                                break;
+                        } //end switch
                     
-                    graphics2.drawImage(imageLetter, wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
-                    i++; 
+                        graphics2.drawImage(imageLetter, wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                        i++; 
+                   // } //end while
                 }//end inner for
 
                 graphics2.drawImage(space, ( wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
