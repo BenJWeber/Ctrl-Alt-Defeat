@@ -146,7 +146,7 @@ public class Player extends Entity {
             } //end if
         } //end else
 
-        if (playerX == monsterX) {
+        if (playerX <= monsterX) {
             GamePanel.State = GamePanel.STATE.gameOver;
             
         }
