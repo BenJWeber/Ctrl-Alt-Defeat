@@ -20,7 +20,9 @@ public class Player extends Entity {
     InputHandler keyH; 
 
     int defaultPlayerY = 675; 
-    int defaultPlayerX = 200; 
+    int defaultPlayerX = 700; 
+    double increaseFactor; 
+    double decreaseFactor; 
 
     public int screenX; 
     public int screenY;
@@ -37,12 +39,15 @@ public class Player extends Entity {
     } //end Player
 
     public void setDefaultValues(){ 
-        worldX = 200; 
+        worldX = 400; 
         worldY = 675; 
 
         playerX = defaultPlayerX; 
         playerY = defaultPlayerY; 
         
+        increaseFactor = 0; 
+        decreaseFactor = 0; 
+
         speed = 4; 
         direction = "forward"; 
     } //end setDefaultValues
@@ -70,8 +75,9 @@ public class Player extends Entity {
             gp.increaseSpeed = false; 
             direction = "forward"; 
 
-            playerX += (speed + 4 ); 
+            playerX += (speed + 10 ); 
             worldX += speed;
+            increaseFactor = 10; 
 
             if( jumpFlag == true ){ 
                 playerY = defaultPlayerY; 
@@ -92,6 +98,7 @@ public class Player extends Entity {
 
             playerX -= ( speed + 4 ); 
             worldX += speed;
+            decreaseFactor = 10; 
 
             if( jumpFlag == true ){ 
                 playerY = defaultPlayerY; 
@@ -110,6 +117,16 @@ public class Player extends Entity {
             direction = "forward";
 
             worldX += speed;
+            if( increaseFactor > 0 ){ 
+                playerX += increaseFactor; 
+                increaseFactor = increaseFactor - .25; 
+            } //end if 
+            else if( decreaseFactor > 0 ){ 
+                playerX -= decreaseFactor; 
+                decreaseFactor = decreaseFactor -.25; 
+            } //end else if
+            else
+                playerX -= .1; 
 
             if( jumpFlag == true ){ 
                 playerY = defaultPlayerY; 
