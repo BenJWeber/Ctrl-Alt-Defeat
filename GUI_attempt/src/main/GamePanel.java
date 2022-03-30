@@ -61,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered( true ); //Improves rendering performance 
         this.addKeyListener( keyH ); 
         this.setFocusable( true );
+        this.addMouseListener(new MouseInput());
     } //End GamePanel
 
     public void startGameThread(){ 
@@ -76,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable{
         long currentTime; 
         long timer = 0; 
         int drawCount = 0; 
-        this.addMouseListener(new MouseInput());
+        
         
         while( gameThread != null ){ 
             currentTime = System.nanoTime(); 

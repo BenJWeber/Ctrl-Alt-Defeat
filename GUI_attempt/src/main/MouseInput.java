@@ -16,7 +16,6 @@ public class MouseInput implements MouseInputListener {
 
        int mx = e.getX();
        int my = e.getY();
-
        //play button
        if(mx >= 550 && mx <= 550 + 100)
           if(my >= 300 && my <= 350){
@@ -29,7 +28,6 @@ public class MouseInput implements MouseInputListener {
           if(my >= 400 && my <= 450){
               System.exit(1);
           }//end if
-
     }//end mousePressed
 
     @Override
