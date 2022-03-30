@@ -49,7 +49,7 @@ public class TestWords extends Entity {
         wordsX_2 = wordsX_1_a + gp.tileSize; 
         wordsX_3 = wordsX_2 + gp.tileSize; 
         wordsY = 250;
-        wordCounter = 1; 
+        wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
         currentLength = 3;
         numWords = 20;
     } //end setDefaultValues
@@ -326,7 +326,7 @@ public class TestWords extends Entity {
             userInput = userInput.substring( 0, userInput.length() - 1 );
             keyH.backSpacePressed = false;  
         } //end else if
-        System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
+        //System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
     } //end getUserInput
 
     public void checkUserInput(){ 
@@ -348,9 +348,18 @@ public class TestWords extends Entity {
     */ 
     public void update(){
         int j = 0; 
- 
+        boolean flag = true; 
         getUserInput(); 
         for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
+            /*
+            if( wordCounter == 0 && flag ){ 
+                System.out.println( "Word Counter is equal to 0" ); 
+                currentWords[ 0 ] = "      "; 
+                j++; 
+                currentLength -= 1; 
+                flag = false; 
+            } //end if
+            */
             currentWords[ j ] = correctWords[ i ];
             j++;  
         } //end for
@@ -379,11 +388,26 @@ public class TestWords extends Entity {
         BufferedImage[] images_grey = {letter_a_gr, letter_b_gr, letter_c_gr, letter_d_gr, letter_e_gr, letter_f_gr, letter_g_gr, letter_h_gr, letter_i_gr, letter_j_gr, letter_k_gr, letter_l_gr, letter_m_gr, letter_n_gr, letter_o_gr, letter_p_gr, letter_q_gr, letter_r_gr, letter_s_gr, letter_t_gr, letter_u_gr, letter_v_gr, letter_w_gr, letter_x_gr, letter_y_gr, letter_z_gr};
         BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
         BufferedImage imageLetter; 
+        boolean flag = true;
+        int counter = 0;  
+        int wordIndex = 0; 
         
         try {
             int i = 1; //keeps letters from overlapping
        
-            for( int x = 0; x < currentLength; x++ ){ 
+            /*
+            if( wordCounter == 0 && flag ){
+                while( counter < 7 ){ 
+                    graphics2.drawImage(space, ( wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                    counter++; 
+                    i++; 
+                } //end while
+                wordIndex++; 
+                flag = false; 
+            } //end if
+            */
+
+            for( int x = wordIndex; x < currentLength; x++ ){ 
                 //compareWord = currentWords[x]; 
                 byte[] bytes = currentWords[x].getBytes("US-ASCII");
                 int length = bytes.length; 
