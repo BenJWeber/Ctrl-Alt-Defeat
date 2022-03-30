@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
 import javax.imageio.ImageIO;
+import javax.lang.model.util.ElementScanner14;
 
 public class TestWords extends Entity {
     /*
@@ -21,6 +22,7 @@ public class TestWords extends Entity {
     InputHandler keyH; 
     String color = "BLACK";
     String colorVerified = "RED";
+    String colorVerifiedLive = "BLACK"; 
     String compareWord = "";  
     String[] correctWords;
     String[] currentWords = { "1", "2", "3" }; 
@@ -48,7 +50,7 @@ public class TestWords extends Entity {
         wordsX_1_a = 30; 
         wordsX_2 = wordsX_1_a + gp.tileSize; 
         wordsX_3 = wordsX_2 + gp.tileSize; 
-        wordsY = 250;
+        wordsY = 200;
         wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
         currentLength = 3;
         numWords = 20;
@@ -332,12 +334,15 @@ public class TestWords extends Entity {
         else if( keyH.backSpacePressed ){   
             if( userInput.length() > 0 )
                 userInput = userInput.substring( 0, userInput.length() - 1 );
-                
+
             keyH.backSpacePressed = false;  
         } //end else if
         //System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
     } //end getUserInput
 
+    /*
+    * Once user hits space check if typed word is correct. 
+    */
     public void checkUserInput(){ 
         if( userInput.equals( compareWord ) == true ){ 
             colorVerified = "GREEN";
@@ -351,6 +356,25 @@ public class TestWords extends Entity {
     } //end checkUserInput
 
     /*
+    * Check user input before user hits space.
+    * Allows for live feedback. 
+    */
+    public void checkUserInputLive(){ 
+        if( userInput.length() <= compareWord.length() ){ 
+
+            String check  = compareWord.substring( 0, userInput.length() ); 
+
+            if( userInput.equals( check ) == true ){ 
+                colorVerifiedLive = "BLACK"; 
+            } //end if
+            else    
+                colorVerifiedLive = "RED"; 
+        } //end if
+        else
+            colorVerifiedLive = "RED"; 
+    } //end checkUserInputLive
+
+    /*
     * Calls checkUserInput. 
     * Checks if user entered space. 
     * When space is hit, updates words/positions. 
@@ -359,6 +383,7 @@ public class TestWords extends Entity {
         int j = 0; 
  
         getUserInput(); 
+        checkUserInputLive();
 
         for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
             currentWords[ j ] = correctWords[ i ];
@@ -393,6 +418,7 @@ public class TestWords extends Entity {
         
         try {
             int i = 1; //keeps letters from overlapping
+            int k = 1; 
 
             for( int x = wordIndex; x < currentLength; x++ ){ 
                 byte[] bytes = currentWords[x].getBytes("US-ASCII");
@@ -446,6 +472,21 @@ public class TestWords extends Entity {
                 graphics2.drawImage(space, ( wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
                 i++; 
             } //end outer for
+
+            byte[] bytes = userInput.getBytes("US-ASCII");
+
+            int length = bytes.length; 
+
+            for( int m = 0; m < length; m++ ) {
+                if( colorVerifiedLive == "RED" )
+                    imageLetter = images_red[bytes[m] - 97];
+                else
+                    imageLetter = images[bytes[m] - 97]; 
+
+                graphics2.drawImage(imageLetter, wordsX_1_b = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ), wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                k++; 
+            } //end for 
+
         } //end try
         catch ( IOException e) {
             e.printStackTrace();
