@@ -178,6 +178,8 @@ public class TestWords extends Entity {
     * Place words into array from File. 
     */
     public static String[] getWords(){ 
+        int count = 0; 
+        String spaceString = "      "; 
         try {
 
         String files[] = {"easyWords.txt", "mediumWords.txt", "hardWords.txt"};                     
@@ -195,6 +197,10 @@ public class TestWords extends Entity {
         ArrayList<String> correct = new ArrayList<String>();   
         Random rand = new Random();
         while (correct.size() < 20) {
+            if( count == 0 ){ 
+                correct.add( spaceString ); 
+                count++; 
+            }
             String random = words.get(rand.nextInt(50));
             if (!correct.contains(random)) {
                 correct.add(random);
@@ -203,6 +209,7 @@ public class TestWords extends Entity {
 
         String[] correctWords = new String[correct.size()];
         correctWords = correct.toArray(correctWords);
+
         return correctWords; 
 
         } catch ( IOException e) {
@@ -322,8 +329,10 @@ public class TestWords extends Entity {
             userInput = userInput + "z";
             keyH.zPressed = false;
         } //end else if
-        else if( keyH.backSpacePressed ){ 
-            userInput = userInput.substring( 0, userInput.length() - 1 );
+        else if( keyH.backSpacePressed ){   
+            if( userInput.length() > 0 )
+                userInput = userInput.substring( 0, userInput.length() - 1 );
+                
             keyH.backSpacePressed = false;  
         } //end else if
         //System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
@@ -348,18 +357,10 @@ public class TestWords extends Entity {
     */ 
     public void update(){
         int j = 0; 
-        boolean flag = true; 
+ 
         getUserInput(); 
+
         for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
-            /*
-            if( wordCounter == 0 && flag ){ 
-                System.out.println( "Word Counter is equal to 0" ); 
-                currentWords[ 0 ] = "      "; 
-                j++; 
-                currentLength -= 1; 
-                flag = false; 
-            } //end if
-            */
             currentWords[ j ] = correctWords[ i ];
             j++;  
         } //end for
@@ -388,27 +389,12 @@ public class TestWords extends Entity {
         BufferedImage[] images_grey = {letter_a_gr, letter_b_gr, letter_c_gr, letter_d_gr, letter_e_gr, letter_f_gr, letter_g_gr, letter_h_gr, letter_i_gr, letter_j_gr, letter_k_gr, letter_l_gr, letter_m_gr, letter_n_gr, letter_o_gr, letter_p_gr, letter_q_gr, letter_r_gr, letter_s_gr, letter_t_gr, letter_u_gr, letter_v_gr, letter_w_gr, letter_x_gr, letter_y_gr, letter_z_gr};
         BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
         BufferedImage imageLetter; 
-        boolean flag = true;
-        int counter = 0;  
         int wordIndex = 0; 
         
         try {
             int i = 1; //keeps letters from overlapping
-       
-            /*
-            if( wordCounter == 0 && flag ){
-                while( counter < 7 ){ 
-                    graphics2.drawImage(space, ( wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
-                    counter++; 
-                    i++; 
-                } //end while
-                wordIndex++; 
-                flag = false; 
-            } //end if
-            */
 
             for( int x = wordIndex; x < currentLength; x++ ){ 
-                //compareWord = currentWords[x]; 
                 byte[] bytes = currentWords[x].getBytes("US-ASCII");
                 int length = bytes.length; 
                 if( x == 0 || x == 2 )
@@ -419,23 +405,36 @@ public class TestWords extends Entity {
 
                 for( int m = 0; m < length; m++ ) {
                         //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc 
-                        if( x == 1){
+                        if( x == 1)
                             compareWord = currentWords[x];  
-                        } //end if 
+
                         else if( x == 0 )
                             color = colorVerified; 
+
                         switch( color ){ 
                             case "GREEN": //User got letter correct
-                                imageLetter = images_green[ bytes[m] - 97 ]; 
+                                if( bytes[m] - 97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images_green[ bytes[m] - 97 ]; 
                                 break; 
                             case "RED":  //user got letter wrong
-                                imageLetter = images_red[ bytes[m] - 97 ];
+                                if( bytes[m] - 97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images_red[ bytes[m] - 97 ];
                                 break;
                             case "GREY": 
-                                imageLetter = images_grey[ bytes[m] - 97 ]; 
+                                if( bytes[m] -97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images_grey[ bytes[m] - 97 ]; 
                                 break; 
                             default:      //User has not attempted letter
-                                imageLetter = images[bytes[m] - 97]; 
+                                if( bytes[m] - 97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images[bytes[m] - 97]; 
                                 break;
                         } //end switch
                     
