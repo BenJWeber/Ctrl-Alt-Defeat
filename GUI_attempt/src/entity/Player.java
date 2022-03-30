@@ -71,7 +71,7 @@ public class Player extends Entity {
             
             jumpFlag = true; 
         } //end if
-        else if( gp.increaseSpeed ){ 
+        else if( gp.increaseSpeed ){            
             gp.increaseSpeed = false; 
             direction = "forward"; 
 
@@ -118,8 +118,12 @@ public class Player extends Entity {
 
             worldX += speed;
             if( increaseFactor > 0 ){ 
+                
                 playerX += increaseFactor; 
-                increaseFactor = increaseFactor - .25; 
+                increaseFactor = increaseFactor - .5; 
+
+                if( playerX > 700 )
+                    increaseFactor = 0; 
             } //end if 
             else if( decreaseFactor > 0 ){ 
                 playerX -= decreaseFactor; 
