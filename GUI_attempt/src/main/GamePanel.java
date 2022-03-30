@@ -50,7 +50,8 @@ public class GamePanel extends JPanel implements Runnable{
     
     public static enum STATE{
         menu,
-        game
+        game,
+        gameOver
     };
 
     public static STATE State = STATE.menu;
@@ -121,6 +122,10 @@ public class GamePanel extends JPanel implements Runnable{
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
             menu.draw( graphics2 );
+        }
+        else if(State == STATE.gameOver) {
+            mapManager.draw(graphics2);
+            menu.drawGameOver(graphics2);
         }
 
     } //end paintComponent 

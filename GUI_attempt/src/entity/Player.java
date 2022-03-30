@@ -147,7 +147,8 @@ public class Player extends Entity {
         } //end else
 
         if (playerX == monsterX) {
-            GamePanel.State = GamePanel.STATE.menu;
+            GamePanel.State = GamePanel.STATE.gameOver;
+            
         }
         spriteCounter++; 
     } //end update

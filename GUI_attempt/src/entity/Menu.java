@@ -10,7 +10,6 @@ public class Menu {
     public Rectangle playButton = new Rectangle(550, 300, 100, 50 );
     public Rectangle quitButton = new Rectangle(550, 400, 100, 50 );
 
-
     public void draw(Graphics2D g2d) {
         Font font1 = new Font("arial", Font.BOLD, 50);
         g2d.setFont(font1);
@@ -24,4 +23,11 @@ public class Menu {
         g2d.drawString("Quit", quitButton.x + 20, quitButton.y + 35);
         g2d.draw(quitButton);
     }//end draw
+
+    public void drawGameOver(Graphics2D g2d) {
+        Font font1 = new Font("arial", Font.BOLD, 50);
+        g2d.setFont(font1);
+        g2d.setColor(Color.white);
+        g2d.drawString("GAME OVER", 400, 250);
+    }
 }//end menu
