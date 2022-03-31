@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
     public int playerX, playerY, worldX, worldY, monsterX, monsterY, wordsX_1, wordsX_1_a, wordsX_1_b, 
-        wordsX_2, wordsX_2_a, wordsX_2_b, wordsX_3, wordsX_3_a, wordsX_3_b, wordsY;
+        wordsX_2, wordsX_2_a, wordsX_2_b, wordsX_3, wordsX_3_a, wordsX_3_b, wordsY, letterX, cursorX, lengthHold;
     public int speed; 
 
     public BufferedImage forward1, forward2, jump, monster1, monster2, 
@@ -31,7 +31,7 @@ public class Entity {
         letter_a_r, letter_b_r, letter_c_r, letter_d_r, letter_e_r, letter_f_r, letter_g_r, 
         letter_h_r, letter_i_r, letter_j_r, letter_k_r, letter_l_r, letter_m_r, letter_n_r, 
         letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, 
-        letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r, space; 
+        letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r, cursor, space; 
         
     public String direction; 
 
