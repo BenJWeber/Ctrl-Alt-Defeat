@@ -29,7 +29,9 @@ public class TestWords extends Entity {
     int wordCounter = 0; 
     int currentLength;  
     int numWords;
+    int pace; 
     String userInput = ""; 
+    String cursor_space; 
 
     /*
     * Call methods. 
@@ -48,12 +50,14 @@ public class TestWords extends Entity {
     */ 
     public void setDefaultValues(){ 
         wordsX_1_a = 30; 
-        wordsX_2 = wordsX_1_a + gp.tileSize; 
+        wordsX_2 = 640; 
         wordsX_3 = wordsX_2 + gp.tileSize; 
         wordsY = 200;
         wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
         currentLength = 3;
         numWords = 20;
+        pace = 0; 
+        cursor_space = "cursor"; 
     } //end setDefaultValues
 
     /*
@@ -169,6 +173,7 @@ public class TestWords extends Entity {
             letter_y_r = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Y_R.png" ) ); 
             letter_z_r = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Z_R.png" ) );
 
+            cursor = ImageIO.read( getClass().getResourceAsStream( "../../res/words/cursor.png" ) ); 
             space = ImageIO.read( getClass().getResourceAsStream( "../../res/words/space.png" ) );
         } //end try
         catch( IOException e ){ 
@@ -385,6 +390,8 @@ public class TestWords extends Entity {
         getUserInput(); 
         checkUserInputLive();
 
+        pace++; 
+
         for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
             currentWords[ j ] = correctWords[ i ];
             j++;  
@@ -413,8 +420,9 @@ public class TestWords extends Entity {
         BufferedImage[] images_red = {letter_a_r, letter_b_r, letter_c_r, letter_d_r, letter_e_r, letter_f_r, letter_g_r, letter_h_r, letter_i_r, letter_j_r, letter_k_r, letter_l_r, letter_m_r, letter_n_r, letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r};
         BufferedImage[] images_grey = {letter_a_gr, letter_b_gr, letter_c_gr, letter_d_gr, letter_e_gr, letter_f_gr, letter_g_gr, letter_h_gr, letter_i_gr, letter_j_gr, letter_k_gr, letter_l_gr, letter_m_gr, letter_n_gr, letter_o_gr, letter_p_gr, letter_q_gr, letter_r_gr, letter_s_gr, letter_t_gr, letter_u_gr, letter_v_gr, letter_w_gr, letter_x_gr, letter_y_gr, letter_z_gr};
         BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
-        BufferedImage imageLetter; 
+        BufferedImage imageLetter;  
         int wordIndex = 0; 
+        //int pace = 0; 
         
         try {
             int i = 1; //keeps letters from overlapping
@@ -477,16 +485,49 @@ public class TestWords extends Entity {
 
             int length = bytes.length; 
 
-            for( int m = 0; m < length; m++ ) {
+            if ( pace > 20 ){ 
+                if( cursor_space == "space" )
+                    cursor_space = "cursor"; 
+                else if( cursor_space == "cursor" )
+                    cursor_space = "space";
+                pace = 0; 
+            } //end if
+
+            if( userInput.length() == 0 ){  //Have blinking cursor on screen before any user input. 
+                if( cursor_space == "space" )
+                    graphics2.drawImage(space, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+    
+                if( cursor_space == "cursor" )
+                    graphics2.drawImage(cursor, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+            } //end if
+
+            /*
+            if( userInput.length() > 0 ){ 
+                lengthHold = userInput.length(); 
+                System.out.println( "Hold: " + lengthHold + " Actual: " + userInput.length() ); 
+
+                if( cursor_space == "space" )
+                    graphics2.drawImage(space, wordsX_1_b = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ), wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+
+                if( cursor_space == "cursor" )
+                    graphics2.drawImage(cursor, wordsX_1_b = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ), wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+
+                if( lengthHold != userInput.length() )
+                    k++; 
+            } //end if
+            */
+
+            for( int m = 0; m < length; m++ ) { //Display live user input
                 if( colorVerifiedLive == "RED" )
                     imageLetter = images_red[bytes[m] - 97];
                 else
                     imageLetter = images[bytes[m] - 97]; 
 
-                graphics2.drawImage(imageLetter, wordsX_1_b = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ), wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                letterX = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
+                
+                graphics2.drawImage(imageLetter, letterX, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
                 k++; 
             } //end for 
-
         } //end try
         catch ( IOException e) {
             e.printStackTrace();
