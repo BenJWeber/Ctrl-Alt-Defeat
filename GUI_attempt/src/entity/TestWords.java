@@ -175,6 +175,9 @@ public class TestWords extends Entity {
 
             cursor = ImageIO.read( getClass().getResourceAsStream( "../../res/words/cursor.png" ) ); 
             space = ImageIO.read( getClass().getResourceAsStream( "../../res/words/space.png" ) );
+            pause = ImageIO.read( getClass().getResourceAsStream( "../../res/icons/pause.png" ) );
+            play = ImageIO.read( getClass().getResourceAsStream( "../../res/icons/play.png" ) );
+
         } //end try
         catch( IOException e ){ 
             e.printStackTrace(); 
@@ -528,6 +531,16 @@ public class TestWords extends Entity {
                 graphics2.drawImage(imageLetter, letterX, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
                 k++; 
             } //end for 
+
+
+            //pause/play button
+            if(GamePanel.State == GamePanel.STATE.game)
+               graphics2.drawImage(pause, 1235, 3, gp.tileSize/2, gp.tileSize/2, null );
+            else if(GamePanel.State == GamePanel.STATE.pause)
+               graphics2.drawImage(play, 1235, 3, gp.tileSize/2, gp.tileSize/2, null );
+
+
+
         } //end try
         catch ( IOException e) {
             e.printStackTrace();
