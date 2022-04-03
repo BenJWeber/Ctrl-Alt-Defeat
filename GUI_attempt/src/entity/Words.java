@@ -12,29 +12,14 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
 import javax.imageio.ImageIO;
-import javax.lang.model.util.ElementScanner14;
 
 public class Words extends Entity {
     /*
     * Set variables for class. 
     */ 
     GamePanel gp;
-    InputHandler keyH; 
-    String color = "BLACK";
-    String colorVerified = "RED";
-    String colorVerifiedLive = "BLACK"; 
-    String compareWord = "";  
-    String[] correctWords;
-    String[] currentWords = { "1", "2", "3" }; 
-    int liveCounter; 
-    int wordCounter; 
-    int currentLength;  
-    int numWords;
-    int pace; 
-    String userInput = ""; 
-    String cursor_space; 
-    boolean keyPressFlag = false; 
-
+    InputHandler keyH;  
+  
     /*
     * Call methods. 
     */ 
@@ -61,6 +46,11 @@ public class Words extends Entity {
         currentLength = 3;
         numWords = 20;
         pace = 0; 
+        color = "BLACK"; 
+        colorVerified = "RED"; 
+        colorVerifiedLive = "BLACK"; 
+        compareWord = ""; 
+        userInput = ""; 
         cursor_space = "cursor"; 
     } //end setDefaultValues
 
@@ -374,7 +364,6 @@ public class Words extends Entity {
             } 
             keyH.backSpacePressed = false;  
         } //end else if
-        //System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
     } //end getUserInput
 
     /*

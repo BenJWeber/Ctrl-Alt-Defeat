@@ -9,8 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
     public int playerX, playerY, worldX, worldY, monsterX, monsterY, wordStreamX_1, wordStreamX_2, liveWordsX, liveWordsY, 
-        wordsY, letterX, cursorX, lengthHold;
-    public int speed; 
+        wordsY, letterX, cursorX, lengthHold, speed, liveCounter, wordCounter, currentLength, numWords, pace, spriteCounter = 0, spriteNum = 1;
 
     public BufferedImage forward1, forward2, jump, monster1, monster2, 
         letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, 
@@ -33,8 +32,9 @@ public class Entity {
         letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, 
         letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r, cursor, space, pause, play; 
         
-    public String direction; 
+    public String direction, color, colorVerified, colorVerifiedLive, compareWord, userInput, cursor_space; 
 
-    public int spriteCounter = 0; 
-    public int spriteNum = 1; 
-}
+    public String[] correctWords, currentWords = {"1", "2", "3"}; 
+
+    public boolean keyPressFlag = false; 
+} //end class
