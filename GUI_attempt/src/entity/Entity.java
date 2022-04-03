@@ -8,8 +8,8 @@ package GUI_attempt.src.entity;
 import java.awt.image.BufferedImage; 
 
 public class Entity {
-    public int playerX, playerY, worldX, worldY, monsterX, monsterY, wordsX_1, wordsX_1_a, wordsX_1_b, 
-        wordsX_2, wordsX_2_a, wordsX_2_b, wordsX_3, wordsX_3_a, wordsX_3_b, wordsY, letterX, cursorX, lengthHold;
+    public int playerX, playerY, worldX, worldY, monsterX, monsterY, wordStreamX_1, wordStreamX_2, liveWordsX, liveWordsY, 
+        wordsY, letterX, cursorX, lengthHold;
     public int speed; 
 
     public BufferedImage forward1, forward2, jump, monster1, monster2, 

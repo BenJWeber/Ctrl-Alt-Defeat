@@ -51,9 +51,10 @@ public class TestWords extends Entity {
     * Set default Values. 
     */ 
     public void setDefaultValues(){ 
-        wordsX_1_a = 30; 
-        wordsX_2 = 640; 
-        wordsX_3 = 640; 
+        wordStreamX_1 = 30; 
+        cursorX = 500; 
+        liveWordsX = 500;
+        liveWordsY = 300;  
         wordsY = 200;
         wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
         liveCounter = 0; 
@@ -421,7 +422,7 @@ public class TestWords extends Entity {
         getUserInput(); 
         checkUserInputLive();
 
-        if ( pace > 20 ){ 
+        if ( pace > 20 ){ //Control speed of cursor
             if( cursor_space == "space" )
                 cursor_space = "cursor"; 
             else if( cursor_space == "cursor" )
@@ -429,23 +430,22 @@ public class TestWords extends Entity {
             pace = 0; 
         } //end if
 
-        if( keyPressFlag ){ 
-           // wordsX_2 = ( wordsX_2 ) + ( ( liveCounter ) * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) );
+        if( keyPressFlag ){ //Increment location of cursor
             liveCounter++; 
             if( keyH.backSpacePressed )
                 liveCounter = liveCounter - 2; 
-            wordsX_2 = liveCounter * 40 + 640; 
+            cursorX = liveCounter * 40 + 500; 
             keyPressFlag = false; 
-        }
+        } //end if
 
         pace++; 
 
-        for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
+        for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){ //Current words always contains three words from correct words
             currentWords[ j ] = correctWords[ i ];
             j++;  
         } //end for
 
-        if( keyH.spacePressed == true ){           
+        if( keyH.spacePressed == true ){ //Iterate words through current words and reset cursor location. 
             wordCounter++; 
             liveCounter = 0; 
 
@@ -521,12 +521,12 @@ public class TestWords extends Entity {
                                 break;
                         } //end switch
                     
-                        graphics2.drawImage(imageLetter, wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                        graphics2.drawImage(imageLetter, wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
                         i++; 
                    // } //end while
                 }//end inner for
 
-                graphics2.drawImage(space, ( wordsX_1_b = wordsX_1_a + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                graphics2.drawImage(space, ( wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
                 i++; 
             } //end outer for
 
@@ -536,15 +536,15 @@ public class TestWords extends Entity {
 
             if( length == 0 ){ 
                 if( cursor_space == "cursor" )
-                    graphics2.drawImage(cursor, 640, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                    graphics2.drawImage(cursor, 500, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
                 if( cursor_space == "space" )
-                    graphics2.drawImage(space, 640, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                    graphics2.drawImage(space, 500, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
             } //end if
             else{ 
                 if( cursor_space == "cursor" )
-                    graphics2.drawImage(cursor, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                    graphics2.drawImage(cursor, cursorX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
                 if( cursor_space == "space" )
-                    graphics2.drawImage(space, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                    graphics2.drawImage(space, cursorX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
             } //end else
 
             for( int m = 0; m < length; m++ ) { //Display live user input
@@ -553,11 +553,11 @@ public class TestWords extends Entity {
                 else
                     imageLetter = images[bytes[m] - 97]; 
 
-                letterX = ( wordsX_3 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
+                letterX = ( liveWordsX ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
 
                 System.out.println( "USer Length: " + length + "X: "+ letterX ); 
                 
-                graphics2.drawImage(imageLetter, letterX, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+                graphics2.drawImage(imageLetter, letterX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
                 k++; 
             } //end for 
 

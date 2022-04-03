@@ -15,26 +15,58 @@ import javax.imageio.ImageIO;
 import javax.lang.model.util.ElementScanner14;
 
 public class Words extends Entity {
+    /*
+    * Set variables for class. 
+    */ 
     GamePanel gp;
     InputHandler keyH; 
     String color = "BLACK";
-    String[] correctWords = getWords();
-    String[] correctLetters; 
-    boolean colorFlag = false; 
+    String colorVerified = "RED";
+    String colorVerifiedLive = "BLACK"; 
+    String compareWord = "";  
+    String[] correctWords;
+    String[] currentWords = { "1", "2", "3" }; 
+    int liveCounter; 
+    int wordCounter; 
+    int currentLength;  
+    int numWords;
+    int pace; 
+    String userInput = ""; 
+    String cursor_space; 
+    boolean keyPressFlag = false; 
 
+    /*
+    * Call methods. 
+    */ 
     public Words( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH; 
 
         setDefaultValues(); 
         getLetterImages(); 
+        correctWords = getWords(); 
     } //end Player
 
+    /*
+    * Set default Values. 
+    */ 
     public void setDefaultValues(){ 
-        wordsX_1 = 1000; 
-        wordsY = 250;
+        wordStreamX_1 = 30; 
+        cursorX = 500; 
+        liveWordsX = 500;
+        liveWordsY = 300;  
+        wordsY = 200;
+        wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
+        liveCounter = 0; 
+        currentLength = 3;
+        numWords = 20;
+        pace = 0; 
+        cursor_space = "cursor"; 
     } //end setDefaultValues
 
+    /*
+    * Get images for letters. 
+    */ 
     public void getLetterImages(){
         try{ 
             letter_a = ImageIO.read( getClass().getResourceAsStream( "../../res/words/A.png" ) ); 
@@ -63,6 +95,33 @@ public class Words extends Entity {
             letter_x = ImageIO.read( getClass().getResourceAsStream( "../../res/words/X.png" ) ); 
             letter_y = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Y.png" ) ); 
             letter_z = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Z.png" ) ); 
+
+            letter_a_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/A_GR.png" ) ); 
+            letter_b_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/B_GR.png" ) ); 
+            letter_c_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/C_GR.png" ) ); 
+            letter_d_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/D_GR.png" ) ); 
+            letter_e_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/E_GR.png" ) ); 
+            letter_f_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/F_GR.png" ) ); 
+            letter_g_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/G_GR.png" ) ); 
+            letter_h_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/H_GR.png" ) ); 
+            letter_i_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/I_GR.png" ) ); 
+            letter_j_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/J_GR.png" ) ); 
+            letter_k_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/K_GR.png" ) ); 
+            letter_l_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/L_GR.png" ) ); 
+            letter_m_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/M_GR.png" ) ); 
+            letter_n_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/N_GR.png" ) ); 
+            letter_o_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/O_GR.png" ) ); 
+            letter_p_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/P_GR.png" ) ); 
+            letter_q_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Q_GR.png" ) ); 
+            letter_r_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/R_GR.png" ) ); 
+            letter_s_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/S_GR.png" ) ); 
+            letter_t_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/T_GR.png" ) ); 
+            letter_u_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/U_GR.png" ) ); 
+            letter_v_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/V_GR.png" ) ); 
+            letter_w_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/W_GR.png" ) ); 
+            letter_x_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/X_GR.png" ) ); 
+            letter_y_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Y_GR.png" ) ); 
+            letter_z_gr = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Z_GR.png" ) );
 
             letter_a_g = ImageIO.read( getClass().getResourceAsStream( "../../res/words/A_G.png" ) ); 
             letter_b_g = ImageIO.read( getClass().getResourceAsStream( "../../res/words/B_G.png" ) ); 
@@ -118,26 +177,25 @@ public class Words extends Entity {
             letter_y_r = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Y_R.png" ) ); 
             letter_z_r = ImageIO.read( getClass().getResourceAsStream( "../../res/words/Z_R.png" ) );
 
+            cursor = ImageIO.read( getClass().getResourceAsStream( "../../res/words/cursor.png" ) ); 
             space = ImageIO.read( getClass().getResourceAsStream( "../../res/words/space.png" ) );
+            pause = ImageIO.read( getClass().getResourceAsStream( "../../res/icons/pause.png" ) );
+            play = ImageIO.read( getClass().getResourceAsStream( "../../res/icons/play.png" ) );
 
-        } catch( IOException e ){ 
+        } //end try
+        catch( IOException e ){ 
             e.printStackTrace(); 
         } //end catch
     } //end getPlayerImage
 
-
-
-    public void update(){
-
-        wordsX_1 = wordsX_1 - 5; 
-       
-        spriteCounter++; 
-    } //end update
-
-
-
+    /*
+    * Place words into array from File. 
+    */
     public static String[] getWords(){ 
+        int count = 0; 
+        String spaceString = "      "; 
         try {
+
         String files[] = {"easyWords.txt", "mediumWords.txt", "hardWords.txt"};                     
         BufferedReader br = new BufferedReader( new FileReader( files[1] ) );
 
@@ -149,11 +207,14 @@ public class Words extends Entity {
         }//end while
         br.close(); 
 
-        /* commented out for testing
         //to make sure there is no duplicates
         ArrayList<String> correct = new ArrayList<String>();   
         Random rand = new Random();
-        while (correct.size() < 17) {
+        while (correct.size() < 20) {
+            if( count == 0 ){ 
+                correct.add( spaceString ); 
+                count++; 
+            }
             String random = words.get(rand.nextInt(50));
             if (!correct.contains(random)) {
                 correct.add(random);
@@ -163,84 +224,355 @@ public class Words extends Entity {
         String[] correctWords = new String[correct.size()];
         correctWords = correct.toArray(correctWords);
 
-        return correctWords;
-        */
-
-        //To use random words generation  uncomment code above and comment out next three lines
-        String[] correctWords = new String[words.size()];
-        correctWords = words.toArray(correctWords);
-        return correctWords;
-        
-    } catch ( IOException e) {
-        e.printStackTrace();
-    }//end catch
-
-    //if theres an IOException
-    String[] empty = {"error", "error", "error"};
-    return empty;
-    }//end getWords
-
-    public void draw( Graphics2D graphics2 ){
-        //in the future id imagine we would just be reading in every character they type in
-        String exampleInput = "elbow grown mesay rider crate hello noble";
-        exampleInput = exampleInput.replace(" ", "");
-        String[] input = exampleInput.split("");
-
-        BufferedImage[] images_green = {letter_a_g, letter_b_g, letter_c_g, letter_d_g, letter_e_g, letter_f_g, letter_g_g, letter_h_g, letter_i_g, letter_j_g, letter_k_g, letter_l_g, letter_m_g, letter_n_g, letter_o_g, letter_p_g, letter_q_g, letter_r_g, letter_s_g, letter_t_g, letter_u_g, letter_v_g, letter_w_g, letter_x_g, letter_y_g, letter_z_g};
-        BufferedImage[] images_red = {letter_a_r, letter_b_r, letter_c_r, letter_d_r, letter_e_r, letter_f_r, letter_g_r, letter_h_r, letter_i_r, letter_j_r, letter_k_r, letter_l_r, letter_m_r, letter_n_r, letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r};
-        BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
-        BufferedImage imageLetter; 
-        try {
-            int i = 1; //keeps letters from overlapping
-            int k = 0; //indexes for the arrays
-        for(int x = 0; x < correctWords.length; x++) {
-            color = "BLACK";
-            // create an array of ascii codes coresponding to each letter in the word
-            byte[] bytes = correctWords[x].getBytes("US-ASCII");
-            for(byte letter : bytes) {
-                
-            //checks if input is correct and sets color
-            if(k < exampleInput.length()) { 
-                if(input[k].charAt(0) == letter)
-                    color = "GREEN";
-                else
-                    color = "RED";
-            }//end if
-
-                //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc            
-                switch( color ){ 
-                    case "GREEN": //User got letter correct
-                        if( colorFlag == false )
-                            imageLetter = images_green[ letter - 97 ]; 
-                        else
-                            imageLetter = images[ letter - 97 ]; 
-
-                        System.out.println( letter ); 
-                        colorFlag = true; 
-                        break; 
-                    case "RED":  //user got letter wrong
-                        imageLetter = images_red[ letter - 97 ];
-                        break;
-                    default:      //User has not attempted letter
-                       imageLetter = images[letter - 97]; 
-                       break;
-                } //end switch
-            
-
-                graphics2.drawImage(imageLetter, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-                i++; 
-                k++;
-            }//end for
-
-            //prints space here
-            graphics2.drawImage(space, ( wordsX_2 = wordsX_1 + ( i * ( gp.tileSize + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize, gp.tileSize, null );
-            i++;
-        } //end for
+        return correctWords; 
 
         } catch ( IOException e) {
             e.printStackTrace();
+
+            //if theres an IOException
+            String[] empty = {"error", "error", "error"};
+            return empty;
         }//end catch
+    }//end getWords
 
+    /*
+    * Checks if user typed correct character. 
+    */ 
+    public void getUserInput(){ 
+        if( keyH.aPressed ){ 
+            userInput = userInput + "a";
+            keyH.aPressed = false;  
+            keyPressFlag = true; 
+        } //end if
+        else if( keyH.bPressed ){ 
+            userInput = userInput + "b";
+            keyH.bPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.cPressed ){ 
+            userInput = userInput + "c";
+            keyH.cPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.dPressed ){ 
+            userInput = userInput + "d";
+            keyH.dPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.ePressed ){ 
+            userInput = userInput + "e";
+            keyH.ePressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.fPressed ){ 
+            userInput = userInput + "f";
+            keyH.fPressed = false;
+        } //end else if
+        else if( keyH.gPressed ){ 
+            userInput = userInput + "g";
+            keyH.gPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.hPressed ){ 
+            userInput = userInput + "h";
+            keyH.hPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.iPressed ){ 
+            userInput = userInput + "i";
+            keyH.iPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.jPressed ){ 
+            userInput = userInput + "j";
+            keyH.jPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.kPressed ){ 
+            userInput = userInput + "k";
+            keyH.kPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.lPressed ){ 
+            userInput = userInput + "l";
+            keyH.lPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.mPressed ){ 
+            userInput = userInput + "m";
+            keyH.mPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.nPressed ){ 
+            userInput = userInput + "n";
+            keyH.nPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.oPressed ){ 
+            userInput = userInput + "o";
+            keyH.oPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.pPressed ){ 
+            userInput = userInput + "p";
+            keyH.pPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.qPressed ){ 
+            userInput = userInput + "q";
+            keyH.qPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.rPressed ){ 
+            userInput = userInput + "r";
+            keyH.rPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.sPressed ){ 
+            userInput = userInput + "s";
+            keyH.sPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.tPressed ){ 
+            userInput = userInput + "t";
+            keyH.tPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.uPressed ){ 
+            userInput = userInput + "u";
+            keyH.uPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.vPressed ){ 
+            userInput = userInput + "v";
+            keyH.vPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.wPressed ){ 
+            userInput = userInput + "w";
+            keyH.wPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.xPressed ){ 
+            userInput = userInput + "x";
+            keyH.xPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.yPressed ){ 
+            userInput = userInput + "y";
+            keyH.yPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.zPressed ){ 
+            userInput = userInput + "z";
+            keyH.zPressed = false;
+            keyPressFlag = true;
+        } //end else if
+        else if( keyH.backSpacePressed ){   
+            if( userInput.length() > 0 ){
+                userInput = userInput.substring( 0, userInput.length() - 1 );
+            } 
+            keyH.backSpacePressed = false;  
+        } //end else if
+        //System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
+    } //end getUserInput
+
+    /*
+    * Once user hits space check if typed word is correct. 
+    */
+    public void checkUserInput(){ 
+        if( userInput.equals( compareWord ) == true ){ 
+            colorVerified = "GREEN";
+            gp.increaseSpeed = true;  
+        } //end if
+        else{
+            colorVerified = "RED";
+            gp.decreaseSpeed = true;   
+        } //end else
+        userInput = ""; 
+    } //end checkUserInput
+
+    /*
+    * Check user input before user hits space.
+    * Allows for live feedback. 
+    */
+    public void checkUserInputLive(){ 
+        if( userInput.length() <= compareWord.length() ){ 
+
+            String check  = compareWord.substring( 0, userInput.length() ); 
+
+            if( userInput.equals( check ) == true ){ 
+                colorVerifiedLive = "BLACK"; 
+            } //end if
+            else    
+                colorVerifiedLive = "RED"; 
+        } //end if
+        else
+            colorVerifiedLive = "RED"; 
+    } //end checkUserInputLive
+
+    /*
+    * Calls checkUserInput. 
+    * Checks if user entered space. 
+    * When space is hit, updates words/positions. 
+    */ 
+    public void update(){
+        int j = 0; 
+ 
+        getUserInput(); 
+        checkUserInputLive();
+
+        if ( pace > 20 ){ //Control speed of cursor
+            if( cursor_space == "space" )
+                cursor_space = "cursor"; 
+            else if( cursor_space == "cursor" )
+                cursor_space = "space";
+            pace = 0; 
+        } //end if
+
+        if( keyPressFlag ){ //Increment location of cursor
+            liveCounter++; 
+            if( keyH.backSpacePressed )
+                liveCounter = liveCounter - 2; 
+            cursorX = liveCounter * 40 + 500; 
+            keyPressFlag = false; 
+        } //end if
+
+        pace++; 
+
+        for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){ //Current words always contains three words from correct words
+            currentWords[ j ] = correctWords[ i ];
+            j++;  
+        } //end for
+
+        if( keyH.spacePressed == true ){ //Iterate words through current words and reset cursor location. 
+            wordCounter++; 
+            liveCounter = 0; 
+
+            checkUserInput();  
+
+            if( wordCounter == correctWords.length - 2 ) //Allows last word to make it to center. 
+                currentLength = 2; 
+            
+            if( wordCounter == correctWords.length - 1 ) //Allows last word to make it to the left of center. 
+                currentLength = 1; 
+
+            keyH.spacePressed = false; 
+        } //end if
+    } //end update
+
+    /*
+    * Draws words. 
+    */ 
+    public void draw( Graphics2D graphics2 ){
+        BufferedImage[] images_green = {letter_a_g, letter_b_g, letter_c_g, letter_d_g, letter_e_g, letter_f_g, letter_g_g, letter_h_g, letter_i_g, letter_j_g, letter_k_g, letter_l_g, letter_m_g, letter_n_g, letter_o_g, letter_p_g, letter_q_g, letter_r_g, letter_s_g, letter_t_g, letter_u_g, letter_v_g, letter_w_g, letter_x_g, letter_y_g, letter_z_g};
+        BufferedImage[] images_red = {letter_a_r, letter_b_r, letter_c_r, letter_d_r, letter_e_r, letter_f_r, letter_g_r, letter_h_r, letter_i_r, letter_j_r, letter_k_r, letter_l_r, letter_m_r, letter_n_r, letter_o_r, letter_p_r, letter_q_r, letter_r_r, letter_s_r, letter_t_r, letter_u_r, letter_v_r, letter_w_r, letter_x_r, letter_y_r, letter_z_r};
+        BufferedImage[] images_grey = {letter_a_gr, letter_b_gr, letter_c_gr, letter_d_gr, letter_e_gr, letter_f_gr, letter_g_gr, letter_h_gr, letter_i_gr, letter_j_gr, letter_k_gr, letter_l_gr, letter_m_gr, letter_n_gr, letter_o_gr, letter_p_gr, letter_q_gr, letter_r_gr, letter_s_gr, letter_t_gr, letter_u_gr, letter_v_gr, letter_w_gr, letter_x_gr, letter_y_gr, letter_z_gr};
+        BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
+        BufferedImage imageLetter;  
+        int wordIndex = 0; 
+        int k = 0; 
+        //int pace = 0; 
+        
+        try {
+            int i = 1; //keeps letters from overlapping
+
+            for( int x = wordIndex; x < currentLength; x++ ){ 
+                byte[] bytes = currentWords[x].getBytes("US-ASCII");
+                int length = bytes.length; 
+                if( x == 0 || x == 2 )
+                    color = "GREY"; 
+                else{     
+                    color = "BLACK"; 
+                } //end else
+
+                for( int m = 0; m < length; m++ ) {
+                        //array index is letter - 97 because ascii code starting from lowercase a=97, b=98, c=99 ..etc 
+                        if( x == 1)
+                            compareWord = currentWords[x];  
+
+                        else if( x == 0 )
+                            color = colorVerified; 
+
+                        switch( color ){ 
+                            case "GREEN": //User got letter correct
+                                if( bytes[m] - 97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images_green[ bytes[m] - 97 ]; 
+                                break; 
+                            case "RED":  //user got letter wrong
+                                if( bytes[m] - 97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images_red[ bytes[m] - 97 ];
+                                break;
+                            case "GREY": 
+                                if( bytes[m] -97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images_grey[ bytes[m] - 97 ]; 
+                                break; 
+                            default:      //User has not attempted letter
+                                if( bytes[m] - 97 == -65 )
+                                    imageLetter = space; 
+                                else
+                                    imageLetter = images[bytes[m] - 97]; 
+                                break;
+                        } //end switch
+                    
+                        graphics2.drawImage(imageLetter, wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                        i++; 
+                   // } //end while
+                }//end inner for
+
+                graphics2.drawImage(space, ( wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                i++; 
+            } //end outer for
+
+            byte[] bytes = userInput.getBytes("US-ASCII");
+
+            int length = bytes.length;
+
+            if( length == 0 ){ 
+                if( cursor_space == "cursor" )
+                    graphics2.drawImage(cursor, 500, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
+                if( cursor_space == "space" )
+                    graphics2.drawImage(space, 500, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
+            } //end if
+            else{ 
+                if( cursor_space == "cursor" )
+                    graphics2.drawImage(cursor, cursorX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
+                if( cursor_space == "space" )
+                    graphics2.drawImage(space, cursorX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
+            } //end else
+
+            for( int m = 0; m < length; m++ ) { //Display live user input
+                if( colorVerifiedLive == "RED" )
+                    imageLetter = images_red[bytes[m] - 97];
+                else
+                    imageLetter = images[bytes[m] - 97]; 
+
+                letterX = ( liveWordsX ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
+
+                System.out.println( "USer Length: " + length + "X: "+ letterX ); 
+                
+                graphics2.drawImage(imageLetter, letterX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
+                k++; 
+            } //end for 
+
+
+            //pause/play button
+            if(GamePanel.State == GamePanel.STATE.game)
+               graphics2.drawImage(pause, 1235, 3, gp.tileSize/2, gp.tileSize/2, null );
+            else if(GamePanel.State == GamePanel.STATE.pause)
+               graphics2.drawImage(play, 1235, 3, gp.tileSize/2, gp.tileSize/2, null );
+
+
+
+        } //end try
+        catch ( IOException e) {
+            e.printStackTrace();
+        }//end catch
     }//end draw
-
 } //end class
