@@ -103,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable{
     } //End run
 
     public void update(){ 
-        System.out.println(GamePanel.State);
+        //System.out.println(GamePanel.State);
         if(State != STATE.pause){
            mapManager.update(); 
            player.update(); 

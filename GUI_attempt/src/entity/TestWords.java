@@ -26,12 +26,14 @@ public class TestWords extends Entity {
     String compareWord = "";  
     String[] correctWords;
     String[] currentWords = { "1", "2", "3" }; 
-    int wordCounter = 0; 
+    int liveCounter; 
+    int wordCounter; 
     int currentLength;  
     int numWords;
     int pace; 
     String userInput = ""; 
     String cursor_space; 
+    boolean keyPressFlag = false; 
 
     /*
     * Call methods. 
@@ -51,9 +53,10 @@ public class TestWords extends Entity {
     public void setDefaultValues(){ 
         wordsX_1_a = 30; 
         wordsX_2 = 640; 
-        wordsX_3 = wordsX_2 + gp.tileSize; 
+        wordsX_3 = 640; 
         wordsY = 200;
         wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
+        liveCounter = 0; 
         currentLength = 3;
         numWords = 20;
         pace = 0; 
@@ -235,22 +238,27 @@ public class TestWords extends Entity {
         if( keyH.aPressed ){ 
             userInput = userInput + "a";
             keyH.aPressed = false;  
+            keyPressFlag = true; 
         } //end if
         else if( keyH.bPressed ){ 
             userInput = userInput + "b";
             keyH.bPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.cPressed ){ 
             userInput = userInput + "c";
             keyH.cPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.dPressed ){ 
             userInput = userInput + "d";
             keyH.dPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.ePressed ){ 
             userInput = userInput + "e";
             keyH.ePressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.fPressed ){ 
             userInput = userInput + "f";
@@ -259,87 +267,107 @@ public class TestWords extends Entity {
         else if( keyH.gPressed ){ 
             userInput = userInput + "g";
             keyH.gPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.hPressed ){ 
             userInput = userInput + "h";
             keyH.hPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.iPressed ){ 
             userInput = userInput + "i";
             keyH.iPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.jPressed ){ 
             userInput = userInput + "j";
             keyH.jPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.kPressed ){ 
             userInput = userInput + "k";
             keyH.kPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.lPressed ){ 
             userInput = userInput + "l";
             keyH.lPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.mPressed ){ 
             userInput = userInput + "m";
             keyH.mPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.nPressed ){ 
             userInput = userInput + "n";
             keyH.nPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.oPressed ){ 
             userInput = userInput + "o";
             keyH.oPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.pPressed ){ 
             userInput = userInput + "p";
             keyH.pPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.qPressed ){ 
             userInput = userInput + "q";
             keyH.qPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.rPressed ){ 
             userInput = userInput + "r";
             keyH.rPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.sPressed ){ 
             userInput = userInput + "s";
             keyH.sPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.tPressed ){ 
             userInput = userInput + "t";
             keyH.tPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.uPressed ){ 
             userInput = userInput + "u";
             keyH.uPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.vPressed ){ 
             userInput = userInput + "v";
             keyH.vPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.wPressed ){ 
             userInput = userInput + "w";
             keyH.wPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.xPressed ){ 
             userInput = userInput + "x";
             keyH.xPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.yPressed ){ 
             userInput = userInput + "y";
             keyH.yPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.zPressed ){ 
             userInput = userInput + "z";
             keyH.zPressed = false;
+            keyPressFlag = true;
         } //end else if
         else if( keyH.backSpacePressed ){   
-            if( userInput.length() > 0 )
+            if( userInput.length() > 0 ){
                 userInput = userInput.substring( 0, userInput.length() - 1 );
-
+            } 
             keyH.backSpacePressed = false;  
         } //end else if
         //System.out.println( "User Input: " + userInput + "Compare Word: " + compareWord ); 
@@ -390,6 +418,23 @@ public class TestWords extends Entity {
         getUserInput(); 
         checkUserInputLive();
 
+        if ( pace > 20 ){ 
+            if( cursor_space == "space" )
+                cursor_space = "cursor"; 
+            else if( cursor_space == "cursor" )
+                cursor_space = "space";
+            pace = 0; 
+        } //end if
+
+        if( keyPressFlag ){ 
+           // wordsX_2 = ( wordsX_2 ) + ( ( liveCounter ) * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) );
+            liveCounter++; 
+            if( keyH.backSpacePressed )
+                liveCounter = liveCounter - 2; 
+            wordsX_2 = liveCounter * 40 + 640; 
+            keyPressFlag = false; 
+        }
+
         pace++; 
 
         for( int i = wordCounter; i < wordCounter + currentLength && i < numWords; i++ ){
@@ -399,6 +444,7 @@ public class TestWords extends Entity {
 
         if( keyH.spacePressed == true ){           
             wordCounter++; 
+            liveCounter = 0; 
 
             checkUserInput();  
 
@@ -422,11 +468,11 @@ public class TestWords extends Entity {
         BufferedImage[] images = {letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, letter_y, letter_z};
         BufferedImage imageLetter;  
         int wordIndex = 0; 
+        int k = 0; 
         //int pace = 0; 
         
         try {
             int i = 1; //keeps letters from overlapping
-            int k = 1; 
 
             for( int x = wordIndex; x < currentLength; x++ ){ 
                 byte[] bytes = currentWords[x].getBytes("US-ASCII");
@@ -483,39 +529,20 @@ public class TestWords extends Entity {
 
             byte[] bytes = userInput.getBytes("US-ASCII");
 
-            int length = bytes.length; 
+            int length = bytes.length;
 
-            if ( pace > 20 ){ 
+            if( length == 0 ){ 
+                if( cursor_space == "cursor" )
+                    graphics2.drawImage(cursor, 640, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
                 if( cursor_space == "space" )
-                    cursor_space = "cursor"; 
-                else if( cursor_space == "cursor" )
-                    cursor_space = "space";
-                pace = 0; 
+                    graphics2.drawImage(space, 640, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
             } //end if
-
-            if( userInput.length() == 0 ){  //Have blinking cursor on screen before any user input. 
-                if( cursor_space == "space" )
-                    graphics2.drawImage(space, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
-    
+            else{ 
                 if( cursor_space == "cursor" )
                     graphics2.drawImage(cursor, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
-            } //end if
-
-            /*
-            if( userInput.length() > 0 ){ 
-                lengthHold = userInput.length(); 
-                System.out.println( "Hold: " + lengthHold + " Actual: " + userInput.length() ); 
-
                 if( cursor_space == "space" )
-                    graphics2.drawImage(space, wordsX_1_b = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ), wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
-
-                if( cursor_space == "cursor" )
-                    graphics2.drawImage(cursor, wordsX_1_b = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ), wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
-
-                if( lengthHold != userInput.length() )
-                    k++; 
-            } //end if
-            */
+                    graphics2.drawImage(space, wordsX_2, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
+            } //end else
 
             for( int m = 0; m < length; m++ ) { //Display live user input
                 if( colorVerifiedLive == "RED" )
@@ -523,7 +550,9 @@ public class TestWords extends Entity {
                 else
                     imageLetter = images[bytes[m] - 97]; 
 
-                letterX = ( wordsX_1_a + 450 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
+                letterX = ( wordsX_3 ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
+
+                System.out.println( "USer Length: " + length + "X: "+ letterX ); 
                 
                 graphics2.drawImage(imageLetter, letterX, wordsY + 100, gp.tileSize/3, gp.tileSize/3, null );
                 k++; 
