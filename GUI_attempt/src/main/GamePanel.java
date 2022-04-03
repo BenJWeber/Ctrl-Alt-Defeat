@@ -122,7 +122,6 @@ public class GamePanel extends JPanel implements Runnable{
          player.draw( graphics2 );
          monster.draw( graphics2 ); 
          words.draw( graphics2 ); 
-         menu.pauseButton(graphics2);
         }
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
@@ -137,7 +136,6 @@ public class GamePanel extends JPanel implements Runnable{
             player.draw( graphics2 );
             monster.draw( graphics2 ); 
             words.draw( graphics2 ); 
-            menu.pauseButton(graphics2);
             menu.pause(graphics2);
         }
 
