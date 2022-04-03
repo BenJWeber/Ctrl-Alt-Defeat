@@ -49,8 +49,8 @@ public class MapManager extends Map {
             map[1].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road_2.png" ) ); 
             map[2] = new Map(); 
             map[2].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road_3.png" ) ); 
-            //map[3] = new Map(); 
-            //map[3].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky.png" ) ); 
+            map[3] = new Map(); 
+            map[3].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/road_4.png" ) ); 
             //map[4] = new Map(); 
             //map[4].image = ImageIO.read( getClass().getResourceAsStream( "../../res/map/sky.png" ) ); 
             map[5] = new Map(); 
