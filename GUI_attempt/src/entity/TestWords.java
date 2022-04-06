@@ -556,7 +556,7 @@ public class TestWords extends Entity {
 
                 letterX = ( liveWordsX ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
 
-                System.out.println( "USer Length: " + length + "X: "+ letterX ); 
+                //System.out.println( "USer Length: " + length + "X: "+ letterX ); 
                 
                 graphics2.drawImage(imageLetter, letterX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
                 k++; 

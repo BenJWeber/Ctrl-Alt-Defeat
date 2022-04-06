@@ -36,6 +36,13 @@ public class Menu {
         g2d.drawString("GAME OVER", 400, 250);
     }
 
+    public void drawVictory(Graphics2D g2d) { 
+        Font font1 = new Font("arial", Font.BOLD, 50);
+        g2d.setFont(font1);
+        g2d.setColor(Color.white);
+        g2d.drawString("You Win!", 400, 250);
+    }
+
     public void pause(Graphics2D g2d) {
         Font font1 = new Font("arial", Font.BOLD, 120);
         Font font2 = new Font("arial", Font.BOLD, 30);

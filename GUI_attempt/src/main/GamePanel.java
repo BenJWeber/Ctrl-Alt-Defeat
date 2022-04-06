@@ -51,7 +51,8 @@ public class GamePanel extends JPanel implements Runnable{
         menu,
         game,
         pause,
-        gameOver
+        gameOver,
+        victory
     };
 
     public static STATE State = STATE.menu;
@@ -103,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){ 
         //System.out.println(GamePanel.State);
-        if(State != STATE.pause){
+        if(State != STATE.pause && State != STATE.victory){
            mapManager.update(); 
            player.update(); 
            monster.update();
@@ -129,6 +130,10 @@ public class GamePanel extends JPanel implements Runnable{
         else if(State == STATE.gameOver) {
             mapManager.draw(graphics2);
             menu.drawGameOver(graphics2);
+        }
+        else if(State == STATE.victory) { 
+            mapManager.draw(graphics2); 
+            menu.drawVictory(graphics2); 
         }
         else if(State == STATE.pause) {
             mapManager.draw( graphics2 ); 

@@ -139,6 +139,9 @@ public class MapManager extends Map {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY; 
 
+            //if( tileNum == 3 )
+               // GamePanel.State = GamePanel.STATE.victory;
+
             graphics2.drawImage( map[ tileNum ].image, screenX, screenY, gp.tileSize, gp.tileSize, null ); 
             worldCol++; 
     
