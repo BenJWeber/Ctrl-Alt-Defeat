@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){ 
         //System.out.println(GamePanel.State);
-        if((State != STATE.pause && State != STATE.gameOver) && State != STATE.victory){
+        if(State == STATE.game) { //(State != STATE.pause && State != STATE.gameOver) && State != STATE.victory){
            mapManager.update(); 
            player.update(); 
            monster.update();
