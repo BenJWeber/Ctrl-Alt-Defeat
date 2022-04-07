@@ -3,7 +3,8 @@ package GUI_attempt.src.main;
 import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputListener;
 
-import GUI_attempt.src.main.GamePanel; 
+import GUI_attempt.src.main.GamePanel;
+import GUI_attempt.src.entity.Entity;
 import GUI_attempt.src.entity.Menu; 
 
 public class MouseInput implements MouseInputListener {
@@ -37,13 +38,44 @@ public class MouseInput implements MouseInputListener {
             // play button
             if (mx >= 550 && mx <= 550 + 100)
                 if (my >= 300 && my <= 350) {
-                    GamePanel.State = GamePanel.STATE.game;
+                    mx = 0;
+                    my = 0;  
+                    GamePanel.State = GamePanel.STATE.difficulty;
                 } // end if
 
             // Quit button
             if (mx >= 550 && mx <= 550 + 100)
                 if (my >= 400 && my <= 450) {
                     System.exit(1);
+                } // end if
+        }
+
+        if (GamePanel.State == GamePanel.STATE.difficulty) {
+            // EASY
+            if (mx >= 550 && mx <= 550 + 100)
+                if (my >= 300 && my <= 350) {
+                    Entity.difficulty = "easyWords.txt"; 
+                    GamePanel.State = GamePanel.STATE.game;
+                } // end if
+
+            // MEDIUM
+            if (mx >= 550 && mx <= 550 + 100)
+                if (my >= 400 && my <= 450) {
+                    Entity.difficulty = "mediumWords.txt"; 
+                    GamePanel.State = GamePanel.STATE.game;
+                } // end if
+
+            // HARD
+            if (mx >= 550 && mx <= 550 + 100)
+                if (my >= 500 && my <= 550) {
+                    Entity.difficulty = "hardWords.txt"; 
+                    GamePanel.State = GamePanel.STATE.game;
+                } // end if
+
+            // BACK
+            if (mx >= 550 && mx <= 550 + 100)
+                if (my >= 600 && my <= 650) {
+                    GamePanel.State = GamePanel.STATE.menu;
                 } // end if
         }
         /*

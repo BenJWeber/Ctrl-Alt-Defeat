@@ -29,7 +29,7 @@ public class Words extends Entity {
 
         setDefaultValues(); 
         getLetterImages(); 
-        correctWords = getWords(); 
+        //correctWords = getWords(); 
     } //end Player
 
     /*
@@ -181,13 +181,12 @@ public class Words extends Entity {
     /*
     * Place words into array from File. 
     */
-    public static String[] getWords(){ 
+    public void getWords(){ 
         int count = 0; 
         String spaceString = "      "; 
         try {
 
-        String files[] = {"easyWords.txt", "mediumWords.txt", "hardWords.txt"};                     
-        BufferedReader br = new BufferedReader( new FileReader( files[1] ) );
+        BufferedReader br = new BufferedReader( new FileReader( difficulty ) );
 
         ArrayList<String> words = new ArrayList<String>();
         String line = br.readLine();
@@ -211,17 +210,14 @@ public class Words extends Entity {
             }//end if
         }//end while
 
-        String[] correctWords = new String[correct.size()];
         correctWords = correct.toArray(correctWords);
-
-        return correctWords; 
 
         } catch ( IOException e) {
             e.printStackTrace();
+            System.out.println( "Yo man I got stuck in JAIL JAIL"); 
 
             //if theres an IOException
             String[] empty = {"error", "error", "error"};
-            return empty;
         }//end catch
     }//end getWords
 
@@ -374,7 +370,6 @@ public class Words extends Entity {
             colorVerified = "GREEN";
             gp.increaseSpeed = true;  
             gp.calculate.correctWordsTotal++; 
-            System.out.println( "Count: " + gp.calculate.correctWordsTotal); 
         } //end if
         else{
             colorVerified = "RED";
@@ -408,6 +403,9 @@ public class Words extends Entity {
     * When space is hit, updates words/positions. 
     */ 
     public void update(){
+        if( correctWords.length < 50 ){ 
+            getWords(); 
+        } 
         int j = 0; 
  
         getUserInput(); 
@@ -463,8 +461,7 @@ public class Words extends Entity {
         BufferedImage imageLetter;  
         int wordIndex = 0; 
         int k = 0; 
-        //int pace = 0; 
-        
+
         try {
             int i = 1; //keeps letters from overlapping
 
@@ -545,21 +542,16 @@ public class Words extends Entity {
                     imageLetter = images[bytes[m] - 97]; 
 
                 letterX = ( liveWordsX ) + ( k * ( gp.tileSize/4 + ( gp.tileSize / 4 ) ) ); 
-
-                System.out.println( "USer Length: " + length + "X: "+ letterX ); 
                 
                 graphics2.drawImage(imageLetter, letterX, liveWordsY, gp.tileSize/3, gp.tileSize/3, null );
                 k++; 
             } //end for 
-
 
             //pause/play button
             if(GamePanel.State == GamePanel.STATE.game)
                graphics2.drawImage(pause, 1235, 3, gp.tileSize/2, gp.tileSize/2, null );
             else if(GamePanel.State == GamePanel.STATE.pause)
                graphics2.drawImage(play, 1235, 3, gp.tileSize/2, gp.tileSize/2, null );
-
-
 
         } //end try
         catch ( IOException e) {

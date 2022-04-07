@@ -47,10 +47,13 @@ public class GamePanel extends JPanel implements Runnable{
     public Calculate calculate = new Calculate(); 
 
     public int FPS = 60; 
+
+    int countCycles = 0; 
     
     
     public static enum STATE{
         menu,
+        difficulty,
         game,
         pause,
         gameOver,
@@ -107,6 +110,10 @@ public class GamePanel extends JPanel implements Runnable{
     public void update(){ 
         //System.out.println(GamePanel.State);
         if(State == STATE.game){
+           if( words.correctWords == null ){ 
+            words.getWords();
+           }
+                
            mapManager.update(); 
            player.update(); 
            monster.update();
@@ -128,6 +135,10 @@ public class GamePanel extends JPanel implements Runnable{
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
             menu.draw( graphics2 );
+        }
+        else if( State == STATE.difficulty){
+            mapManager.draw(graphics2);
+            menu.drawDifficulty(graphics2);
         }
         else if(State == STATE.gameOver) {
             mapManager.draw(graphics2);
