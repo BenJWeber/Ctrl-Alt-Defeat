@@ -7,11 +7,14 @@ import java.awt.Rectangle;
 
 import GUI_attempt.src.main.GamePanel;
 
-public class Menu {
-
+public class Menu extends Entity{
     GamePanel gp;
 
-
+    public Menu( GamePanel gp ){ 
+        this.gp = gp; 
+    } //end Player
+    
+    
     public void draw(Graphics2D g2d) {
         Font font1 = new Font("arial", Font.BOLD, 50);
         g2d.setFont(font1);
@@ -41,6 +44,7 @@ public class Menu {
         g2d.setFont(font1);
         g2d.setColor(Color.white);
         g2d.drawString("You Win!", 400, 250);
+        g2d.drawString("WordsPerMinute = " + gp.calculate.wordsPerMinute, 400, 300);
     }
 
     public void pause(Graphics2D g2d) {
@@ -52,6 +56,9 @@ public class Menu {
         g2d.setFont(font2);
         g2d.drawString("Press esc to un-pause", 480, 300);
     }//end
+
+    public void resetGame(){ 
+    }
 
 
 }//end menu
