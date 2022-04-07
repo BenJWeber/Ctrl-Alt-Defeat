@@ -19,18 +19,13 @@ public class MapManager extends Map {
     Map[] map; 
     int mapTileNum[][];
     
-    int screenX; 
-    int screenY;
+    public int screenX; 
+    public int screenY;
     int worldEditX; 
     int worldEditY; 
 
     public MapManager( GamePanel gp ){ 
-        this.gp = gp; 
-
-        screenX = 200; 
-        screenY = 675; 
-        map = new Map[30]; 
-        mapTileNum = new int[ gp.maxWorldCol ][ gp.maxWorldRow ];  
+        this.gp = gp;
 
         setDefaultValues();
         getMapImage(); 
@@ -38,6 +33,11 @@ public class MapManager extends Map {
     }
 
     public void setDefaultValues(){ 
+        map = new Map[30]; 
+        mapTileNum = new int[ gp.maxWorldCol ][ gp.maxWorldRow ];  
+        
+        screenX = 200; 
+        screenY = 675; 
         worldSpeed = 4; 
     } //end setDefaultValues
 

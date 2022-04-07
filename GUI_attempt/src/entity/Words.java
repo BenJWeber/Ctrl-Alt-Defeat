@@ -373,6 +373,8 @@ public class Words extends Entity {
         if( userInput.equals( compareWord ) == true ){ 
             colorVerified = "GREEN";
             gp.increaseSpeed = true;  
+            gp.calculate.correctWordsTotal++; 
+            System.out.println( "Count: " + gp.calculate.correctWordsTotal); 
         } //end if
         else{
             colorVerified = "RED";

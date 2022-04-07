@@ -3,7 +3,13 @@ package GUI_attempt.src.main;
 import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputListener;
 
+import GUI_attempt.src.main.GamePanel; 
+import GUI_attempt.src.entity.Menu; 
+
 public class MouseInput implements MouseInputListener {
+
+    GamePanel gp;
+   // Menu menu = new Menu(); 
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -40,7 +46,17 @@ public class MouseInput implements MouseInputListener {
                     System.exit(1);
                 } // end if
         }
-
+        /*
+        if( GamePanel.State == GamePanel.STATE.victory){ 
+            if (mx >= 550 && mx <= 550 + 100)
+                if (my >= 300 && my <= 350) {
+                        //System.out.println( "This is when the game would be reset");     
+                    menu.resetGame(); 
+                    GamePanel.State = GamePanel.STATE.game;
+                    System.out.println( "i MADE IT MA!"); 
+                } // end if
+        }
+        */
     }// end mousePressed
 
     @Override

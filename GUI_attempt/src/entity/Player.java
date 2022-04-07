@@ -7,7 +7,6 @@ package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
 import GUI_attempt.src.main.InputHandler;
-import GUI_attempt.src.entity.TestWords; 
 
 import java.io.IOException;
 import java.awt.Graphics2D;

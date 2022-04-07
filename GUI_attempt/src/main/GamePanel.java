@@ -17,6 +17,7 @@ import GUI_attempt.src.entity.Monster;
 import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.entity.Words;
 import GUI_attempt.src.map.MapManager;
+import GUI_attempt.src.entity.Calculate;
 
 
 public class GamePanel extends JPanel implements Runnable{
@@ -42,7 +43,8 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player( this, keyH ); 
     public Monster monster = new Monster( this ); 
     public Words words = new Words( this, keyH ); 
-    public Menu menu = new Menu();
+    public Menu menu = new Menu( this );
+    public Calculate calculate = new Calculate(); 
 
     public int FPS = 60; 
     
@@ -104,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){ 
         //System.out.println(GamePanel.State);
-        if((State != STATE.pause && State != STATE.gameOver) && State != STATE.victory){
+        if(State == STATE.game){
            mapManager.update(); 
            player.update(); 
            monster.update();
@@ -132,6 +134,7 @@ public class GamePanel extends JPanel implements Runnable{
             menu.drawGameOver(graphics2);
         }
         else if(State == STATE.victory) { 
+            calculate.wordsPerMinute(); 
             mapManager.draw(graphics2); 
             menu.drawVictory(graphics2); 
         }
