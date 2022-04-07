@@ -44,7 +44,7 @@ public class Words extends Entity {
         wordCounter = 0; //Changed to 0 from 1 - RC - 3/29 
         liveCounter = 0; 
         currentLength = 3;
-        numWords = 20;
+        numWords = 100;
         pace = 0; 
         color = "BLACK"; 
         colorVerified = "RED"; 
@@ -200,12 +200,12 @@ public class Words extends Entity {
         //to make sure there is no duplicates
         ArrayList<String> correct = new ArrayList<String>();   
         Random rand = new Random();
-        while (correct.size() < 20) {
+        while (correct.size() < 100) {
             if( count == 0 ){ 
                 correct.add( spaceString ); 
                 count++; 
             }
-            String random = words.get(rand.nextInt(50));
+            String random = words.get(rand.nextInt(100));
             if (!correct.contains(random)) {
                 correct.add(random);
             }//end if
