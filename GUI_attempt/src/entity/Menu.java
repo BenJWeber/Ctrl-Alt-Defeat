@@ -32,24 +32,34 @@ public class Menu extends Entity{
         g2d.draw(quitButton);
     }//end draw
 
+
     public void drawDifficulty(Graphics2D g2d){ 
+
         g2d.setColor(Color.white);
+        Font font1 = new Font("arial", Font.BOLD, 50);
+        g2d.setFont(font1);
+        g2d.setColor(Color.white);
+        g2d.drawString("TYPOPOCALYPSE", 400, 250);
         
-        Rectangle easyButton = new Rectangle(550, 300, 150, 50 );
-        Rectangle mediumButton = new Rectangle(550, 400, 150, 50 );
-        Rectangle hardButton = new Rectangle(550, 500, 150, 50 );
-        Rectangle backButton = new Rectangle(550, 600, 150, 50 );
+        Rectangle quitButton = new Rectangle(550, 400, 100, 50 );
+        Rectangle easyButton = new Rectangle(400, 300, 100, 50 );
+        Rectangle mediumButton = new Rectangle(540, 300, 125, 50 );
+        Rectangle hardButton = new Rectangle(700, 300, 100, 50 );
 
         Font font2 = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font2);
-        g2d.drawString("Easy", easyButton.x + 40, easyButton.y + 35);
+
+        g2d.drawString("Quit", quitButton.x + 20, quitButton.y + 35);
+        g2d.draw(quitButton);
+
+        g2d.drawString("Easy", easyButton.x + 15, easyButton.y + 35);
         g2d.draw(easyButton);
-        g2d.drawString("Medium", mediumButton.x + 20, mediumButton.y + 35);
+
+        g2d.drawString("Medium", mediumButton.x + 5, mediumButton.y + 35);
         g2d.draw(mediumButton);
-        g2d.drawString("Hard", hardButton.x + 40, hardButton.y + 35);
+
+        g2d.drawString("Hard", hardButton.x + 15, hardButton.y + 35);
         g2d.draw(hardButton);
-        g2d.drawString("Back", backButton.x + 40, backButton.y + 35);
-        g2d.draw(backButton);
     }
 
     public void drawGameOver(Graphics2D g2d) {
