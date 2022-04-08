@@ -71,6 +71,11 @@ public class MouseInput implements MouseInputListener {
                     Entity.difficulty = "hardWords.txt"; 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
+
+            if (mx >= 550 && mx <= 550 + 100)
+                if (my >= 400 && my <= 450) {
+                    GamePanel.State = GamePanel.STATE.menu; 
+                } // end if
         }
         /*
         if( GamePanel.State == GamePanel.STATE.victory){ 
