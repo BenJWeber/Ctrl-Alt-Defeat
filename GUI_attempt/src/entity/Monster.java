@@ -25,8 +25,8 @@ public class Monster extends Entity {
 
     public void getMonsterImage(){ 
         try{ 
-            monster1 = ImageIO.read( getClass().getResourceAsStream( "../../res/monster/Monster_1.png" ) ); 
-            monster2 = ImageIO.read( getClass().getResourceAsStream( "../../res/monster/Monster_2.png" ) ); 
+            monster1 = ImageIO.read( getClass().getResourceAsStream( "../monster/Monster_1.png" ) ); 
+            monster2 = ImageIO.read( getClass().getResourceAsStream( "../monster/Monster_2.png" ) ); 
         } catch( IOException e ){ 
             e.printStackTrace(); 
         } //end catch
