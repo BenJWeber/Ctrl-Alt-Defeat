@@ -38,7 +38,8 @@ public class MapManager extends Map {
         
         screenX = 200; 
         screenY = 675; 
-        worldSpeed = 4; 
+        worldSpeed = 4;
+        
     } //end setDefaultValues
 
     public void getMapImage(){ 
@@ -123,7 +124,7 @@ public class MapManager extends Map {
     } //end loadMap
 
     public void update(){ 
-       worldEditX += worldSpeed;  
+       worldEditX += worldSpeed;
     } //end update
 
     public void draw( Graphics2D graphics2 ){ 

@@ -151,8 +151,11 @@ public class Player extends Entity {
         }
         spriteCounter++; 
 
-        if( worldX == 9000 )
+        if (worldX == 9000) {
             GamePanel.State = GamePanel.STATE.victory;
+            
+        }
+        
     } //end update
 
     public void draw( Graphics2D graphics2 ){ 

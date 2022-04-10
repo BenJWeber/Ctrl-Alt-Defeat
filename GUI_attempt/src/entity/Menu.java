@@ -64,17 +64,32 @@ public class Menu extends Entity{
 
     public void drawGameOver(Graphics2D g2d) {
         Font font1 = new Font("arial", Font.BOLD, 50);
+        Font restartButtonFont = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font1);
+        g2d.setColor(Color.red);
+        g2d.drawString("GAME OVER", 500, 250);
+
+        Rectangle restartButton = new Rectangle(540, 300, 125, 50);
+        g2d.setFont(restartButtonFont);
         g2d.setColor(Color.white);
-        g2d.drawString("GAME OVER", 400, 250);
+        g2d.drawString("Restart", restartButton.x + 5, restartButton.y + 35);
+        g2d.draw(restartButton);
+
     }
 
     public void drawVictory(Graphics2D g2d) { 
         Font font1 = new Font("arial", Font.BOLD, 50);
+        Font restartButtonFont = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font1);
         g2d.setColor(Color.white);
         g2d.drawString("You Win!", 400, 250);
         g2d.drawString("WordsPerMinute = " + gp.calculate.wordsPerMinute, 400, 300);
+
+        Rectangle restartButton = new Rectangle(540, 300, 125, 50);
+        g2d.setFont(restartButtonFont);
+        g2d.setColor(Color.white);
+        g2d.drawString("Restart", restartButton.x + 5, restartButton.y + 35);
+        g2d.draw(restartButton);
     }
 
     public void pause(Graphics2D g2d) {
