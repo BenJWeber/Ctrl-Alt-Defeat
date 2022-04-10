@@ -88,7 +88,7 @@ public class MouseInput implements MouseInputListener {
                     GamePanel.State = GamePanel.STATE.reset;
                 } // end if
         }
-        */
+        
 
         // restart button kills jvm and shell script will restart the game
         if (GamePanel.State == GamePanel.STATE.gameOver || GamePanel.State == GamePanel.STATE.victory) {
