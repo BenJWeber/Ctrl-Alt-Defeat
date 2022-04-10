@@ -1,7 +1,6 @@
 <project name="Typopocalypse" default="buildrun" basedir=".">
 	
 	<target name="buildrun">
-		<delete dir="GUI_attempt/bin"/>
 		<mkdir dir="GUI_attempt/bin"/>
 		<javac srcdir="GUI_attempt/src" destdir="GUI_attempt/bin"/>
 		<copy todir="GUI_attempt/bin/GUI_attempt/src">
@@ -13,6 +12,9 @@
 	<target name="compile">
 		<delete dir="GUI_attempt/bin"/>
 		<mkdir dir="GUI_attempt/bin"/>
+		<copy todir="GUI_attempt/bin/GUI_attempt/src">
+  	<fileset dir="GUI_attempt/res/"/>
+		</copy>
 		<javac srcdir="GUI_attempt/src" destdir="GUI_attempt/bin"/>
 	</target>
 
