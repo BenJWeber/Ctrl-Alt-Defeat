@@ -6,10 +6,12 @@ import javax.swing.event.MouseInputListener;
 import GUI_attempt.src.main.GamePanel;
 import GUI_attempt.src.entity.Entity;
 import GUI_attempt.src.entity.Menu; 
+import GUI_attempt.src.main.Reset;
 
 public class MouseInput implements MouseInputListener {
 
-    GamePanel gp;
+    GamePanel gp; // = new GamePanel();
+    Reset reset = new Reset(); 
    // Menu menu = new Menu(); 
 
     @Override
@@ -46,7 +48,8 @@ public class MouseInput implements MouseInputListener {
             // Quit button
             if (mx >= 550 && mx <= 550 + 100)
                 if (my >= 400 && my <= 450) {
-                    System.exit(1);
+                    GamePanel.State = GamePanel.STATE.victory; 
+                    //System.exit(1);
                 } // end if
         }
 
@@ -77,17 +80,22 @@ public class MouseInput implements MouseInputListener {
                     GamePanel.State = GamePanel.STATE.menu; 
                 } // end if
         }
-        /*
+        
         if( GamePanel.State == GamePanel.STATE.victory){ 
-            if (mx >= 550 && mx <= 550 + 100)
-                if (my >= 300 && my <= 350) {
-                        //System.out.println( "This is when the game would be reset");     
-                    menu.resetGame(); 
-                    GamePanel.State = GamePanel.STATE.game;
-                    System.out.println( "i MADE IT MA!"); 
+            if (mx >= 570 && mx <= 570 + 100)
+                if (my >= 350 && my <= 400) {
+                    //reset.resetGame(); 
+                    GamePanel.State = GamePanel.STATE.reset;
                 } // end if
         }
-        */
+
+        if( GamePanel.State == GamePanel.STATE.gameOver ){ 
+            if (mx >= 570 && mx <= 570 + 100)
+                if (my >= 350 && my <= 400) {
+                    GamePanel.State = GamePanel.STATE.reset;
+                } // end if
+        }
+        
     }// end mousePressed
 
     @Override
