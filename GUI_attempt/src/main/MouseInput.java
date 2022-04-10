@@ -88,14 +88,16 @@ public class MouseInput implements MouseInputListener {
                     GamePanel.State = GamePanel.STATE.reset;
                 } // end if
         }
+        */
 
-        if( GamePanel.State == GamePanel.STATE.gameOver ){ 
-            if (mx >= 570 && mx <= 570 + 100)
-                if (my >= 350 && my <= 400) {
-                    GamePanel.State = GamePanel.STATE.reset;
-                } // end if
+        // restart button kills jvm and shell script will restart the game
+        if (GamePanel.State == GamePanel.STATE.gameOver || GamePanel.State == GamePanel.STATE.victory) {
+            if (mx >= 540 && mx <= 540 + 100) {
+                if (my >= 300 && my <= 350) {
+                    System.exit(2);
+                } // end if 
+            }
         }
-        
     }// end mousePressed
 
     @Override
