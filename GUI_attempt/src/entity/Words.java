@@ -36,6 +36,7 @@ public class Words extends Entity {
     * Set default Values. 
     */ 
     public void setDefaultValues(){ 
+        System.out.println( "RESET RESET" ); 
         wordStreamX_1 = 30; 
         cursorX = 500; 
         liveWordsX = 500;
@@ -52,6 +53,7 @@ public class Words extends Entity {
         compareWord = ""; 
         userInput = ""; 
         cursor_space = "cursor"; 
+        difficulty = ""; 
     } //end setDefaultValues
 
     /*
@@ -182,6 +184,7 @@ public class Words extends Entity {
     * Place words into array from File. 
     */
     public void getWords(){ 
+        System.out.println( "GET WORDS" ); 
         int count = 0; 
         String spaceString = "      "; 
         try {
@@ -189,7 +192,8 @@ public class Words extends Entity {
         BufferedReader br = new BufferedReader( new FileReader( difficulty ) );
 
         ArrayList<String> words = new ArrayList<String>();
-        String line = br.readLine();
+        String line = ""; 
+        line = br.readLine();
         while( line != null ){ 
             words.add(line);
             line = br.readLine(); 
@@ -403,8 +407,9 @@ public class Words extends Entity {
     * When space is hit, updates words/positions. 
     */ 
     public void update(){
-        if( correctWords.length < 50 ){ 
+        if( correctWords.length < 50 || resetFlag ){ 
             getWords(); 
+            resetFlag = false; 
         } 
         int j = 0; 
  
