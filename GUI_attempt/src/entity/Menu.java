@@ -63,6 +63,8 @@ public class Menu extends Entity{
     }
 
     public void drawGameOver(Graphics2D g2d) {
+        Rectangle resetButton = new Rectangle(570, 350, 115, 30 );
+
         Font font1 = new Font("arial", Font.BOLD, 50);
         Font restartButtonFont = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font1);
@@ -78,6 +80,8 @@ public class Menu extends Entity{
     }
 
     public void drawVictory(Graphics2D g2d) { 
+        Rectangle resetButton = new Rectangle(570, 350, 115, 30 );
+
         Font font1 = new Font("arial", Font.BOLD, 50);
         Font restartButtonFont = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font1);
@@ -101,9 +105,4 @@ public class Menu extends Entity{
         g2d.setFont(font2);
         g2d.drawString("Press esc to un-pause", 480, 300);
     }//end
-
-    public void resetGame(){ 
-    }
-
-
 }//end menu

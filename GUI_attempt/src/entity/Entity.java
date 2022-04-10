@@ -38,5 +38,5 @@ public class Entity {
 
     public String[] correctWords = { " " }, currentWords = {"1", "2", "3"}; 
 
-    public boolean keyPressFlag = false; 
+    public boolean keyPressFlag = false, resetFlag = false; 
 } //end class

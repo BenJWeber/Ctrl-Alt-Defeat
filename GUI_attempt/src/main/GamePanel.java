@@ -57,7 +57,8 @@ public class GamePanel extends JPanel implements Runnable{
         game,
         pause,
         gameOver,
-        victory
+        victory, 
+        reset
     };
 
     public static STATE State = STATE.menu;
@@ -155,6 +156,15 @@ public class GamePanel extends JPanel implements Runnable{
             monster.draw( graphics2 ); 
             words.draw( graphics2 ); 
             menu.pause(graphics2);
+        }
+        else if( State == STATE.reset ){ 
+            mapManager.draw( graphics2 );
+            calculate.setDefaultValues();
+            player.setDefaultValues(); 
+            words.setDefaultValues();
+            words.resetFlag = true; 
+
+            State = STATE.difficulty; 
         }
 
     } //end paintComponent 
