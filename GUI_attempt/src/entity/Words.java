@@ -446,17 +446,23 @@ public class Words extends Entity {
         } //end for
 
         if( keyH.spacePressed == true ){ //Iterate words through current words and reset cursor location. 
-            wordCounter++; 
-            liveCounter = 0; 
-
-            checkUserInput();  
-
-            if( wordCounter == correctWords.length - 2 ) //Allows last word to make it to center. 
-                currentLength = 2; 
-            
-            if( wordCounter == correctWords.length - 1 ) //Allows last word to make it to the left of center. 
-                currentLength = 1; 
-
+            if( userInput.equals( gp.action.actionCheck ) == true ){ 
+                liveCounter = 0; 
+    
+                checkUserInput();  
+            } //end if
+            else{ 
+                wordCounter++; 
+                liveCounter = 0; 
+    
+                checkUserInput();  
+    
+                if( wordCounter == correctWords.length - 2 ) //Allows last word to make it to center. 
+                    currentLength = 2; 
+                
+                if( wordCounter == correctWords.length - 1 ) //Allows last word to make it to the left of center. 
+                    currentLength = 1; 
+            }
             keyH.spacePressed = false; 
         } //end if
     } //end update

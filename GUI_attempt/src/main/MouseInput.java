@@ -48,8 +48,7 @@ public class MouseInput implements MouseInputListener {
             // Quit button
             if (mx >= 550 && mx <= 550 + 100)
                 if (my >= 400 && my <= 450) {
-                    GamePanel.State = GamePanel.STATE.victory; 
-                    //System.exit(1);
+                    System.exit(1);
                 } // end if
         }
 
@@ -84,12 +83,10 @@ public class MouseInput implements MouseInputListener {
         if( GamePanel.State == GamePanel.STATE.victory){ 
             if (mx >= 570 && mx <= 570 + 100)
                 if (my >= 350 && my <= 400) {
-                    //reset.resetGame(); 
                     GamePanel.State = GamePanel.STATE.reset;
                 } // end if
         }
     
-
         // restart button kills jvm and shell script will restart the game
         if (GamePanel.State == GamePanel.STATE.gameOver || GamePanel.State == GamePanel.STATE.victory) {
             if (mx >= 540 && mx <= 540 + 100) {

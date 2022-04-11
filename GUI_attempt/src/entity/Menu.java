@@ -70,7 +70,7 @@ public class Menu extends Entity{
         //Font restartButtonFont = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font1);
         g2d.setColor(Color.red);
-        g2d.drawString("GAME OVER", 500, 250);
+        g2d.drawString("GAME OVER", 475, 310);
 
         //Rectangle restartButton = new Rectangle(540, 300, 125, 50);
         //g2d.setFont(restartButtonFont);
@@ -85,16 +85,19 @@ public class Menu extends Entity{
         Rectangle resetButton = new Rectangle(570, 350, 115, 30 );
 
         Font font1 = new Font("arial", Font.BOLD, 50);
+        Font font2 = new Font("arial", Font.BOLD, 30);
         //Font restartButtonFont = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font1);
-        g2d.setColor(Color.white);
-        g2d.drawString("You Win!", 400, 250);
-        g2d.drawString("WordsPerMinute = " + gp.calculate.wordsPerMinute, 400, 300);
+        g2d.setColor(Color.green);
+        g2d.drawString("You Win!", 525, 250);
+        g2d.setColor( Color.white ); 
+        g2d.drawString("WordsPerMinute = " + gp.calculate.wordsPerMinute, 400, 310);
 
         //Rectangle restartButton = new Rectangle(540, 300, 125, 50);
         //g2d.setFont(restartButtonFont);
+        g2d.setFont(font2); 
         g2d.setColor(Color.white);
-        g2d.drawString("Reset", resetButton.x + 5, resetButton.y + 35);
+        g2d.drawString("Reset", resetButton.x + 15, resetButton.y + 25);
         g2d.draw(resetButton);
     }
 
