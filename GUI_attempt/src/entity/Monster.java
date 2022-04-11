@@ -20,7 +20,7 @@ public class Monster extends Entity {
 
     public void setDefaultValues(){ 
         monsterX = 0; 
-        monsterY = 515;
+        monsterY = 450;
     } //end setDefaultValues
 
     public void getMonsterImage(){ 
@@ -33,7 +33,7 @@ public class Monster extends Entity {
     } //end getPlayerImage
 
     public void update(){ 
-        if (spriteCounter > 5 ){ 
+        if (spriteCounter > 20 ){ 
             if( spriteNum == 1 )
                 spriteNum = 2; 
             else if( spriteNum == 2 )
@@ -52,6 +52,6 @@ public class Monster extends Entity {
         if( spriteNum == 2 )
             image = monster2;
 
-        graphics2.drawImage( image, monsterX, monsterY, gp.tileSize, gp.tileSize, null ); 
+        graphics2.drawImage( image, monsterX, monsterY, gp.tileSize*2, gp.tileSize*2, null ); 
     } //end draw
 } //end class
