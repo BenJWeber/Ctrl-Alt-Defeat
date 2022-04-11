@@ -67,7 +67,7 @@ public class Player extends Entity {
             direction = "up"; 
 
             playerY += ( speed - 10 ); 
-            playerX += ( speed + 10 ); 
+            playerX += ( speed + 5 ); 
             jumpFactor = 10; 
         } //end if
 
@@ -121,12 +121,22 @@ public class Player extends Entity {
                 decreaseFactor = decreaseFactor -.25; 
             } //end else if
             else if( jumpFactor > 0 ){ 
-                playerX += jumpFactor; 
+                if( jumpFactor > 3 )
+                    playerX += ( jumpFactor - 3 );  
+            
                 playerY -= jumpFactor; 
                 jumpFactor = jumpFactor - .25; 
-                if( jumpFactor == 0 )
-                    playerY = 515; 
+                if( jumpFactor == 0 ) {
+                    jumpFactor = -10; 
+                }
+                    //playerY = 515; 
             } //end else if
+            else if( jumpFactor < 0 ){ 
+                playerY -= jumpFactor; 
+                jumpFactor -= .25; 
+                if( playerY == 515 )
+                    jumpFactor = 0; 
+            }
             else
                 playerX -= .1; 
 

@@ -185,7 +185,6 @@ public class Words extends Entity {
     * Place words into array from File. 
     */
     public void getWords(){ 
-        System.out.println( "GET WORDS" ); 
         int count = 0; 
         String spaceString = "      "; 
         try {
@@ -371,7 +370,7 @@ public class Words extends Entity {
     * Once user hits space check if typed word is correct. 
     */
     public void checkUserInput(){ 
-        if( userInput.equals( gp.action.actionCheck ) == true ){ 
+        if( userInput.equals( gp.action.actionCheck ) == true ){ //Checks if user is typing action word 
             gp.jumpFlag = true; 
             gp.calculate.correctWordsTotal++; 
         } //end if

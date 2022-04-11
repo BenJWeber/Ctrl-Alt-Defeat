@@ -127,7 +127,6 @@ public class ActionWords extends Entity {
 
             byte[] bytes = correctWords[hold].getBytes("US-ASCII");
             actionCheck = correctWords[hold]; 
-            System.out.println( actionCheck); 
             int length = bytes.length; 
 
             for( int m = 0; m < length; m++ ) {
