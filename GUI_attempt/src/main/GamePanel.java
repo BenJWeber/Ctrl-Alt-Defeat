@@ -136,11 +136,11 @@ public class GamePanel extends JPanel implements Runnable{
         
         if(State == STATE.game) {
          mapManager.draw( graphics2 ); 
-         player.draw( graphics2 );
-         monster.draw( graphics2 ); 
+         player.draw( graphics2 ); 
          words.draw( graphics2 ); 
          tumble.draw( graphics2 ); 
          action.draw( graphics2 ); 
+         monster.draw( graphics2 );
         }
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
