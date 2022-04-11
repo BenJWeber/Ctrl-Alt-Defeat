@@ -20,7 +20,7 @@ public class Monster extends Entity {
 
     public void setDefaultValues(){ 
         monsterX = 0; 
-        monsterY = 675;
+        monsterY = 515;
     } //end setDefaultValues
 
     public void getMonsterImage(){ 

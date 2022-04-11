@@ -18,6 +18,8 @@ import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.entity.Words;
 import GUI_attempt.src.map.MapManager;
 import GUI_attempt.src.entity.Calculate;
+import GUI_attempt.src.entity.TumbleWeed;
+import GUI_attempt.src.entity.ActionWords;
 
 
 public class GamePanel extends JPanel implements Runnable{
@@ -36,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public boolean increaseSpeed = false; 
     public boolean decreaseSpeed = false; 
+    public boolean jumpFlag = false; 
 
     public MapManager mapManager = new MapManager( this ); 
     InputHandler keyH = new InputHandler(); 
@@ -43,8 +46,10 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player( this, keyH ); 
     public Monster monster = new Monster( this ); 
     public Words words = new Words( this, keyH ); 
+    public ActionWords action = new ActionWords( this, keyH ); 
     public Menu menu = new Menu( this );
-    public Calculate calculate = new Calculate(); 
+    public Calculate calculate = new Calculate();
+    public TumbleWeed tumble = new TumbleWeed( this );  
 
     public int FPS = 60; 
 
@@ -119,6 +124,8 @@ public class GamePanel extends JPanel implements Runnable{
            player.update(); 
            monster.update();
            words.update();
+           tumble.update(); 
+           action.update();
         }
     } //end update
 
@@ -132,6 +139,8 @@ public class GamePanel extends JPanel implements Runnable{
          player.draw( graphics2 );
          monster.draw( graphics2 ); 
          words.draw( graphics2 ); 
+         tumble.draw( graphics2 ); 
+         action.draw( graphics2 ); 
         }
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
@@ -162,6 +171,7 @@ public class GamePanel extends JPanel implements Runnable{
             calculate.setDefaultValues();
             player.setDefaultValues(); 
             words.setDefaultValues();
+            tumble.setDefaultValues();
             words.resetFlag = true; 
 
             State = STATE.difficulty; 

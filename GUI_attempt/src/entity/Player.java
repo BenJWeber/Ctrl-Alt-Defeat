@@ -18,15 +18,14 @@ public class Player extends Entity {
     GamePanel gp; 
     InputHandler keyH; 
 
-    int defaultPlayerY = 675; 
+    int defaultPlayerY = 515; 
     int defaultPlayerX = 700; 
     double increaseFactor; 
     double decreaseFactor; 
+    double jumpFactor; 
 
     public int screenX; 
     public int screenY;
-
-    public boolean jumpFlag = false; 
 
     public Player( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
@@ -46,6 +45,7 @@ public class Player extends Entity {
         
         increaseFactor = 0; 
         decreaseFactor = 0; 
+        jumpFactor = 0; 
 
         speed = 4; 
         direction = "forward"; 
@@ -62,14 +62,15 @@ public class Player extends Entity {
     } //end getPlayerImage
 
     public void update(){ 
-        if( keyH.jumpPressed == true ){ 
+        if( gp.jumpFlag ){ 
+            gp.jumpFlag = false; 
             direction = "up"; 
 
-            playerY -= speed;  
-            worldX += speed;
-            
-            jumpFlag = true; 
+            playerY += ( speed - 10 ); 
+            playerX += ( speed + 10 ); 
+            jumpFactor = 10; 
         } //end if
+
         else if( gp.increaseSpeed ){            
             gp.increaseSpeed = false; 
             direction = "forward"; 
@@ -77,11 +78,6 @@ public class Player extends Entity {
             playerX += (speed + 10 ); 
             worldX += speed;
             increaseFactor = 10; 
-
-            if( jumpFlag == true ){ 
-                playerY = defaultPlayerY; 
-                jumpFlag = false; 
-            } //end if
 
             if (spriteCounter > 5 ){ 
                 if( spriteNum == 1 )
@@ -99,11 +95,6 @@ public class Player extends Entity {
             worldX += speed;
             decreaseFactor = 10; 
 
-            if( jumpFlag == true ){ 
-                playerY = defaultPlayerY; 
-                jumpFlag = false; 
-            } //end if
-
             if (spriteCounter > 15 ){ 
                 if( spriteNum == 1 )
                     spriteNum = 2; 
@@ -113,7 +104,8 @@ public class Player extends Entity {
             } //end if
         } //end else if
         else{ 
-            direction = "forward";
+            if( jumpFactor == 0 )
+                direction = "forward";
 
             worldX += speed;
             if( increaseFactor > 0 ){ 
@@ -128,14 +120,16 @@ public class Player extends Entity {
                 playerX -= decreaseFactor; 
                 decreaseFactor = decreaseFactor -.25; 
             } //end else if
+            else if( jumpFactor > 0 ){ 
+                playerX += jumpFactor; 
+                playerY -= jumpFactor; 
+                jumpFactor = jumpFactor - .25; 
+                if( jumpFactor == 0 )
+                    playerY = 515; 
+            } //end else if
             else
                 playerX -= .1; 
 
-            if( jumpFlag == true ){ 
-                playerY = defaultPlayerY; 
-                jumpFlag = false; 
-            } //end if
-            
             if (spriteCounter > 10 ){ 
                 if( spriteNum == 1 )
                     spriteNum = 2; 
@@ -147,7 +141,10 @@ public class Player extends Entity {
 
         if (playerX <= monsterX) {
             GamePanel.State = GamePanel.STATE.gameOver;
-            
+        }
+
+        if( ( playerX > ( gp.tumble.tumbleX - 10 ) && playerX < ( gp.tumble.tumbleX + 10 ) ) && ( playerY > ( gp.tumble.tumbleY - 20 ) && playerY < (gp.tumble.tumbleY + 20 ) ) ){ 
+            decreaseFactor = 10; 
         }
         spriteCounter++; 
 

@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
 import javax.imageio.ImageIO;
+import javax.lang.model.util.ElementScanner14;
 
 public class Words extends Entity {
     /*
@@ -178,7 +179,7 @@ public class Words extends Entity {
         catch( IOException e ){ 
             e.printStackTrace(); 
         } //end catch
-    } //end getPlayerImage
+    } 
 
     /*
     * Place words into array from File. 
@@ -370,14 +371,20 @@ public class Words extends Entity {
     * Once user hits space check if typed word is correct. 
     */
     public void checkUserInput(){ 
-        if( userInput.equals( compareWord ) == true ){ 
-            colorVerified = "GREEN";
-            gp.increaseSpeed = true;  
+        if( userInput.equals( gp.action.actionCheck ) == true ){ 
+            gp.jumpFlag = true; 
             gp.calculate.correctWordsTotal++; 
         } //end if
-        else{
-            colorVerified = "RED";
-            gp.decreaseSpeed = true;   
+        else{ 
+            if( userInput.equals( compareWord ) == true ){ 
+                colorVerified = "GREEN";
+                gp.increaseSpeed = true;  
+                gp.calculate.correctWordsTotal++; 
+            } //end if
+            else{
+                colorVerified = "RED";
+                gp.decreaseSpeed = true;   
+            } //end else
         } //end else
         userInput = ""; 
     } //end checkUserInput
@@ -388,7 +395,6 @@ public class Words extends Entity {
     */
     public void checkUserInputLive(){ 
         if( userInput.length() <= compareWord.length() ){ 
-
             String check  = compareWord.substring( 0, userInput.length() ); 
 
             if( userInput.equals( check ) == true ){ 
@@ -513,8 +519,10 @@ public class Words extends Entity {
                                     imageLetter = images[bytes[m] - 97]; 
                                 break;
                         } //end switch
-                    
-                        graphics2.drawImage(imageLetter, wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                        if( x == 1 )
+                            graphics2.drawImage(imageLetter, wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/2, gp.tileSize/2, null );
+                        else
+                            graphics2.drawImage(imageLetter, wordStreamX_2 = wordStreamX_1 + ( i * ( gp.tileSize/2 + ( gp.tileSize / 4 ) ) ), wordsY, gp.tileSize/3, gp.tileSize/3, null );
                         i++; 
                    // } //end while
                 }//end inner for

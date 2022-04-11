@@ -3,6 +3,7 @@ package GUI_attempt.src.entity;
 import GUI_attempt.src.main.GamePanel;
 
 import java.io.IOException;
+import java.util.Random;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
@@ -34,7 +35,22 @@ public class TumbleWeed extends Entity {
         } //end catch
     } //end getPlayerImage
 
+    public void tumbleGenerator(){ 
+        int[] randomNum = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
+
+        int hold = new Random().nextInt( randomNum.length); 
+
+        if( randomNum[ hold ] < 5 ){ 
+            gp.action.setDefaultValues();
+            setDefaultValues();
+        } //end if
+            
+
+    } //end tumbleGenerator
+
     public void update(){ 
+        if( tumbleX <= 0 )
+            tumbleGenerator(); 
         tumbleX -= speed + 2; 
         if (spriteCounter > 10 ){ 
             if( spriteNum == 1 )
