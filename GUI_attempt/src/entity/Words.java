@@ -37,7 +37,6 @@ public class Words extends Entity {
     * Set default Values. 
     */ 
     public void setDefaultValues(){ 
-        System.out.println( "RESET RESET" ); 
         wordStreamX_1 = 30; 
         cursorX = 500; 
         liveWordsX = 500;
