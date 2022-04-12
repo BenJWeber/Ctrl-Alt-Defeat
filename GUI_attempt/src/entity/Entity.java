@@ -12,7 +12,9 @@ public class Entity {
         wordsY, letterX, cursorX, lengthHold, speed, liveCounter, wordCounter, currentLength, numWords, pace, spriteCounter = 0, spriteNum = 1,
         actionWordX_1, actionWordX_2, actionWordY;
 
-    public BufferedImage forward1, forward2, jump, monster1, monster2, tumble1, tumble2, tumble3, tumble4,
+    public BufferedImage forward1, forward2, jump, monster1, monster2, monster3, monster4, tumble1, tumble2, tumble3, tumble4,
+        vic1, vic2, vic3, vic4, 
+        
         letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, 
         letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, 
         letter_q, letter_r, letter_s, letter_t, letter_u, letter_v, letter_w, letter_x, 

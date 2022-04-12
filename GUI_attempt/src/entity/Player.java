@@ -149,7 +149,7 @@ public class Player extends Entity {
             } //end if
         } //end else
 
-        if (playerX <= monsterX) {
+        if (playerX <= 77) {
             GamePanel.State = GamePanel.STATE.gameOver;
         }
 

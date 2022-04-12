@@ -127,6 +127,10 @@ public class GamePanel extends JPanel implements Runnable{
            tumble.update(); 
            action.update();
         }
+        if( State == STATE.gameOver )
+            monster.update(); 
+        if( State == STATE.victory )
+            monster.update(); 
     } //end update
 
     public void paintComponent( Graphics graphics ){ 
@@ -153,11 +157,13 @@ public class GamePanel extends JPanel implements Runnable{
         else if(State == STATE.gameOver) {
             mapManager.draw(graphics2);
             menu.drawGameOver(graphics2);
+            monster.draw(graphics2);
         }
         else if(State == STATE.victory) { 
             calculate.wordsPerMinute(); 
             mapManager.draw(graphics2); 
             menu.drawVictory(graphics2); 
+            monster.draw(graphics2);
         }
         else if(State == STATE.pause) {
             mapManager.draw( graphics2 ); 
