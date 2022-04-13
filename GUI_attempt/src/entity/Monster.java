@@ -55,6 +55,8 @@ public class Monster extends Entity {
             } //end if
         }
         else{ 
+            if( spriteNum == 3 || spriteNum == 4 )
+                spriteNum = 1; 
             if (spriteCounter > 20 ){ 
                 if( spriteNum == 1 )
                     spriteNum = 2; 

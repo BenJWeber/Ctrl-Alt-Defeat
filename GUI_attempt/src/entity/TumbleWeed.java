@@ -40,7 +40,11 @@ public class TumbleWeed extends Entity {
 
         int hold = new Random().nextInt( randomNum.length); 
 
-        if( randomNum[ hold ] < 5 ){ 
+        if( Entity.extremeFlag = true ){ 
+            gp.action.setDefaultValues();
+            setDefaultValues();
+        }
+        else if( randomNum[ hold ] < 5 ){ 
             gp.action.setDefaultValues();
             setDefaultValues();
         } //end if
@@ -49,9 +53,14 @@ public class TumbleWeed extends Entity {
     } //end tumbleGenerator
 
     public void update(){ 
+       // if( Entity.extremeFlag == true )
+           // tumbleGenerator(); 
+
         if( tumbleX <= 0 )
             tumbleGenerator(); 
+
         tumbleX -= speed + 2; 
+
         if (spriteCounter > 10 ){ 
             if( spriteNum == 1 )
                 spriteNum = 2; 

@@ -41,7 +41,7 @@ public class Menu extends Entity{
         g2d.setColor(Color.white);
         g2d.drawString("TYPOPOCALYPSE", 400, 250);
         
-        Rectangle backButton = new Rectangle(550, 400, 100, 50 );
+        Rectangle backButton = new Rectangle(550, 415, 100, 50 );
         Rectangle easyButton = new Rectangle(400, 300, 100, 50 );
         Rectangle mediumButton = new Rectangle(540, 300, 125, 50 );
         Rectangle hardButton = new Rectangle(700, 300, 100, 50 );
@@ -60,6 +60,14 @@ public class Menu extends Entity{
 
         g2d.drawString("Hard", hardButton.x + 15, hardButton.y + 35);
         g2d.draw(hardButton);
+
+        Rectangle extremeButton = new Rectangle(550, 360, 100, 30 );
+        Font font3 = new Font("arial", Font.BOLD, 20);
+        g2d.setFont(font3);
+        g2d.setColor(Color.red);
+
+        g2d.drawString("XTREME", extremeButton.x + 10, extremeButton.y + 22);
+        g2d.draw(extremeButton);
     }
 
     public void drawGameOver(Graphics2D g2d) {

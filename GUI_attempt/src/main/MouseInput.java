@@ -11,8 +11,6 @@ import GUI_attempt.src.main.Reset;
 public class MouseInput implements MouseInputListener {
 
     GamePanel gp; // = new GamePanel();
-    Reset reset = new Reset(); 
-   // Menu menu = new Menu(); 
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -72,6 +70,15 @@ public class MouseInput implements MouseInputListener {
             if (mx >= 700 && mx <= 700 + 100)
                 if (my >= 300 && my <= 350) {
                     Entity.difficulty = "hardWords.txt"; 
+                    GamePanel.State = GamePanel.STATE.game;
+                } // end if
+
+            //Extreme
+            if (mx >= 550 && mx <= 650)
+                if (my >= 360 && my <= 390) {
+                    Entity.difficulty = "hardWords.txt";
+                    Entity.extremeFlag = true;  
+                    System.out.println( "EXTREME" ); 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 

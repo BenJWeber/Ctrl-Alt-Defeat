@@ -62,6 +62,12 @@ public class Player extends Entity {
     } //end getPlayerImage
 
     public void update(){ 
+        /*
+        if( Entity.extremeFlag ){ 
+            speed = 10; 
+            System.out.print( "EXTREME ACTIVATED"); 
+        }
+        */
         if( gp.jumpFlag ){ 
             gp.jumpFlag = false; 
             direction = "up"; 
@@ -137,8 +143,13 @@ public class Player extends Entity {
                 if( playerY == 515 )
                     jumpFactor = 0; 
             }
-            else
-                playerX -= .1; 
+            else{ 
+                if( Entity.extremeFlag)
+                    playerX -= 1; 
+                else 
+                    playerX -= .1; 
+            }
+                //playerX -= .1; 
 
             if (spriteCounter > 10 ){ 
                 if( spriteNum == 1 )
