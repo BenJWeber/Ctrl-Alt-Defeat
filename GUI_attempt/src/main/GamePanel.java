@@ -18,6 +18,7 @@ import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.entity.Words;
 import GUI_attempt.src.map.MapManager;
 import GUI_attempt.src.entity.Calculate;
+import GUI_attempt.src.entity.Entity;
 import GUI_attempt.src.entity.TumbleWeed;
 import GUI_attempt.src.entity.ActionWords;
 
@@ -158,12 +159,14 @@ public class GamePanel extends JPanel implements Runnable{
             mapManager.draw(graphics2);
             menu.drawGameOver(graphics2);
             monster.draw(graphics2);
+            Entity.extremeFlag = false; 
         }
         else if(State == STATE.victory) { 
             calculate.wordsPerMinute(); 
             mapManager.draw(graphics2); 
             menu.drawVictory(graphics2); 
             monster.draw(graphics2);
+            Entity.extremeFlag = false; 
         }
         else if(State == STATE.pause) {
             mapManager.draw( graphics2 ); 

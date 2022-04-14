@@ -144,8 +144,8 @@ public class Player extends Entity {
                     jumpFactor = 0; 
             }
             else{ 
-                if( Entity.extremeFlag)
-                    playerX -= 1; 
+                if( Entity.extremeFlag )
+                    playerX -= 3; 
                 else 
                     playerX -= .1; 
             }

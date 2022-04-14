@@ -78,7 +78,6 @@ public class MouseInput implements MouseInputListener {
                 if (my >= 360 && my <= 390) {
                     Entity.difficulty = "hardWords.txt";
                     Entity.extremeFlag = true;  
-                    System.out.println( "EXTREME" ); 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
