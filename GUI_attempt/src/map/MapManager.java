@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 import GUI_attempt.src.main.GamePanel;
+import GUI_attempt.src.main.GamePanel.STATE;
+
 import java.awt.Graphics2D;
 
 public class MapManager extends Map {

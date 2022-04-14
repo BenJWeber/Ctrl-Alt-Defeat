@@ -116,6 +116,7 @@ public class InputHandler implements KeyListener{
             } //end if
             else
                 spacePressed = false; 
+        } 
 
         if( code == KeyEvent.VK_BACK_SPACE ){ 
             backSpacePressed = true; 

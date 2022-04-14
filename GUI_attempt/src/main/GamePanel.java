@@ -61,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
         menu,
         difficulty,
         game,
+        infinite,
         pause,
         gameOver,
         victory, 
@@ -116,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){ 
         //System.out.println(GamePanel.State);
-        if(State == STATE.game){
+        if(State == STATE.game || State == STATE.infinite){
            if( words.correctWords == null ){ 
             words.getWords();
            }
@@ -139,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D graphics2 = ( Graphics2D )graphics; 
         
         
-        if(State == STATE.game) {
+        if(State == STATE.game || State == STATE.infinite) {
          mapManager.draw( graphics2 ); 
          player.draw( graphics2 ); 
          words.draw( graphics2 ); 

@@ -21,13 +21,19 @@ public class Menu extends Entity{
         g2d.setColor(Color.white);
         g2d.drawString("TYPOPOCALYPSE", 400, 250);
         
-        Rectangle playButton = new Rectangle(550, 300, 100, 50 );
+        Rectangle campaignButton = new Rectangle(350, 300, 175, 50 );
+        Rectangle regularButton = new Rectangle(560, 300, 150, 50 );
+        Rectangle infiniteButton = new Rectangle(750, 300, 125, 50 );
         Rectangle quitButton = new Rectangle(550, 400, 100, 50 );
 
         Font font2 = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font2);
-        g2d.drawString("Play", playButton.x + 20, playButton.y + 35);
-        g2d.draw(playButton);
+        g2d.drawString("Campaign", campaignButton.x + 15, campaignButton.y + 35);
+        g2d.draw(campaignButton);
+        g2d.drawString("Regular", regularButton.x + 20, regularButton.y + 35);
+        g2d.draw(regularButton);
+        g2d.drawString("Infinite", infiniteButton.x + 15, infiniteButton.y + 35);
+        g2d.draw(infiniteButton);
         g2d.drawString("Quit", quitButton.x + 20, quitButton.y + 35);
         g2d.draw(quitButton);
     }//end draw
@@ -49,7 +55,7 @@ public class Menu extends Entity{
         Font font2 = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font2);
 
-        g2d.drawString("Back", backButton.x + 20, backButton.y + 35);
+        g2d.drawString("Back", backButton.x + 15, backButton.y + 35);
         g2d.draw(backButton);
 
         g2d.drawString("Easy", easyButton.x + 15, easyButton.y + 35);
