@@ -15,7 +15,7 @@ public class InputHandler implements KeyListener{
     public boolean aPressed, bPressed, cPressed, dPressed, ePressed, fPressed, gPressed, hPressed, 
                     iPressed, jPressed, kPressed, lPressed, mPressed, nPressed, oPressed, pPressed, 
                     qPressed, rPressed, sPressed, tPressed, uPressed, vPressed, wPressed, xPressed, 
-                    yPressed, zPressed, spacePressed, backSpacePressed, escape; 
+                    yPressed, zPressed, spacePressed, backSpacePressed, escapePressed, enterPressed; 
     int counter = 0; 
 
     @Override
@@ -116,19 +116,24 @@ public class InputHandler implements KeyListener{
             } //end if
             else
                 spacePressed = false; 
-        } //end if
+
         if( code == KeyEvent.VK_BACK_SPACE ){ 
             backSpacePressed = true; 
         }
 
         if( code == KeyEvent.VK_ESCAPE ){
-            escape = true;
+            escapePressed = true;
             if(GamePanel.State == GamePanel.STATE.game)
                GamePanel.State = GamePanel.STATE.pause;
 
             else if(GamePanel.State == GamePanel.STATE.pause)
                     GamePanel.State = GamePanel.STATE.game;
-        } 
+        } //end escape
+
+        //press enter to restart
+        if(code == KeyEvent.VK_ENTER)
+            if(GamePanel.State == GamePanel.STATE.gameOver)
+               GamePanel.State = GamePanel.STATE.reset;
     } //end keyPressed
 
     @Override
@@ -222,7 +227,10 @@ public class InputHandler implements KeyListener{
             backSpacePressed = false; 
         }
         if( code == KeyEvent.VK_ESCAPE ){ 
-            escape = false; 
+            escapePressed = false; 
+        }
+        if( code == KeyEvent.VK_ENTER ){ 
+            enterPressed = false; 
         }
     } //end keyReleased
 }//end class
