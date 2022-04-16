@@ -170,7 +170,14 @@ public class Player extends Entity {
         spriteCounter++; 
 
         if (worldX == 9000) {
-            GamePanel.State = GamePanel.STATE.victory;
+            
+            System.out.println( GamePanel.State ); 
+
+            if( GamePanel.State == GamePanel.STATE.infinite ) 
+                Entity.resetMap = true;     
+            //gp.mapManager.setDefaultValues();   
+            else
+                GamePanel.State = GamePanel.STATE.victory;
             
         }
         

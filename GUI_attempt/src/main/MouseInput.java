@@ -35,12 +35,28 @@ public class MouseInput implements MouseInputListener {
         }
 
         if (GamePanel.State == GamePanel.STATE.menu) {
-            // play button
-            if (mx >= 550 && mx <= 550 + 100)
+            // campaign button
+            if (mx >= 350 && mx <= 350 + 175)
                 if (my >= 300 && my <= 350) {
                     mx = 0;
                     my = 0;  
                     GamePanel.State = GamePanel.STATE.difficulty;
+                } // end if
+
+            // play button
+            if (mx >= 560 && mx <= 560 + 150)
+                if (my >= 300 && my <= 350) {
+                    mx = 0;
+                    my = 0;  
+                    GamePanel.State = GamePanel.STATE.difficulty;
+                } // end if
+
+            // infinite button
+            if (mx >= 750 && mx <= 750 + 125)
+                if (my >= 300 && my <= 350) {
+                    mx = 0;
+                    my = 0;  
+                    GamePanel.State = GamePanel.STATE.infinite;
                 } // end if
 
             // Quit button

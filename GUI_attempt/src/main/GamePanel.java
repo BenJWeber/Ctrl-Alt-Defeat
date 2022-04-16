@@ -118,6 +118,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void update(){ 
         //System.out.println(GamePanel.State);
         if(State == STATE.game || State == STATE.infinite){
+            if( State == STATE.infinite )
+                Entity.difficulty = "mediumWords.txt"; 
            if( words.correctWords == null ){ 
             words.getWords();
            }
@@ -147,6 +149,11 @@ public class GamePanel extends JPanel implements Runnable{
          tumble.draw( graphics2 ); 
          action.draw( graphics2 ); 
          monster.draw( graphics2 );
+
+         if( State == STATE.infinite && Entity.resetMap ){ 
+            mapManager.setDefaultValues();
+            Entity.resetMap = false; 
+         }
         }
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );

@@ -49,5 +49,5 @@ public class Entity {
     public String[] correctWords = { " " }, currentWords = {"1", "2", "3"}; 
 
     public boolean keyPressFlag = false, resetFlag = false, tumbleIncoming = false; 
-    public static boolean extremeFlag = false; 
+    public static boolean extremeFlag = false, resetMap = false; 
 } //end class
