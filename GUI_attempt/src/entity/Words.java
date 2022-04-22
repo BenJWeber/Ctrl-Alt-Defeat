@@ -392,17 +392,20 @@ public class Words extends Entity {
     * Allows for live feedback. 
     */
     public void checkUserInputLive(){ 
-        if( userInput.length() <= compareWord.length() ){ 
-            String check  = compareWord.substring( 0, userInput.length() ); 
+        String actionWord = "";
+            if( userInput.length() <= compareWord.length()){ 
+                String mainWord  = compareWord.substring( 0, userInput.length() );
+                if(gp.action.actionCheck != null && userInput.length() <= gp.action.actionCheck.length())
+                    actionWord  = gp.action.actionCheck.substring( 0, userInput.length() );
 
-            if( userInput.equals( check ) == true ){ 
-                colorVerifiedLive = "BLACK"; 
-            } //end if
-            else    
+                if( userInput.equals( mainWord ) == true || userInput.equals( actionWord ) == true){ 
+                    colorVerifiedLive = "BLACK"; 
+                } //end if
+                else    
+                    colorVerifiedLive = "RED"; 
+            }else 
                 colorVerifiedLive = "RED"; 
-        } //end if
-        else
-            colorVerifiedLive = "RED"; 
+
     } //end checkUserInputLive
 
     /*
