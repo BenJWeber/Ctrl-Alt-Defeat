@@ -10,10 +10,17 @@ import java.awt.image.BufferedImage;
 public class Entity {
     public int playerX, playerY, worldX, worldY, monsterX, monsterY, tumbleX, tumbleY, wordStreamX_1, wordStreamX_2, liveWordsX, liveWordsY, 
         wordsY, letterX, cursorX, lengthHold, speed, liveCounter, wordCounter, currentLength, numWords, pace, spriteCounter = 0, spriteNum = 1,
-        actionWordX_1, actionWordX_2, actionWordY;
+        actionWordX_1, actionWordX_2, actionWordY, cutSceneCounter, cutScenePlayerCounter, cutSceneNum, cutSceneNumPlayer,
 
+        playerCampaignX, playerCampaignY, monsterCampaignX, monsterCampaignY, playerSpriteCounter = 0, playerSpriteNum = 1, monsterSpriteCounter = 0, monsterSpriteNum = 1,
+        monsterHealthCount, playerHealthCount, holdHealthPlayer, holdHeathMonster, healthY;
+
+    public static int correctCounter = 0; 
     public BufferedImage forward1, forward2, jump, monster1, monster2, monster3, monster4, tumble1, tumble2, tumble3, tumble4,
         vic1, vic2, vic3, vic4, 
+
+        monsterC1, monsterC2, redMonster1, redMonster2, monsterThrow1, monsterThrow2, monsterThrow3, cowboy1, cowboy2, cowboy3, redCowboy1, 
+        redCowboy2, redCowboy3, cowboyHit, heart, sleep1, sleep2, awake1, awake2, cowboyAlarmed,
         
         letter_a, letter_b, letter_c, letter_d, letter_e, letter_f, letter_g, letter_h, 
         letter_i, letter_j, letter_k, letter_l, letter_m, letter_n, letter_o, letter_p, 
@@ -49,5 +56,5 @@ public class Entity {
     public String[] correctWords = { " " }, currentWords = {"1", "2", "3"}; 
 
     public boolean keyPressFlag = false, resetFlag = false, tumbleIncoming = false; 
-    public static boolean extremeFlag = false, resetMap = false; 
+    public static boolean extremeFlag = false, resetMap = false, campaignFlag = false, throwFlag = false, hurtBlock = false; 
 } //end class

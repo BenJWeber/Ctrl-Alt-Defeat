@@ -40,7 +40,7 @@ public class Monster extends Entity {
     } //end getPlayerImage
 
     public void update(){ 
-        if( gp.State == STATE.victory ){ 
+        if( gp.State == STATE.victory || gp.State == STATE.campaignVictory ){ 
             if (spriteCounter > 20 ){ 
                 if( spriteNum == 1 )
                     spriteNum = 2; 
@@ -82,7 +82,7 @@ public class Monster extends Entity {
 
             graphics2.drawImage( image, monsterX, monsterY, gp.tileSize*2, gp.tileSize*2, null ); 
         }
-        else if( gp.State == STATE.victory ){ 
+        else if( gp.State == STATE.victory || gp.State == STATE.campaignVictory ){ 
             if( spriteNum == 1 ) 
                 image = vic1; 
             if( spriteNum == 2 )

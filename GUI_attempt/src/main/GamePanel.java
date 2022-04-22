@@ -16,12 +16,16 @@ import GUI_attempt.src.entity.Menu;
 import GUI_attempt.src.entity.Monster;
 import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.entity.Words;
+import GUI_attempt.src.entity.CampaignWords;
 import GUI_attempt.src.map.MapManager;
 import GUI_attempt.src.entity.Calculate;
+import GUI_attempt.src.entity.Campaign;
+import GUI_attempt.src.entity.CampaignActionWords;
 import GUI_attempt.src.entity.Entity;
 import GUI_attempt.src.entity.TumbleWeed;
+import GUI_attempt.src.entity.CampaignTumble;
 import GUI_attempt.src.entity.ActionWords;
-
+import GUI_attempt.src.entity.CampaignActionWords;
 
 public class GamePanel extends JPanel implements Runnable{
     final int originalTileSize = 16; //16x16 tile
@@ -45,16 +49,22 @@ public class GamePanel extends JPanel implements Runnable{
     InputHandler keyH = new InputHandler(); 
     Thread gameThread; 
     public Player player = new Player( this, keyH ); 
+    public Campaign campaignClass = new Campaign(this, keyH); 
     public Monster monster = new Monster( this ); 
     public Words words = new Words( this, keyH ); 
+    public CampaignWords campaignWords = new CampaignWords( this, keyH ); 
     public ActionWords action = new ActionWords( this, keyH ); 
+    public CampaignActionWords cAction = new CampaignActionWords( this, keyH ); 
     public Menu menu = new Menu( this );
     public Calculate calculate = new Calculate();
     public TumbleWeed tumble = new TumbleWeed( this );  
+    public CampaignTumble cTumble = new CampaignTumble( this );  
 
     public int FPS = 60; 
 
     int countCycles = 0; 
+    int passCount = 0;  
+    public int level = 1; 
     
     
     public static enum STATE{
@@ -62,10 +72,14 @@ public class GamePanel extends JPanel implements Runnable{
         difficulty,
         game,
         infinite,
+        campaign, 
         pause,
         gameOver,
         victory, 
-        reset
+        campaignVictory,
+        cutScene,
+        reset, 
+        campaignReset
     };
 
     public static STATE State = STATE.menu;
@@ -116,12 +130,20 @@ public class GamePanel extends JPanel implements Runnable{
     } //End run
 
     public void update(){ 
-        //System.out.println(GamePanel.State);
         if(State == STATE.game || State == STATE.infinite){
+            if( Entity.campaignFlag ){ 
+                if( level == 1 )
+                    Entity.difficulty = "easyWords.txt"; 
+                else if( level == 2 )
+                    Entity.difficulty = "mediumWords.txt"; 
+                else if( level == 3 )
+                    Entity.difficulty = "hardWords.txt";
+            } 
+
             if( State == STATE.infinite )
                 Entity.difficulty = "mediumWords.txt"; 
-           if( words.correctWords == null ){ 
-            words.getWords();
+            if( words.correctWords == null ){ 
+                words.getWords();
            }
                 
            mapManager.update(); 
@@ -131,10 +153,23 @@ public class GamePanel extends JPanel implements Runnable{
            tumble.update(); 
            action.update();
         }
-        if( State == STATE.gameOver )
+        if( State == STATE.gameOver ){
             monster.update(); 
+            Entity.campaignFlag = false; 
+        } 
         if( State == STATE.victory )
             monster.update(); 
+        if( State == STATE.campaignVictory )
+            monster.update();
+        if( State == STATE.campaign ){ 
+            campaignClass.update();
+            if( passCount == 0 )
+                campaignWords.getWords();
+            passCount++; 
+            campaignWords.update();
+            cTumble.update(); 
+            cAction.update();
+        }
     } //end update
 
     public void paintComponent( Graphics graphics ){ 
@@ -174,7 +209,25 @@ public class GamePanel extends JPanel implements Runnable{
             mapManager.draw(graphics2); 
             menu.drawVictory(graphics2); 
             monster.draw(graphics2);
-            Entity.extremeFlag = false; 
+            Entity.extremeFlag = false;
+            Entity.campaignFlag = false; 
+        }
+        else if( State == STATE.campaignVictory ){ 
+            calculate.wordsPerMinute(); 
+            mapManager.draw(graphics2); 
+            menu.drawCampaignVictory(graphics2); 
+            monster.draw(graphics2);
+        }
+        else if( State == STATE.cutScene ){ 
+            mapManager.draw(graphics2);
+            campaignClass.drawCutScene(graphics2);
+        }
+        else if(State == STATE.campaign){ 
+            mapManager.draw( graphics2 );
+            cAction.draw( graphics2 );
+            cTumble.draw( graphics2 ); 
+            campaignWords.draw( graphics2 ); 
+            campaignClass.draw( graphics2 ); 
         }
         else if(State == STATE.pause) {
             mapManager.draw( graphics2 ); 
@@ -189,10 +242,29 @@ public class GamePanel extends JPanel implements Runnable{
             player.setDefaultValues(); 
             words.setDefaultValues();
             tumble.setDefaultValues();
+            campaignClass.setDefaultValues();
+            cTumble.setDefaultValues(); 
+            campaignWords.setDefaultValues();
+            
             words.resetFlag = true; 
+            campaignWords.resetFlag = true; 
 
-            State = STATE.difficulty; 
+            State = STATE.menu; 
+        }
+        else if( State == STATE.campaignReset ){ 
+            mapManager.draw( graphics2 );
+            calculate.setDefaultValues();
+            player.setDefaultValues(); 
+            words.setDefaultValues();
+            tumble.setDefaultValues();
+            words.resetFlag = true;  
+            campaignWords.resetFlag = true; 
+
+            Entity.campaignFlag = true; 
+            campaignClass.roundCount = 0;             
+            State = STATE.game; 
         }
 
+        
     } //end paintComponent 
 }

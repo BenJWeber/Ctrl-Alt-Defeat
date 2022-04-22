@@ -40,7 +40,9 @@ public class MouseInput implements MouseInputListener {
                 if (my >= 300 && my <= 350) {
                     mx = 0;
                     my = 0;  
-                    GamePanel.State = GamePanel.STATE.difficulty;
+                    Entity.campaignFlag = true; 
+                    Entity.difficulty = "easyWords.txt"; 
+                    GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
             // play button
@@ -62,7 +64,7 @@ public class MouseInput implements MouseInputListener {
             // Quit button
             if (mx >= 550 && mx <= 550 + 100)
                 if (my >= 400 && my <= 450) {
-                    GamePanel.State = GamePanel.STATE.victory; 
+                    GamePanel.State = GamePanel.STATE.cutScene; 
                     //System.exit(1);
                 } // end if
         }
@@ -109,9 +111,15 @@ public class MouseInput implements MouseInputListener {
                     GamePanel.State = GamePanel.STATE.reset;
                 } // end if
         }
-    
-        // restart button kills jvm and shell script will restart the game
-        if (GamePanel.State == GamePanel.STATE.gameOver || GamePanel.State == GamePanel.STATE.victory) {
+
+        if( GamePanel.State == GamePanel.STATE.campaignVictory ){ 
+            if (mx >= 570 && mx <= 570 + 100)
+                if (my >= 350 && my <= 400) {
+                    GamePanel.State = GamePanel.STATE.campaignReset;
+                } // end if
+        }
+
+        if (GamePanel.State == GamePanel.STATE.gameOver ) {
             if (mx >= 540 && mx <= 540 + 100) {
                 if (my >= 350 && my <= 400) {
                     GamePanel.State = GamePanel.STATE.reset;

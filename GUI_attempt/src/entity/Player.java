@@ -175,6 +175,8 @@ public class Player extends Entity {
 
             if( GamePanel.State == GamePanel.STATE.infinite ) 
                 Entity.resetMap = true;     
+            if( Entity.campaignFlag )
+                GamePanel.State = GamePanel.STATE.campaign; 
             //gp.mapManager.setDefaultValues();   
             else
                 GamePanel.State = GamePanel.STATE.victory;
