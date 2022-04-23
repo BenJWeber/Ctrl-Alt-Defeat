@@ -17,6 +17,7 @@ import GUI_attempt.src.entity.Monster;
 import GUI_attempt.src.entity.Player;
 import GUI_attempt.src.entity.Words;
 import GUI_attempt.src.entity.CampaignWords;
+import GUI_attempt.src.map.InfiniteMapManager;
 import GUI_attempt.src.map.MapManager;
 import GUI_attempt.src.entity.Calculate;
 import GUI_attempt.src.entity.Campaign;
@@ -36,7 +37,9 @@ public class GamePanel extends JPanel implements Runnable{
     final int screenWidth = tileSize * maxScreenCol; //1280 Pixels
     final int screenHeight = tileSize * maxScreenRow; //960 Pixels
 
-    public final int maxWorldCol = 128; 
+    public final int maxWorldCol = 128;
+    public final int maxWorldColInfinite = 38;
+
     public final int maxWorldRow = 12; 
     public final int worldWidth = tileSize * maxWorldCol; 
     public final int worldHeight = tileSize * maxWorldRow;  
@@ -46,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
     public boolean jumpFlag = false; 
 
     public MapManager mapManager = new MapManager( this ); 
+    public InfiniteMapManager infiniteMap = new InfiniteMapManager( this ); 
     InputHandler keyH = new InputHandler(); 
     Thread gameThread; 
     public Player player = new Player( this, keyH ); 
@@ -130,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable{
     } //End run
 
     public void update(){ 
-        if(State == STATE.game || State == STATE.infinite){
+        if(State == STATE.game){
             if( Entity.campaignFlag ){ 
                 if( level == 1 )
                     Entity.difficulty = "easyWords.txt"; 
@@ -140,18 +144,31 @@ public class GamePanel extends JPanel implements Runnable{
                     Entity.difficulty = "hardWords.txt";
             } 
 
-            if( State == STATE.infinite )
-                Entity.difficulty = "mediumWords.txt"; 
-            if( words.correctWords == null ){ 
+            if( words.correctWords == null ) 
                 words.getWords();
-           }
                 
-           mapManager.update(); 
-           player.update(); 
-           monster.update();
-           words.update();
-           tumble.update(); 
-           action.update();
+            mapManager.update(); 
+            player.update(); 
+            monster.update();
+            words.update();
+            tumble.update(); 
+            action.update();
+        }
+        if( State == STATE.infinite ){ 
+            if( player.worldX >= 1900 ){
+                player.worldX = 400;  
+            } 
+            Entity.difficulty = "mediumWords.txt"; 
+            if( words.correctWords == null )
+                words.getWords();
+
+            infiniteMap.update(); 
+            player.update(); 
+            monster.update();
+            words.update();
+            tumble.update(); 
+            action.update();
+
         }
         if( State == STATE.gameOver ){
             monster.update(); 
@@ -189,6 +206,19 @@ public class GamePanel extends JPanel implements Runnable{
             mapManager.setDefaultValues();
             Entity.resetMap = false; 
          }
+        }
+        if(State == STATE.infinite) {
+            infiniteMap.draw( graphics2 ); 
+            player.draw( graphics2 ); 
+            words.draw( graphics2 ); 
+            tumble.draw( graphics2 ); 
+            action.draw( graphics2 ); 
+            monster.draw( graphics2 );
+   
+            if( Entity.resetMap ){ 
+               infiniteMap.setDefaultValues();
+               Entity.resetMap = false; 
+            }
         }
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
