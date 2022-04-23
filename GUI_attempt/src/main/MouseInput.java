@@ -64,8 +64,7 @@ public class MouseInput implements MouseInputListener {
             // Quit button
             if (mx >= 550 && mx <= 550 + 100)
                 if (my >= 400 && my <= 450) {
-                    GamePanel.State = GamePanel.STATE.cutScene; 
-                    //System.exit(1);
+                    System.exit(1);
                 } // end if
         }
 

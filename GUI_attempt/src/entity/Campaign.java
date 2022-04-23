@@ -368,14 +368,15 @@ public class Campaign extends Entity{
         graphics2.drawImage( playerImage, playerCampaignX, playerCampaignY, gp.tileSize*2, gp.tileSize*2, null ); 
 
         if( monsterHealthCount == 0 ){ 
-            gp.level++; 
             System.out.println( gp.level ); 
             if( gp.level >= 3 ){ 
                 Entity.campaignFlag = false; 
                 GamePanel.State = STATE.victory; 
             } 
-            else
+            else{
+                gp.level++; 
                 GamePanel.State = GamePanel.STATE.cutScene; 
+            } 
         } 
         if( playerHealthCount == 0 ){ 
             gp.level = 0; 
