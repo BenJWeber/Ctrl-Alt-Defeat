@@ -45,7 +45,7 @@ public class MouseInput implements MouseInputListener {
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
-            // play button
+            // regular button
             if (mx >= 560 && mx <= 560 + 150)
                 if (my >= 300 && my <= 350) {
                     mx = 0;
@@ -62,8 +62,8 @@ public class MouseInput implements MouseInputListener {
                 } // end if
 
             // Quit button
-            if (mx >= 550 && mx <= 550 + 100)
-                if (my >= 400 && my <= 450) {
+            if (mx >= 585 && mx <= 585 + 100)
+                if (my >= 380 && my <= 430) {
                     System.exit(1);
                 } // end if
         }

@@ -446,7 +446,7 @@ public class Words extends Entity {
             j++;  
         } //end for
 
-        if( keyH.spacePressed == true ){ //Iterate words through current words and reset cursor location. 
+        if( keyH.spacePressed == true || keyH.enterPressed == true){ //Iterate words through current words and reset cursor location. 
             if( userInput.equals( gp.action.actionCheck ) == true ){ 
                 liveCounter = 0; 
     
@@ -465,6 +465,7 @@ public class Words extends Entity {
                     currentLength = 1; 
             }
             keyH.spacePressed = false; 
+            keyH.enterPressed = false;
         } //end if
     } //end update
 
