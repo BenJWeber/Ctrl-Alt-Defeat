@@ -1,3 +1,12 @@
+/**
+ * 
+ * TumbleWeed.java
+ * Description: Controls tumble weed in regular mode. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
@@ -11,6 +20,9 @@ import javax.imageio.ImageIO;
 public class TumbleWeed extends Entity {
     GamePanel gp;
 
+    /**
+     * Constructor
+     */
     public TumbleWeed( GamePanel gp ){ 
         this.gp = gp; 
          
@@ -18,11 +30,17 @@ public class TumbleWeed extends Entity {
         getImage(); 
     } //end Player
 
+    /**
+     * Set Default Values. 
+     */
     public void setDefaultValues(){ 
         tumbleX = 1500; 
         tumbleY = 530;
     } //end setDefaultValues
 
+    /**
+     * Import tumbleweed images. 
+     */
     public void getImage(){ 
         try{ 
             tumble1 = ImageIO.read( getClass().getResourceAsStream( "../tumbleWeed/tumbleWeed_1.png" ) ); 
@@ -35,6 +53,9 @@ public class TumbleWeed extends Entity {
         } //end catch
     } //end getPlayerImage
 
+    /**
+     * Constructor
+     */
     public void tumbleGenerator(){ 
         int[] randomNum = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
 
@@ -48,14 +69,12 @@ public class TumbleWeed extends Entity {
             gp.action.setDefaultValues();
             setDefaultValues();
         } //end if
-            
-
     } //end tumbleGenerator
 
+    /**
+     * Updates location of tumbleweed. 
+     */
     public void update(){ 
-       // if( Entity.extremeFlag == true )
-           // tumbleGenerator(); 
-
         if( tumbleX <= 0 )
             tumbleGenerator(); 
 
@@ -79,6 +98,9 @@ public class TumbleWeed extends Entity {
         spriteCounter++; 
     } //end update
 
+    /**
+     * Draws tumbleweed onto screen. 
+     */
     public void draw( Graphics2D graphics2 ){ 
         BufferedImage image = null; 
         
@@ -93,4 +115,4 @@ public class TumbleWeed extends Entity {
 
         graphics2.drawImage( image, tumbleX, tumbleY, gp.tileSize, gp.tileSize, null ); 
     } //end draw
-}
+} //End Class

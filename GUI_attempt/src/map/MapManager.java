@@ -1,7 +1,11 @@
-/*
-* MapManager.java
-* Reads in map tiles and generates map based off of text file. 
-*/
+/**
+ * 
+ * MapManager.java
+ * Description: Reads in map tiles and generates map based off of text file. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
 
 package GUI_attempt.src.map;
 
@@ -26,6 +30,9 @@ public class MapManager extends Map {
     int worldEditX; 
     int worldEditY; 
 
+    /**
+     * Constructor
+     */
     public MapManager( GamePanel gp ){ 
         this.gp = gp;
 
@@ -34,6 +41,9 @@ public class MapManager extends Map {
         loadMap(); 
     }
 
+    /**
+     * Set Default Values. 
+     */
     public void setDefaultValues(){ 
         map = new Map[30]; 
         mapTileNum = new int[ gp.maxWorldCol ][ gp.maxWorldRow ];  
@@ -44,6 +54,9 @@ public class MapManager extends Map {
         
     } //end setDefaultValues
 
+    /**
+     * Import map tiles. 
+     */
     public void getMapImage(){ 
         try{ 
             map[0] = new Map(); 
@@ -94,6 +107,9 @@ public class MapManager extends Map {
         } //end catch
     } //end getMapImage
 
+    /**
+     * Load map onto screen. 
+     */
     public void loadMap(){ 
         try{ 
             InputStream is = getClass().getResourceAsStream( "../map/map_2.txt" ); //input text file
@@ -127,10 +143,16 @@ public class MapManager extends Map {
         } //end catch
     } //end loadMap
 
+    /**
+     * Update camera position on map. 
+     */
     public void update(){ 
        worldEditX += worldSpeed;
     } //end update
 
+    /**
+     * Draw map onto screen. 
+     */
     public void draw( Graphics2D graphics2 ){ 
         int worldCol = 0; 
         int worldRow = 0; 

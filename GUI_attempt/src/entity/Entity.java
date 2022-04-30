@@ -1,7 +1,11 @@
-/*
-* Entity.java
-* Contains public characteristics for entities. 
-*/
+/**
+ * 
+ * Entity.java
+ * Description: Holds variable definitions to be called by other classes. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
 
 package GUI_attempt.src.entity;
 

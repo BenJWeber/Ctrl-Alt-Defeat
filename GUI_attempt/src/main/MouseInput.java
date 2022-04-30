@@ -1,3 +1,12 @@
+/**
+ * 
+ * MouseInput.java
+ * Description: Listens for mouse input by user and proccess corresponding action. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.main;
 
 import java.awt.event.MouseEvent;

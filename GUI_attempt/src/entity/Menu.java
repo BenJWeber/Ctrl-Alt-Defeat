@@ -1,3 +1,12 @@
+/**
+ * 
+ * Menu.java
+ * Description: Draws different menu screens depending on what state the game is in. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 import java.awt.Graphics2D;
 

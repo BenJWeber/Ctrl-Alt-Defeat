@@ -1,7 +1,11 @@
-/*
-* Player.java
-* Loads player image, handles player animation based on user input.
-*/
+/**
+ * 
+ * Player.java
+ * Description: Loads player image, handles player animation based on user input.
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
 
 package GUI_attempt.src.entity;
 
@@ -27,6 +31,9 @@ public class Player extends Entity {
     public int screenX; 
     public int screenY;
 
+    /**
+    * Constructor
+    */
     public Player( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH;
@@ -36,6 +43,9 @@ public class Player extends Entity {
         getPlayerImage(); 
     } //end Player
 
+    /**
+    * Set Default Values
+    */
     public void setDefaultValues(){ 
         worldX = 400; 
         worldY = 675; 
@@ -51,6 +61,9 @@ public class Player extends Entity {
         direction = "forward"; 
     } //end setDefaultValues
 
+    /**
+    * Import sprite images for cowboy. 
+    */
     public void getPlayerImage(){ 
         try{ 
             forward1 = ImageIO.read( getClass().getResourceAsStream( "../player/Cowboy_1.png" ) ); 
@@ -61,13 +74,10 @@ public class Player extends Entity {
         } //end catch
     } //end getPlayerImage
 
+    /**
+    * Update position of cowboy as well as map movement. 
+    */
     public void update(){ 
-        /*
-        if( Entity.extremeFlag ){ 
-            speed = 10; 
-            System.out.print( "EXTREME ACTIVATED"); 
-        }
-        */
         if( gp.jumpFlag ){ 
             gp.jumpFlag = false; 
             direction = "up"; 
@@ -160,7 +170,7 @@ public class Player extends Entity {
             } //end if
         } //end else
 
-        if (playerX <= 77) {
+        if (playerX <= 77) { //Cowboy ran into dinosaur - Game Over. 
             GamePanel.State = GamePanel.STATE.gameOver;
         }
 
@@ -169,16 +179,18 @@ public class Player extends Entity {
         }
         spriteCounter++; 
 
-        if (worldX == 9000) {
+        if (worldX == 9000) { //End of map. Go to boss fight if campaign mode. 
             if( Entity.campaignFlag )
-                GamePanel.State = GamePanel.STATE.campaign; 
-            //gp.mapManager.setDefaultValues();   
+                GamePanel.State = GamePanel.STATE.campaign;   
             else
                 GamePanel.State = GamePanel.STATE.victory;      
         }
         
     } //end update
 
+    /**
+    * Draw cowboy onto screen
+    */
     public void draw( Graphics2D graphics2 ){ 
         BufferedImage image = null; 
         

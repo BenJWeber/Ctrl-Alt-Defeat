@@ -1,7 +1,11 @@
-/*
-* Main.java
-* Initiates Gameplay 
-*/
+/**
+ * 
+ * Main.java
+ * Description: Initiates gameplay. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
 
 package GUI_attempt.src.main;
 

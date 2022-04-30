@@ -1,7 +1,11 @@
-/*
-* InputHandler.java
-* Detects keyboard input and processes expected action. 
-*/
+/**
+ * 
+ * InputHandler.java
+ * Description: Detects keyboard input and processes expected action. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
 
 package GUI_attempt.src.main; 
 

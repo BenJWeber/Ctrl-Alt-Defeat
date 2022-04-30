@@ -1,3 +1,12 @@
+/**
+ * 
+ * Words.java
+ * Description: Controls word stream in regular mode. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
@@ -22,7 +31,7 @@ public class Words extends Entity {
     InputHandler keyH;  
   
     /*
-    * Call methods. 
+    * Constructor. 
     */ 
     public Words( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 

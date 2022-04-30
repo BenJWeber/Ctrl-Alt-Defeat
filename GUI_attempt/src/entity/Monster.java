@@ -1,3 +1,12 @@
+/**
+ * 
+ * Monster.java
+ * Description: Controls dinosaur movement and animation. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
@@ -12,6 +21,9 @@ import javax.imageio.ImageIO;
 public class Monster extends Entity {
     GamePanel gp;
 
+    /**
+     * Constructor 
+     */
     public Monster( GamePanel gp ){ 
         this.gp = gp; 
          
@@ -19,11 +31,17 @@ public class Monster extends Entity {
         getMonsterImage(); 
     } //end Player
 
+    /**
+     * Set Default Values.  
+     */
     public void setDefaultValues(){ 
         monsterX = 0; 
         monsterY = 450;
     } //end setDefaultValues
 
+    /**
+     * Import dinosaur sprites.  
+     */
     public void getMonsterImage(){ 
         try{ 
             monster1 = ImageIO.read( getClass().getResourceAsStream( "../monster/Monster_1.png" ) ); 
@@ -39,6 +57,9 @@ public class Monster extends Entity {
         } //end catch
     } //end getPlayerImage
 
+    /**
+     * Updates position of dinosaur. Also controls victory and gameover animation.  
+     */
     public void update(){ 
         if( gp.State == STATE.victory || gp.State == STATE.campaignVictory ){ 
             if (spriteCounter > 20 ){ 
@@ -66,11 +87,12 @@ public class Monster extends Entity {
                 spriteCounter = 0; 
             } //end if
         }
-        
-       
         spriteCounter++; 
     } //end update
 
+    /**
+     * Draws dinosaur onto screen.  
+     */
     public void draw( Graphics2D graphics2 ){ 
         BufferedImage image = null; 
         

@@ -1,3 +1,12 @@
+/**
+ * 
+ * CampaignWords.java
+ * Description: Controls word streaming in campaign state. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
@@ -18,6 +27,9 @@ public class CampaignWords extends Entity {
     GamePanel gp;
     InputHandler keyH;  
 
+    /**
+     * Constructor
+     */
     public CampaignWords( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH; 
@@ -26,6 +38,9 @@ public class CampaignWords extends Entity {
         getLetterImages(); 
     } //end Player
 
+    /**
+     * Set Default Values. 
+     */
     public void setDefaultValues(){ 
         wordStreamX_1 = 30; 
         cursorX = 500; 
@@ -46,6 +61,9 @@ public class CampaignWords extends Entity {
         difficulty = ""; 
     } //end setDefaultValues
 
+    /**
+     * Import sprites for letters. 
+     */
     public void getLetterImages(){
         try{ 
             letter_a = ImageIO.read( getClass().getResourceAsStream( "../words/A.png" ) ); 
@@ -167,6 +185,9 @@ public class CampaignWords extends Entity {
         } //end catch
     } 
 
+    /**
+     * Radomly order words pulled from text files.
+     */
     public void getWords(){ 
         int count = 0; 
         String spaceString = "      "; 

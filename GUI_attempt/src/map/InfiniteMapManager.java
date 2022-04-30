@@ -1,3 +1,12 @@
+/**
+ * 
+ * InfiniteMapManager.java
+ * Description: Loads infinite map for infinite game state. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.map;
 
 import java.io.BufferedReader;
@@ -21,6 +30,9 @@ public class InfiniteMapManager extends Map{
     int worldEditX; 
     int worldEditY; 
 
+    /**
+     * Constructor
+     */
     public InfiniteMapManager( GamePanel gp ){ 
         this.gp = gp;
 
@@ -29,6 +41,9 @@ public class InfiniteMapManager extends Map{
         loadMap(); 
     }
 
+    /**
+     * Set Default Values. 
+     */
     public void setDefaultValues(){ 
         map = new Map[30]; 
         mapTileNum = new int[ gp.maxWorldCol ][ gp.maxWorldRow ];  
@@ -39,6 +54,9 @@ public class InfiniteMapManager extends Map{
         
     } //end setDefaultValues
 
+    /**
+     * Import map tiles. 
+     */
     public void getMapImage(){ 
         try{ 
             map[0] = new Map(); 
@@ -89,6 +107,9 @@ public class InfiniteMapManager extends Map{
         } //end catch
     } //end getMapImage
 
+    /**
+     * Load map onto screen. 
+     */
     public void loadMap(){ 
         try{ 
             InputStream is = getClass().getResourceAsStream( "../map/mapInfinite.txt" ); //input text file
@@ -114,18 +135,22 @@ public class InfiniteMapManager extends Map{
                 } //end if
             } //end while
 
-            
-
             br.close(); 
         } //end try
         catch( Exception e ){ 
         } //end catch
     } //end loadMap
 
+    /**
+     * Update camera position on map. 
+     */
     public void update(){ 
        worldEditX += worldSpeed;
     } //end update
 
+    /**
+     * Draw map onto screen. 
+     */
     public void draw( Graphics2D graphics2 ){ 
         int worldCol = 0; 
         int worldRow = 0; 
@@ -151,4 +176,4 @@ public class InfiniteMapManager extends Map{
             } //end if
         } //end while
     } //end draw
-}
+} //end class

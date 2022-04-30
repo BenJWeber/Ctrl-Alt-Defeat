@@ -1,3 +1,12 @@
+/**
+ * 
+ * Campaign.java
+ * Description: In use when game is in campaign state. Controls all boss fight mechanics and graphics. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
@@ -22,6 +31,9 @@ public class Campaign extends Entity{
     int count; 
     boolean cutScene; 
 
+    /**
+     * Constructor
+     */
     public Campaign( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH;
@@ -30,6 +42,9 @@ public class Campaign extends Entity{
         getPlayerImage();
     } //end Player
 
+    /**
+     * Set Default Values 
+     */
     public void setDefaultValues(){ 
         monsterCampaignX = 800; 
         monsterCampaignY = 300;
@@ -56,6 +71,9 @@ public class Campaign extends Entity{
         cutSceneNumPlayer = 1;  
     } //end setDefaultValues
 
+    /**
+     * Imports sprites for cowboy, dinosaur and hearts. 
+     */
     public void getPlayerImage(){ 
         try{ 
             //Monster Images: 
@@ -90,6 +108,9 @@ public class Campaign extends Entity{
         } //end catch
     } 
 
+    /**
+     * Controls animation of cutscene. Plays after level 1 and 2. 
+     */
     public void drawCutScene( Graphics2D graphics2 ){ 
         BufferedImage monsterImage = null;
         BufferedImage playerImage = null; 
@@ -106,7 +127,7 @@ public class Campaign extends Entity{
                     cutSceneNum = 1; 
                 cutSceneCounter = 0; 
                 count++; 
-            }
+            } //end if 
 
             if( cutScenePlayerCounter > 10 ){ 
                 if( cutSceneNumPlayer == 1 )
@@ -116,7 +137,7 @@ public class Campaign extends Entity{
                 else if( cutSceneNumPlayer == 3 )
                     cutSceneNumPlayer = 1; 
                 cutScenePlayerCounter = 0; 
-            }
+            } //end if 
      
 
             if( cutSceneNum == 1 )
@@ -134,33 +155,33 @@ public class Campaign extends Entity{
             graphics2.drawImage( monsterImage, monsterCampaignX, monsterCampaignY + 75, gp.tileSize*4, gp.tileSize*4, null ); 
             graphics2.drawImage( playerImage, playerCampaignX, playerCampaignY, gp.tileSize*2, gp.tileSize*2, null ); 
 
-        } 
+        } //end if 
 
         if( count >= 4 && count < 6 ){ 
             if (cutSceneCounter > 20 ){  
                 cutSceneCounter = 0; 
                 count++; 
-            }
+            } //end if 
 
             monsterImage = awake1; 
             playerImage = cowboyAlarmed;
 
             graphics2.drawImage( monsterImage, monsterCampaignX, monsterCampaignY + 75, gp.tileSize*4, gp.tileSize*4, null ); 
             graphics2.drawImage( playerImage, playerCampaignX, playerCampaignY, gp.tileSize*2, gp.tileSize*2, null ); 
-        }
+        } //end if 
 
         if( count >= 6 && count < 8 ){ 
             if (cutSceneCounter > 20 ){  
                 cutSceneCounter = 0; 
                 count++; 
-            }
+            } //end if 
 
             monsterImage = awake2; 
             playerImage = cowboyAlarmed;
 
             graphics2.drawImage( monsterImage, monsterCampaignX, monsterCampaignY + 75, gp.tileSize*4, gp.tileSize*4, null ); 
             graphics2.drawImage( playerImage, playerCampaignX, playerCampaignY, gp.tileSize*2, gp.tileSize*2, null ); 
-        }
+        } //end if 
         if( count >= 8 ){ 
             count = 0; 
             cutScene = false; 
@@ -169,10 +190,13 @@ public class Campaign extends Entity{
             cutSceneNum = 1;
             cutSceneNumPlayer = 1;  
             GamePanel.State = GamePanel.STATE.campaignReset;
-        }  
+        }  //end if 
 
     }
 
+    /**
+     * Updates position and sprite counters (controls speed of animation). 
+     */
     public void update(){
         if( gp.campaignWords.resetFlag )
             gp.campaignWords.getWords(); 
@@ -181,16 +205,16 @@ public class Campaign extends Entity{
             if( Entity.difficulty == "easyWords.txt" ){
                 monsterHealthCount = 5; 
                 playerHealthCount = 3; 
-            } 
+            } //end if 
             if( Entity.difficulty == "mediumWords.txt" ){ 
                 monsterHealthCount = 8; 
                 playerHealthCount = 3; 
-            } 
+            } //end if 
             if( Entity.difficulty == "hardWords.txt" ){ 
                 monsterHealthCount = 12; 
                 playerHealthCount = 3; 
-            } 
-        } 
+            } //end if
+        } //end if 
         roundCount++; 
 
         if( gp.jumpFlag ){ 
@@ -208,8 +232,7 @@ public class Campaign extends Entity{
                 jumpFactor = jumpFactor - .25; 
                 if( jumpFactor == 0 ) {
                     jumpFactor = -10; 
-                }
-                    //playerY = 515; 
+                } //end if
             } //end else if
             else if( jumpFactor < 0 ){ 
                 playerCampaignY -= jumpFactor; 
@@ -217,9 +240,9 @@ public class Campaign extends Entity{
                 if( playerCampaignY >= 450 ){ 
                     jumpFactor = 0; 
                     playerCampaignY = 450; 
-                } 
-            }
-        } 
+                } //end if 
+            } //end else if 
+        } //end else
 
         if (monsterSpriteCounter > 10 ){ 
             if( monsterSpriteNum == 1 )
@@ -242,6 +265,7 @@ public class Campaign extends Entity{
         monsterSpriteCounter++; 
         playerSpriteCounter++;
 
+        //Make frequency of tumble weed throws random
         if( gp.cTumble.tumbleX <= 0 ){ 
             int[] randomNum = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
 
@@ -251,12 +275,15 @@ public class Campaign extends Entity{
                 gp.cAction.setDefaultValues();
                 gp.cTumble.setDefaultValues();
             }
-            else if( randomNum[ hold ] < 2 ){ 
+            else if( randomNum[ hold ] < 2 ){ //Controls how frequent tumble weeds are thrown
                 Entity.throwFlag = true; 
             } //end if
         } 
     } 
 
+    /**
+     * Draw everything onto screen
+     */
     public void draw( Graphics2D graphics2 ){ 
         BufferedImage monsterImage = null; 
         BufferedImage playerImage = null; 
@@ -331,7 +358,7 @@ public class Campaign extends Entity{
             playerImage = gp.player.jump; 
         }
              
-
+        //Cowboy Heath Tracker: 
         holdHealthPlayer = playerHealthCount; 
 
         if( holdHealthPlayer >= 1 )
@@ -341,6 +368,7 @@ public class Campaign extends Entity{
         if( holdHealthPlayer >= 3 )
             graphics2.drawImage( heart, playerCampaignX + 2 * ( gp.tileSize*1/2), healthY, gp.tileSize*1/2, gp.tileSize*1/2, null ); 
 
+        //Dinosaur Health Tracker: 
         holdHeathMonster = monsterHealthCount; 
 
         if( holdHeathMonster >= 1 )
@@ -372,16 +400,15 @@ public class Campaign extends Entity{
             if( gp.level >= 3 ){ 
                 Entity.campaignFlag = false; 
                 GamePanel.State = STATE.victory; 
-            } 
+            } //end if 
             else{
                 gp.level++; 
                 GamePanel.State = GamePanel.STATE.cutScene; 
-            } 
-        } 
+            } //end else 
+        } //end if 
         if( playerHealthCount == 0 ){ 
             gp.level = 0; 
             GamePanel.State = GamePanel.STATE.gameOver;
-        } 
-
+        } //end if
     } //end draw
-}
+} //end class

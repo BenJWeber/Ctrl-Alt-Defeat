@@ -1,3 +1,12 @@
+/**
+ * 
+ * ActionWords.java
+ * Description: Using action.txt randomly pick words that will appear on top of an incoming tumble weed. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
+
 package GUI_attempt.src.entity;
 
 import GUI_attempt.src.main.GamePanel;
@@ -19,15 +28,20 @@ public class ActionWords extends Entity {
     InputHandler keyH;  
     int hold; 
 
+    /**
+     * Constructor
+     */
     public ActionWords( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH; 
 
         setDefaultValues(); 
         getLetterImages(); 
-        //correctWords = getWords(); 
     } //end constructor
 
+    /**
+     * Set Default Values
+     */
     public void setDefaultValues(){ 
         actionWordX_1 = 5000; 
         actionWordY = 5000; 
@@ -35,6 +49,9 @@ public class ActionWords extends Entity {
         hold = new Random().nextInt( randomNum.length); 
     } //end setDefaultValues
 
+    /**
+     * Import Action Letter Sprites
+     */
     public void getLetterImages(){
         try{ 
             letter_a_act = ImageIO.read( getClass().getResourceAsStream( "../words/A_ACT.png" ) ); 
@@ -69,6 +86,9 @@ public class ActionWords extends Entity {
         } //end catch
     } //end getPlayerImage
 
+    /**
+     * Randomly pick words to appear above tumble weed. Gets words from action.txt. 
+     */
     public void getWords(){ 
         try {
 
@@ -103,6 +123,9 @@ public class ActionWords extends Entity {
         }//end catch
     }//end getWords
 
+    /**
+     * Update location of word to keep above tumble weed. Detect whether tumble is on screen. 
+     */
     public void update(){
         if( correctWords.length < 2 ){ 
             getWords(); 
@@ -116,7 +139,7 @@ public class ActionWords extends Entity {
     } //end update
 
     /*
-    * Draws words. 
+    * Draws words on screen. 
     */ 
     public void draw( Graphics2D graphics2 ){
         BufferedImage[] images_act = {letter_a_act, letter_b_act, letter_c_act, letter_d_act, letter_e_act, letter_f_act, letter_g_act, letter_h_act, letter_i_act, letter_j_act, letter_k_act, letter_l_act, letter_m_act, letter_n_act, letter_o_act, letter_p_act, letter_q_act, letter_r_act, letter_s_act, letter_t_act, letter_u_act, letter_v_act, letter_w_act, letter_x_act, letter_y_act, letter_z_act};

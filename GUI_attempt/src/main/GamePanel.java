@@ -1,7 +1,11 @@
-/*
-* GamePanel.java
-* Creates GUI, controls FPS, containes main run loop, calls methods to update GUI. 
-*/
+/**
+ * 
+ * GamePanel.java
+ * Description: Creates GUI, controls FPS, containes main run loop, calls methods to update GUI. 
+ * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
+ * Date: April 30th, 2022
+ * 
+ */
 
 package GUI_attempt.src.main;
 
@@ -29,6 +33,9 @@ import GUI_attempt.src.entity.ActionWords;
 import GUI_attempt.src.entity.CampaignActionWords;
 
 public class GamePanel extends JPanel implements Runnable{
+    /**
+     * Set all parameters: 
+     */
     final int originalTileSize = 16; //16x16 tile
     final int scale = 5;    
     public final int tileSize = originalTileSize * scale; //48x48 tile
@@ -70,7 +77,9 @@ public class GamePanel extends JPanel implements Runnable{
     int passCount = 0;  
     public int level = 1; 
     
-    
+    /**
+     * Declare States. 
+     */
     public static enum STATE{
         menu,
         difficulty,
@@ -294,7 +303,5 @@ public class GamePanel extends JPanel implements Runnable{
             campaignClass.roundCount = 0;             
             State = STATE.game; 
         }
-
-        
     } //end paintComponent 
-}
+} //end class
