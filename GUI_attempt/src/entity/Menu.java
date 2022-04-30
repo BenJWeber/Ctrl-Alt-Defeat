@@ -33,7 +33,7 @@ public class Menu extends Entity{
         Rectangle campaignButton = new Rectangle(350, 300, 175, 50 );
         Rectangle regularButton = new Rectangle(560, 300, 150, 50 );
         Rectangle infiniteButton = new Rectangle(750, 300, 125, 50 );
-        Rectangle quitButton = new Rectangle(550, 400, 100, 50 );
+        Rectangle quitButton = new Rectangle(585, 380, 100, 50 );
 
         Font font2 = new Font("arial", Font.BOLD, 30);
         g2d.setFont(font2);

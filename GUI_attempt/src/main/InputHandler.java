@@ -136,9 +136,18 @@ public class InputHandler implements KeyListener{
         } //end escape
 
         //press enter to restart
-        if(code == KeyEvent.VK_ENTER)
+        if(code == KeyEvent.VK_ENTER) {
+            if(GamePanel.State == GamePanel.STATE.game){
+                if( counter == 0) {
+                enterPressed = true; 
+                counter++; 
+                } else
+                    enterPressed = false;
+            }
+
             if(GamePanel.State == GamePanel.STATE.gameOver)
                GamePanel.State = GamePanel.STATE.reset;
+        }
     } //end keyPressed
 
     @Override
@@ -236,6 +245,7 @@ public class InputHandler implements KeyListener{
         }
         if( code == KeyEvent.VK_ENTER ){ 
             enterPressed = false; 
+            counter = 0;
         }
     } //end keyReleased
 }//end class
