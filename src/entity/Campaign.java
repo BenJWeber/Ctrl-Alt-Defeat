@@ -7,11 +7,11 @@
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 
-import GUI_attempt.src.main.GamePanel;
-import GUI_attempt.src.main.InputHandler;
-import GUI_attempt.src.main.GamePanel.STATE;
+import src.main.GamePanel;
+import src.main.InputHandler;
+import src.main.GamePanel.STATE;
 
 import java.io.IOException;
 import java.awt.Graphics2D;
@@ -202,15 +202,15 @@ public class Campaign extends Entity{
             gp.campaignWords.getWords(); 
 
         if( roundCount == 0 ){
-            if( Entity.difficulty == "easyWords.txt" ){
+            if( Entity.difficulty == "res/wordBanks/easyWords.txt" ){
                 monsterHealthCount = 5; 
                 playerHealthCount = 3; 
             } //end if 
-            if( Entity.difficulty == "mediumWords.txt" ){ 
+            if( Entity.difficulty == "res/wordBanks/mediumWords.txt" ){ 
                 monsterHealthCount = 8; 
                 playerHealthCount = 3; 
             } //end if 
-            if( Entity.difficulty == "hardWords.txt" ){ 
+            if( Entity.difficulty == "res/wordBanks/hardWords.txt" ){ 
                 monsterHealthCount = 12; 
                 playerHealthCount = 3; 
             } //end if

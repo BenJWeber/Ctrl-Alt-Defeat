@@ -1,16 +1,16 @@
 /**
  * 
- * CampaignActionWords.java
- * Description: Controls words above tumbleweed when in campaign state. 
+ * ActionWords.java
+ * Description: Using action.txt randomly pick words that will appear on top of an incoming tumble weed. 
  * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
  * Date: April 30th, 2022
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 
-import GUI_attempt.src.main.GamePanel;
-import GUI_attempt.src.main.InputHandler;
+import src.main.GamePanel;
+import src.main.InputHandler;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,15 +23,15 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.lang.model.util.ElementScanner14;
 
-public class CampaignActionWords extends Entity {
+public class ActionWords extends Entity {
     GamePanel gp;
     InputHandler keyH;  
     int hold; 
 
     /**
-     * Constructor 
+     * Constructor
      */
-    public CampaignActionWords( GamePanel gp, InputHandler keyH ){ 
+    public ActionWords( GamePanel gp, InputHandler keyH ){ 
         this.gp = gp; 
         this.keyH = keyH; 
 
@@ -40,7 +40,7 @@ public class CampaignActionWords extends Entity {
     } //end constructor
 
     /**
-     * Set Default Values 
+     * Set Default Values
      */
     public void setDefaultValues(){ 
         actionWordX_1 = 5000; 
@@ -50,7 +50,7 @@ public class CampaignActionWords extends Entity {
     } //end setDefaultValues
 
     /**
-     * Import sprites for letters.  
+     * Import Action Letter Sprites
      */
     public void getLetterImages(){
         try{ 
@@ -87,12 +87,12 @@ public class CampaignActionWords extends Entity {
     } //end getPlayerImage
 
     /**
-     * Generate random word from text file. 
+     * Randomly pick words to appear above tumble weed. Gets words from action.txt. 
      */
     public void getWords(){ 
         try {
 
-        BufferedReader br = new BufferedReader( new FileReader( "action.txt" ) );
+        BufferedReader br = new BufferedReader( new FileReader( "res/wordBanks/action.txt" ) );
 
         ArrayList<String> words = new ArrayList<String>();
         String line = ""; 
@@ -124,15 +124,15 @@ public class CampaignActionWords extends Entity {
     }//end getWords
 
     /**
-     * Update position of word so it stays above tumble weed.  
+     * Update location of word to keep above tumble weed. Detect whether tumble is on screen. 
      */
     public void update(){
         if( correctWords.length < 2 ){ 
             getWords(); 
         } 
 
-        actionWordX_1 = gp.cTumble.tumbleX - 35; 
-        actionWordY = gp.cTumble.tumbleY - 50; 
+        actionWordX_1 = gp.tumble.tumbleX - 35; 
+        actionWordY = gp.tumble.tumbleY - 50; 
 
         if( actionWordX_1 < 1100 )
             tumbleIncoming = true;  

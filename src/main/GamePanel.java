@@ -7,7 +7,7 @@
  * 
  */
 
-package GUI_attempt.src.main;
+package src.main;
 
 import java.awt.Color; 
 import java.awt.Dimension;
@@ -16,21 +16,21 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import GUI_attempt.src.entity.Menu;
-import GUI_attempt.src.entity.Monster;
-import GUI_attempt.src.entity.Player;
-import GUI_attempt.src.entity.Words;
-import GUI_attempt.src.entity.CampaignWords;
-import GUI_attempt.src.map.InfiniteMapManager;
-import GUI_attempt.src.map.MapManager;
-import GUI_attempt.src.entity.Calculate;
-import GUI_attempt.src.entity.Campaign;
-import GUI_attempt.src.entity.CampaignActionWords;
-import GUI_attempt.src.entity.Entity;
-import GUI_attempt.src.entity.TumbleWeed;
-import GUI_attempt.src.entity.CampaignTumble;
-import GUI_attempt.src.entity.ActionWords;
-import GUI_attempt.src.entity.CampaignActionWords;
+import src.entity.Menu;
+import src.entity.Monster;
+import src.entity.Player;
+import src.entity.Words;
+import src.entity.CampaignWords;
+import src.map.InfiniteMapManager;
+import src.map.MapManager;
+import src.entity.Calculate;
+import src.entity.Campaign;
+import src.entity.CampaignActionWords;
+import src.entity.Entity;
+import src.entity.TumbleWeed;
+import src.entity.CampaignTumble;
+import src.entity.ActionWords;
+import src.entity.CampaignActionWords;
 
 public class GamePanel extends JPanel implements Runnable{
     /**
@@ -146,11 +146,11 @@ public class GamePanel extends JPanel implements Runnable{
         if(State == STATE.game){
             if( Entity.campaignFlag ){ 
                 if( level == 1 )
-                    Entity.difficulty = "easyWords.txt"; 
+                    Entity.difficulty = "res/wordBanks/easyWords.txt"; 
                 else if( level == 2 )
-                    Entity.difficulty = "mediumWords.txt"; 
+                    Entity.difficulty = "res/wordBanks/mediumWords.txt"; 
                 else if( level == 3 )
-                    Entity.difficulty = "hardWords.txt";
+                    Entity.difficulty = "res/wordBanks/hardWords.txt";
             } 
 
             if( words.correctWords == null ) 
@@ -167,7 +167,7 @@ public class GamePanel extends JPanel implements Runnable{
             if( player.worldX >= 1900 ){
                 player.worldX = 400;  
             } 
-            Entity.difficulty = "mediumWords.txt"; 
+            Entity.difficulty = "res/wordBanks/mediumWords.txt"; 
             if( words.correctWords == null )
                 words.getWords();
 

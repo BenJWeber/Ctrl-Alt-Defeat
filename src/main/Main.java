@@ -7,7 +7,7 @@
  * 
  */
 
-package GUI_attempt.src.main;
+package src.main;
 
 import javax.swing.JFrame; 
 

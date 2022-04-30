@@ -7,10 +7,10 @@
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 
-import GUI_attempt.src.main.GamePanel;
-import GUI_attempt.src.main.InputHandler;
+import src.main.GamePanel;
+import src.main.InputHandler;
 
 import java.io.IOException;
 import java.awt.Graphics2D;

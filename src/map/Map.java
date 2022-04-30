@@ -7,7 +7,7 @@
  * 
  */
 
-package GUI_attempt.src.map;
+package src.map;
 
 import java.awt.image.BufferedImage; 
 

@@ -7,7 +7,7 @@
  * 
  */
 
-package GUI_attempt.src.map;
+package src.map;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,8 +15,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
-import GUI_attempt.src.main.GamePanel;
-import GUI_attempt.src.main.GamePanel.STATE;
+import src.main.GamePanel;
+import src.main.GamePanel.STATE;
 
 import java.awt.Graphics2D;
 

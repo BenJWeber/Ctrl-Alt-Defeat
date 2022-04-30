@@ -7,14 +7,14 @@
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 import java.awt.Graphics2D;
 
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Rectangle;
 
-import GUI_attempt.src.main.GamePanel;
+import src.main.GamePanel;
 
 public class Menu extends Entity{
     GamePanel gp;

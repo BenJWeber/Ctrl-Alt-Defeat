@@ -1,15 +1,15 @@
 /**
  * 
- * TumbleWeed.java
- * Description: Controls tumble weed in regular mode. 
+ * CampaignTumble.java
+ * Description: Controls animation of tumbleweed. 
  * Modified by: Remington Crichton, Benjamin Weber, Joey Troyer, Mohith Dontireddy
  * Date: April 30th, 2022
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 
-import GUI_attempt.src.main.GamePanel;
+import src.main.GamePanel;
 
 import java.io.IOException;
 import java.util.Random;
@@ -17,13 +17,13 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage; 
 
 import javax.imageio.ImageIO;
-public class TumbleWeed extends Entity {
+public class CampaignTumble extends Entity {
     GamePanel gp;
 
     /**
      * Constructor
      */
-    public TumbleWeed( GamePanel gp ){ 
+    public CampaignTumble( GamePanel gp ){ 
         this.gp = gp; 
          
         setDefaultValues(); 
@@ -31,15 +31,15 @@ public class TumbleWeed extends Entity {
     } //end Player
 
     /**
-     * Set Default Values. 
+     * Set Default Values
      */
     public void setDefaultValues(){ 
-        tumbleX = 1500; 
+        tumbleX = 800; 
         tumbleY = 530;
     } //end setDefaultValues
 
     /**
-     * Import tumbleweed images. 
+     * Import Tumbleweed images.
      */
     public void getImage(){ 
         try{ 
@@ -54,7 +54,7 @@ public class TumbleWeed extends Entity {
     } //end getPlayerImage
 
     /**
-     * Constructor
+     * Randomly generate tumbleweeds. Make it so that tumble weed generation is not constant. 
      */
     public void tumbleGenerator(){ 
         int[] randomNum = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
@@ -62,26 +62,26 @@ public class TumbleWeed extends Entity {
         int hold = new Random().nextInt( randomNum.length); 
 
         if( Entity.extremeFlag ){ 
-            gp.action.setDefaultValues();
+            gp.cAction.setDefaultValues();
             setDefaultValues();
         }
         else if( randomNum[ hold ] < 5 ){ 
-            gp.action.setDefaultValues();
+            gp.cAction.setDefaultValues();
             setDefaultValues();
         } //end if
     } //end tumbleGenerator
 
     /**
-     * Updates location of tumbleweed. 
+     * Update position of tumble weed and spritecounter. 
      */
     public void update(){ 
-        if( tumbleX <= 0 )
+        if( tumbleX <= 0 && Entity.throwFlag )
             tumbleGenerator(); 
 
         if( Entity.extremeFlag )
             tumbleX -= speed + 5; 
         else
-            tumbleX -= speed + 2; 
+            tumbleX -= speed + 3; 
 
         if (spriteCounter > 10 ){ 
             if( spriteNum == 1 )
@@ -99,7 +99,7 @@ public class TumbleWeed extends Entity {
     } //end update
 
     /**
-     * Draws tumbleweed onto screen. 
+     * Draw tumbleweed onto screen. 
      */
     public void draw( Graphics2D graphics2 ){ 
         BufferedImage image = null; 
@@ -115,4 +115,4 @@ public class TumbleWeed extends Entity {
 
         graphics2.drawImage( image, tumbleX, tumbleY, gp.tileSize, gp.tileSize, null ); 
     } //end draw
-} //End Class
+} //end class

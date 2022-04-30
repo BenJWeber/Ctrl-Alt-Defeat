@@ -7,7 +7,7 @@
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 
 public class Calculate {
     public double correctWordsTotal; 

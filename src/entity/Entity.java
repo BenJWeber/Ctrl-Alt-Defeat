@@ -7,7 +7,7 @@
  * 
  */
 
-package GUI_attempt.src.entity;
+package src.entity;
 
 import java.awt.image.BufferedImage; 
 

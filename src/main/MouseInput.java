@@ -7,15 +7,14 @@
  * 
  */
 
-package GUI_attempt.src.main;
+package src.main;
 
 import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputListener;
 
-import GUI_attempt.src.main.GamePanel;
-import GUI_attempt.src.entity.Entity;
-import GUI_attempt.src.entity.Menu; 
-import GUI_attempt.src.main.Reset;
+import src.main.GamePanel;
+import src.entity.Entity;
+import src.entity.Menu; 
 
 public class MouseInput implements MouseInputListener {
 
@@ -50,7 +49,7 @@ public class MouseInput implements MouseInputListener {
                     mx = 0;
                     my = 0;  
                     Entity.campaignFlag = true; 
-                    Entity.difficulty = "easyWords.txt"; 
+                    Entity.difficulty = "res/wordBanks/easyWords.txt"; 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
@@ -81,28 +80,28 @@ public class MouseInput implements MouseInputListener {
             // EASY
             if (mx >= 400 && mx <= 400 + 100)
                 if (my >= 300 && my <= 350) {
-                    Entity.difficulty = "easyWords.txt"; 
+                    Entity.difficulty = "res/wordBanks/easyWords.txt"; 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
             // MEDIUM
             if (mx >= 540 && mx <= 540 + 100)
                 if (my >= 300 && my <= 350) {
-                    Entity.difficulty = "mediumWords.txt"; 
+                    Entity.difficulty = "res/wordBanks/mediumWords.txt"; 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
             // HARD
             if (mx >= 700 && mx <= 700 + 100)
                 if (my >= 300 && my <= 350) {
-                    Entity.difficulty = "hardWords.txt"; 
+                    Entity.difficulty = "res/wordBanks/hardWords.txt"; 
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
 
             //Extreme
             if (mx >= 550 && mx <= 650)
                 if (my >= 360 && my <= 390) {
-                    Entity.difficulty = "hardWords.txt";
+                    Entity.difficulty = "res/wordBanks/hardWords.txt";
                     Entity.extremeFlag = true;  
                     GamePanel.State = GamePanel.STATE.game;
                 } // end if
