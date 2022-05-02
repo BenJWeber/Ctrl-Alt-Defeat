@@ -203,18 +203,13 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D graphics2 = ( Graphics2D )graphics; 
         
         
-        if(State == STATE.game || State == STATE.infinite) {
+        if(State == STATE.game ) {
          mapManager.draw( graphics2 ); 
          player.draw( graphics2 ); 
          words.draw( graphics2 ); 
          tumble.draw( graphics2 ); 
          action.draw( graphics2 ); 
          monster.draw( graphics2 );
-
-         if( State == STATE.infinite && Entity.resetMap ){ 
-            mapManager.setDefaultValues();
-            Entity.resetMap = false; 
-         }
         }
         if(State == STATE.infinite) {
             infiniteMap.draw( graphics2 ); 
@@ -223,11 +218,6 @@ public class GamePanel extends JPanel implements Runnable{
             tumble.draw( graphics2 ); 
             action.draw( graphics2 ); 
             monster.draw( graphics2 );
-   
-            if( Entity.resetMap ){ 
-               infiniteMap.setDefaultValues();
-               Entity.resetMap = false; 
-            }
         }
         else if(State == STATE.menu) {
             mapManager.draw( graphics2 );
